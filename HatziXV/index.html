@@ -34,6 +34,123 @@ a{text-decoration:none;color:inherit}.stage{max-width:920px;margin:auto;position
 .thanks{min-height:170px}.thanks .block-inner{text-align:center;padding:28px 18px}.thanks .big{font:400 2.8rem Allura,cursive;color:var(--rose)}.thanks p{font-size:.78rem;margin:7px 0}.mini-heart{font-size:1.1rem;color:var(--rose)}
 .float{position:fixed;right:14px;bottom:17px;width:48px;height:48px;border:0;border-radius:50%;z-index:40;background:rgba(181,108,101,.94);color:#fff;box-shadow:0 8px 24px rgba(80,40,38,.3);font-size:1rem;cursor:pointer}.reveal{opacity:0;transform:translateY(10px);transition:.55s}.reveal.show{opacity:1;transform:none}
 @media(max-width:520px){.stage{width:100%}.left,.right{padding:5px}.left{padding-right:3px}.right{padding-left:3px}.block{margin-bottom:6px;border-radius:12px}.block:after{inset:4px;border-radius:9px}.block-inner{padding:13px 8px}.cover,.cover .block-inner{min-height:620px}.cover .block-inner{padding:28px 13px}.crown{width:72px;height:52px}.cover .xv{font-size:.85rem}.name{font-size:4.35rem;margin:10px 0 13px}.tag{font-size:.56rem}.date-line{font-size:.56rem;gap:4px}.date-line strong{width:33px;height:33px;font-size:1.55rem}.message{min-height:205px}.message .block-inner{padding:20px 10px}.quote{font-size:.76rem}.quote2{font-size:.7rem;margin-top:10px}.divider{width:75px;margin:11px auto}.parents{min-height:176px}.parents .block-inner{padding:18px 8px}.title-script{font-size:1.65rem}.people strong{font-size:1rem}.people p{font-size:.59rem}.music-ui{padding:8px;gap:7px}.music-btn{width:34px;height:34px}.music-meta strong{font-size:.68rem}.music-meta span{font-size:.53rem}.countdown{min-height:137px}.count-grid{gap:3px}.count-box{padding:6px 1px}.count-box b{font-size:.95rem}.count-box span{font-size:.28rem}.butterfly{height:100px}.butterfly svg{width:80px;height:65px}.closing-left{padding:12px 5px 19px}.closing-left .script{font-size:1.8rem}.details{min-height:235px}.details .block-inner{padding:18px 8px 15px}.icon{width:33px;height:33px}.card-title{font-size:1.55rem}.time{font-size:.95rem}.place{font-size:.7rem}.address{font-size:.48rem}.map-btn{font-size:.34rem;padding:7px 8px}.itin{min-height:240px}.itin .block-inner{padding:14px 7px}.row{grid-template-columns:33px 7px 1fr;min-height:42px}.row .it-icon{width:22px;height:22px}.it-txt{grid-template-columns:42px 1fr;gap:3px;font-size:.49rem}.it-txt b{font-size:.51rem}.dress{min-height:185px}.dress-pair svg{width:37px;height:49px}.formal{font-size:1.75rem}.note{font-size:.49rem;max-width:160px}.gift{min-height:190px}.gift .block-inner{padding:17px 8px}.gift .env{width:38px;height:31px}.gift p{font-size:.48rem;max-width:160px}.gift strong{font-size:.62rem}.thanks{min-height:134px}.thanks .block-inner{padding:19px 8px}.thanks .big{font-size:1.85rem}.thanks p{font-size:.47rem}.orn.tl,.orn.br,.orn.tr{width:78px;height:78px}.smallcaps{font-size:.4rem}.float{width:43px;height:43px}}
+
+/* Single-column editorial layout */
+.stage{max-width:560px;background:linear-gradient(180deg,#f8e7e2 0%,#efd5d2 100%)}
+.columns{display:flex;flex-direction:column;gap:0;padding:8px;position:relative;z-index:1}
+.left,.right{display:contents}
+.left:after{display:none}
+.block{width:100%;margin:0 0 12px;border-radius:22px}
+.block:after{inset:7px;border-radius:16px}
+.cover{order:1}
+.message{order:2}
+.parents{order:3}
+.right .details:nth-of-type(1){order:4}
+.right .details:nth-of-type(2){order:5}
+.right .itin{order:6}
+.right .dress{order:7}
+.music-card{order:8}
+.right .gift{order:9}
+.countdown{order:10}
+.butterfly{order:11}
+.right .thanks{order:12}
+.closing-left{order:13}
+
+.cover,.cover .block-inner{min-height:86vh}
+.cover .block-inner{padding:54px 26px}
+.cover .xv{font-size:1.2rem}
+.name{font-size:clamp(6rem,24vw,8.3rem)}
+.tag{font-size:.9rem}
+.date-line{font-size:1rem}
+.date-line strong{width:52px;height:52px;font-size:2.45rem}
+
+.message,.parents,.details,.itin,.dress,.gift,.thanks,.countdown{min-height:0}
+.message .block-inner,.parents .block-inner,.details .block-inner,.itin .block-inner,.dress .block-inner,.gift .block-inner,.thanks .block-inner,.countdown .block-inner{padding:34px 24px}
+.quote{font-size:1.3rem}
+.quote2{font-size:1.12rem}
+.title-script{font-size:2.65rem}
+.people strong{font-size:1.7rem}
+.people p{font-size:1.03rem}
+.card-title{font-size:2.7rem}
+.icon{width:50px;height:50px}
+.time{font-size:1.55rem}
+.place{font-size:1.18rem}
+.address{font-size:.9rem}
+.map-btn{font-size:.66rem;padding:11px 16px}
+.row{grid-template-columns:52px 10px 1fr;min-height:62px}
+.row .it-icon{width:34px;height:34px}
+.it-txt{grid-template-columns:72px 1fr;font-size:.92rem}
+.it-txt b{font-size:.95rem}
+.dress-pair svg{width:58px;height:72px}
+.formal{font-size:3rem}
+.note{font-size:.92rem;max-width:320px}
+.gift p{font-size:.94rem;max-width:340px}
+.gift strong{font-size:1.05rem}
+.music-ui{padding:16px}
+.music-btn{width:54px;height:54px}
+.music-meta strong{font-size:1.15rem}
+.music-meta span{font-size:.9rem}
+.count-grid{gap:7px}
+.count-box{padding:12px 4px}
+.count-box b{font-size:1.7rem}
+.count-box span{font-size:.42rem}
+.thanks .big{font-size:3.4rem}
+.thanks p{font-size:1rem}
+.butterfly{height:130px}
+.closing-left{padding:16px 8px 34px}
+.closing-left .script{font-size:3.2rem}
+
+@media(max-width:520px){
+  .stage{width:100%;max-width:none}
+  .columns{padding:7px}
+  .block{margin-bottom:10px;border-radius:20px}
+  .block:after{inset:6px;border-radius:14px}
+  .block-inner{padding:24px 17px}
+  .cover,.cover .block-inner{min-height:86vh}
+  .cover .block-inner{padding:42px 20px}
+  .crown{width:92px;height:66px}
+  .cover .xv{font-size:1rem}
+  .name{font-size:clamp(5.6rem,27vw,7.2rem);margin:12px 0 17px}
+  .tag{font-size:.7rem}
+  .date-line{font-size:.78rem;gap:7px}
+  .date-line strong{width:46px;height:46px;font-size:2rem}
+  .message .block-inner,.parents .block-inner,.details .block-inner,.itin .block-inner,.dress .block-inner,.gift .block-inner,.thanks .block-inner,.countdown .block-inner{padding:28px 18px}
+  .quote{font-size:1.08rem}
+  .quote2{font-size:.98rem}
+  .title-script{font-size:2.2rem}
+  .people strong{font-size:1.45rem}
+  .people p{font-size:.92rem}
+  .card-title{font-size:2.25rem}
+  .icon{width:44px;height:44px}
+  .time{font-size:1.35rem}
+  .place{font-size:1.02rem}
+  .address{font-size:.75rem}
+  .map-btn{font-size:.58rem;padding:10px 14px}
+  .row{grid-template-columns:46px 9px 1fr;min-height:56px}
+  .row .it-icon{width:30px;height:30px}
+  .it-txt{grid-template-columns:64px 1fr;font-size:.8rem}
+  .it-txt b{font-size:.83rem}
+  .dress-pair svg{width:50px;height:65px}
+  .formal{font-size:2.6rem}
+  .note{font-size:.8rem;max-width:285px}
+  .gift p{font-size:.82rem;max-width:285px}
+  .gift strong{font-size:.95rem}
+  .music-ui{padding:13px}
+  .music-btn{width:48px;height:48px}
+  .music-meta strong{font-size:1rem}
+  .music-meta span{font-size:.78rem}
+  .count-box{padding:10px 2px}
+  .count-box b{font-size:1.42rem}
+  .count-box span{font-size:.35rem}
+  .thanks .big{font-size:2.9rem}
+  .thanks p{font-size:.88rem}
+  .orn.tl,.orn.br,.orn.tr{width:95px;height:95px}
+  .smallcaps{font-size:.52rem}
+  .butterfly{height:115px}
+  .butterfly svg{width:92px;height:74px}
+  .closing-left .script{font-size:2.7rem}
+}
+
 </style>
 </head>
 <body>
