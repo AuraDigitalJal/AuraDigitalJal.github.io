@@ -3,217 +3,189 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Mis XV AÃ±os Â· Hatzi</title>
-<meta name="description" content="AcompÃ¡Ã±ame a celebrar mis XV aÃ±os. SÃ¡bado 14 de noviembre de 2026.">
-<meta name="theme-color" content="#F7F2EB">
+<title>Mis XV A&ntilde;os &middot; Hatzi</title>
+<meta name="description" content="Acompa&ntilde;ame a celebrar mis XV a&ntilde;os. S&aacute;bado 14 de noviembre de 2026.">
+<meta name="theme-color" content="#f7f2eb">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mis XV A&ntilde;os &middot; Hatzi">
+<meta property="og:description" content="S&aacute;bado 14 de noviembre de 2026 &middot; Misa 6:00 PM &middot; Recepci&oacute;n 7:30 PM">
+<meta property="og:url" content="https://auradigitaljal.com/HatziXV/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mis XV AÃ±os Â· Hatzi">
-<meta property="og:description" content="SÃ¡bado 14 de noviembre de 2026 Â· Misa 6:00 PM Â· RecepciÃ³n 7:30 PM">
-<meta property="og:url" content="https://auradigitaljal.com/HatziXV/">
-<meta property="og:image" content="https://auradigitaljal.com/HatziXV/preview.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/jpeg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Mis XV AÃ±os Â· Hatzi">
-<meta name="twitter:description" content="SÃ¡bado 14 de noviembre de 2026">
-<meta name="twitter:image" content="https://auradigitaljal.com/HatziXV/preview.jpg">
 <style>
-:root{
-  --champagne:#E8D7C5;
-  --rose-gold:#D8A39D;
-  --rosa-palo:#E6C7C2;
-  --marfil:#F7F2EB;
-  --beige-perla:#DCCBBC;
-  --ink:#6E4E4A;
-  --ink-soft:#8B6863;
-  --accent:#B9756E;
-  --accent-deep:#9E5E58;
-  --paper:#FFF9F5;
-  --shadow:0 22px 45px rgba(121,79,73,.12);
-}
+:root{--champ:#E8D7C5;--rg:#D8A39D;--palo:#E6C7C2;--ivory:#F7F2EB;--pearl:#DCCBBC;--ink:#684846;--deep:#9E5E58;--paper:#FFF9F5;--shadow:0 20px 46px rgba(107,68,64,.13)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  margin:0;
-  color:var(--ink);
-  font-family:"Cormorant Garamond",serif;
-  background:
-    radial-gradient(circle at 15% 8%,rgba(230,199,194,.48),transparent 28%),
-    radial-gradient(circle at 88% 32%,rgba(232,215,197,.72),transparent 33%),
-    linear-gradient(180deg,#f6dedb 0%,#f9ebe6 35%,#f3dfda 100%);
-  overflow-x:hidden;
-}
-body::before{
-  content:"";
-  position:fixed; inset:0; pointer-events:none; opacity:.28;
-  background-image:
-    linear-gradient(90deg,rgba(255,255,255,.45) 1px,transparent 1px),
-    linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px);
-  background-size:34px 34px;
-  mask-image:linear-gradient(to bottom,black,transparent 85%);
-}
-button,a{font:inherit}
-a{text-decoration:none;color:inherit}
-.intro{
-  position:fixed; inset:0; z-index:50;
-  display:grid; place-items:center;
-  background:
-    radial-gradient(circle at 50% 20%,rgba(255,255,255,.75),transparent 30%),
-    linear-gradient(160deg,#f0d1ce,#f9ece7 55%,#ead2ca);
-  transition:opacity .75s ease,visibility .75s ease;
-}
-.intro.hidden{opacity:0;visibility:hidden}
-.intro-card{
-  width:min(88vw,420px);
-  min-height:72vh;
-  border:1px solid rgba(185,117,110,.55);
-  border-radius:34px;
-  background:rgba(255,249,245,.83);
-  box-shadow:var(--shadow);
-  padding:44px 28px 34px;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-  backdrop-filter:blur(7px);
-}
-.intro-card::before,.intro-card::after{
-  content:""; position:absolute; width:180px; height:180px; border:1px solid rgba(185,117,110,.18); border-radius:50%;
-}
-.intro-card::before{left:-88px;top:-84px}
-.intro-card::after{right:-90px;bottom:-86px}
-.crown{
-  width:84px;height:auto;stroke:var(--accent);fill:none;stroke-width:1.4;margin:0 auto 14px;
-}
-.eyebrow{
-  font-family:Montserrat,sans-serif;
-  text-transform:uppercase;
-  letter-spacing:.28em;
-  font-size:.72rem;
-  color:var(--accent-deep);
-}
-.script{
-  font-family:Allura,cursive;
-  color:var(--accent-deep);
-  line-height:.92;
-}
-.intro h1{font-size:clamp(4.7rem,20vw,7.2rem);font-weight:400;margin:18px 0 8px}
-.intro .date{font-size:1.2rem;letter-spacing:.08em;margin:18px 0 34px}
-.enter{
-  display:flex;flex-direction:column;gap:11px;align-items:center;
-}
-.btn{
-  border:0;border-radius:999px;padding:14px 24px;cursor:pointer;
-  font-family:Montserrat,sans-serif;font-size:.78rem;letter-spacing:.08em;
-  transition:.25s ease;
-}
-.btn-primary{
-  background:linear-gradient(135deg,var(--accent),#cf8c84);
-  color:white;box-shadow:0 12px 24px rgba(185,117,110,.27)
-}
-.btn-secondary{background:transparent;border:1px solid rgba(185,117,110,.42);color:var(--ink)}
-.btn:hover{transform:translateY(-1px)}
-.page{width:min(100%,1120px);margin:0 auto;padding:18px 14px 80px}
-.hero{
-  min-height:92vh;
-  margin:10px auto 20px;
-  border-radius:34px;
-  background:
-    linear-gradient(rgba(255,249,245,.82),rgba(255,249,245,.9)),
-    radial-gradient(circle at 15% 12%,var(--rosa-palo),transparent 34%),
-    radial-gradient(circle at 88% 88%,var(--champagne),transpa\™[Ì‰JNÂˆ›Ü™\Œ\ÛÛY™Ø˜JNKLMËLLŠNÂˆ›Ş\ÚYİÎ˜\ŠK\ÚYİÊNÂˆ\Ü^N™ÜšYÜXÙKZ][\Î˜Ù[\Âˆ^X[YÛ˜Ù[\ÜÜÚ][Ûœ™[]]™NÛİ™\™›İÎšY[ÜY[™ÎŒÍœÂŸB‹š\›Î˜Y\ÂˆÛÛ[ˆˆÜÜÚ][Û˜XœÛÛ]NÚ[œÙ]ŒNØ›Ü™\Œ\ÛÛY™Ø˜JNKLMËLLŒŒŠNØ›Ü™\‹\˜Y]\ÎŒœÜÚ[\‹Y]™[Î››Û™NÂŸB‹˜›İ[šXØ[ÜÜÚ][Û˜XœÛÛ]NÜİ›ÚÙN˜\ŠKXXØÙ[
-NÙš[››Û™NÜİ›ÚÙK]ÚYŒKŒNÛÜXÚ]N‹_B‹˜›İ[šXØ[]˜›İ[šXØ[[\Ù^İ™XİÜ‹YY™™Xİ››Û‹\ØØ[[™Ë\İ›ÚÙ_B‹˜›İ[šXØ[İÚYŒŒŒÛY‹MŒœİÜ‹Mİ˜[œÙ›Ü›Nœ›İ]JLM™YÊ_B‹˜›İ[šXØ[˜œİÚYŒÜšYÚ‹MÎØ›İÛN‹LÎİ˜[œÙ›Ü›Nœ›İ]JMYÊ_B‹š\›ËZ[›™\ÜÜÚ][Ûœ™[]]™NŞ‹Z[™^ŒÛX^]ÚYÌB‹š\›ÈÙ›Û\Ú^™N˜Û[\
-KŒœ™[KŒËL™[JNÙ›Û]ÙZYÚÛX\™Ú[ŒMB‹š\›ÈÙ›Û\Ú^™N˜Û[\
-KŒÍ\™[KËœ™[JNÛ]\‹\ÜXÚ[™Î‹ŒN[Nİ^]˜[œÙ›Ü›N\\˜Ø\Ù_B‹š\›È™]KXšYŞÙ\Ü^N™›^Ú\İYKXÛÛ[˜Ù[\Ø[YÛ‹Z][\Î˜Ù[\ÙØ\ŒMÛX\™Ú[ŒÌNÙ›Û\Ú^™NŒKŒœ™[_B‹š\›È™]KXšYÈİ›Û™ŞÙ›Û\Ú^™NŒÜ™[NÙ›Û]ÙZYÚØÛÛÜ˜\ŠKXXØÙ[YY\
-_B‹š\›ÈœØÜ›ÛİY^Ù›ÛY˜[Z[N“[ÛÙ\œ˜]Ø[œË\Ù\šYÙ›Û\Ú^™N‹™[NÛ]\‹\ÜXÚ[™Î‹Œ™[Nİ^]˜[œÙ›Ü›N\\˜Ø\ÙNÛX\™Ú[‹]ÜŒÍœØÛÛÜ˜\ŠKZ[šË\ÛÙ
-_B‹œÙXİ[ÛÂˆÜÚ][Ûœ™[]]™NÂˆX\™Ú[ŒNÂˆ›Ü™\‹\˜Y]\ÎŒÌÂˆ˜XÚÙÜ›İ[™œ™Ø˜JMKKK
-NÂˆ›Ü™\Œ\ÛÛY™Ø˜JNKLMËLLŒÍ
-NÂˆ›Ş\ÚYİÎ˜\ŠK\ÚYİÊNÂˆY[™ÎŒÍÂˆİ™\™›İÎšY[ÂŸB‹œÙXİ[Û˜Y\ØÛÛ[ˆˆÜÜÚ][Û˜XœÛÛ]NÚ[œÙ]ŒLœØ›Ü™\Œ\ÛÛY™Ø˜JNKLMËLLŒLŠNØ›Ü™\‹\˜Y]\ÎŒŒœÜÚ[\‹Y]™[Î››Û™_B‹šÚXÚÙ\Âˆ›ÛY˜[Z[N“[ÛÙ\œ˜]Ø[œË\Ù\šYİ^]˜[œÙ›Ü›N\\˜Ø\ÙNÛ]\‹\ÜXÚ[™Î‹ŒŒ™[NÙ›Û\Ú^™N‹œ™[NØÛÛÜ˜\ŠKXXØÙ[YY\
-Nİ^X[YÛ˜Ù[\‚ŸB‹œÙXİ[Û‹]]^Ù›ÛY˜[Z[N[\˜Kİ\œÚ]™NÙ›Û]ÙZYÚÙ›Û\Ú^™N˜Û[\
-‹™[KLËœ™[JNÛ[™KZZYÚŒNÛX\™Ú[\Mœİ^X[YÛ˜Ù[\ØÛÛÜ˜\ŠKXXØÙ[YY\
-_B‹˜ÛÜ^Ù›Û\Ú^™NŒKŒœ™[NÛ[™KZZYÚŒKMNİ^X[YÛ˜Ù[\ÛX^]ÚYÌŒÛX\™Ú[Œ]]ßB‹œ][İ^Ù›Û\Ú^™NŒKM\™[NÙ›Û\İ[Nš][XÎÛ[™KZZYÚŒKNÛX^]ÚYÌŒÛX\™Ú[Œ]]Îİ^X[YÛ˜Ù[\ŸB‹™]šY\İÚYŒMLÚZYÚŒ\Ø˜XÚÙÜ›İ[™›[™X\‹YÜ˜YY[
-LYË˜[œÜ\™[˜\ŠK\›ÜÙKYÛÛ
-K˜[œÜ\™[
-NÛX\™Ú[ŒŒœ]]ÎÜÜÚ][Ûœ™[]]™_B‹™]šY\˜Y\ØÛÛ[ˆ¸¦¨HÜÜÚ][Û˜XœÛÛ]NÛYL	NİÜL	Nİ˜[œÙ›Ü›N˜[œÛ]JML	KML‰JNØ˜XÚÙÜ›İ[™˜\ŠK\\\ŠNÜY[™ÎŒ\ØÛÛÜ˜\ŠKXXØÙ[
-_B‹™ÜšYLÙ\Ü^N™ÜšYÙØ\ŒNB‹˜Ø\™ÂˆÜÚ][Ûœ™[]]™NŞ‹Z[™^ŒÂˆ›Ü™\Œ\ÛÛY™Ø˜JNKLMËLLŒÌŠNÂˆ›Ü™\‹\˜Y]\ÎŒØ˜XÚÙÜ›İ[™œ™Ø˜JMKMKMKŠNÂˆY[™ÎŒÜŒİ^X[YÛ˜Ù[\‚ŸB‹˜Ø\™ŞÙ›ÛY˜[Z[N[\˜Kİ\œÚ]™NÙ›Û\Ú^™NŒ‹œ™[NÙ›Û]ÙZYÚØÛÛÜ˜\ŠKXXØÙ[YY\
-NÛX\™Ú[ŒB‹šXÛÛÂˆÚYœÚZYÚœÛX\™Ú[Œ]]ÈLÂˆİ›ÚÙN˜\ŠKXXØÙ[
-NÙš[››Û™NÜİ›ÚÙK]ÚYŒKBŸB‹[Y^Ù›Û\Ú^™NŒKM\™[NØÛÛÜ˜\ŠKXXØÙ[YY\
-NÙ›Û]ÙZYÚŒÛX\™Ú[ÜB‹œXÙ^Ù›Û\Ú^™NŒKŒ\™[NÛX\™Ú[\B‹˜Y™\ÜŞÙ›Û\Ú^™NŒ\™[NØÛÛÜ˜\ŠKZ[šË\ÛÙ
-NÛ[™KZZYÚŒKB‹›X\XÂˆ\Ü^Nš[›[™KY›^Ø[YÛ‹Z][\Î˜Ù[\ÙØ\ÛX\™Ú[‹]ÜŒM\ÂˆY[™ÎŒLœNØ›Ü™\‹\˜Y]\ÎNN\Ø˜XÚÙÜ›İ[™›[™X\‹YÜ˜YY[
-LÍYYË˜\ŠKXXØÙ[
-KØÙÎ
-NØÛÛÜˆÙ™™Âˆ›ÛY˜[Z[N“[ÛÙ\œ˜]Ø[œË\Ù\šYÙ›Û\Ú^™N‹Ìœ™[NÛ]\‹\ÜXÚ[™Î‹ŒÙ[NØ›Ş\ÚYİÎŒ\Œ™Ø˜JNKLMËLLŒŒŠBŸB‹[Y[[™^Ù\Ü^N™ÜšYÙØ\ŒÛX^]ÚYMŒÛX\™Ú[]]ÈB‹[Y[[™K\›İŞÙ\Ü^N™ÜšYÙÜšY][\]KXÛÛ[[œÏNLŒœYœØ[YÛ‹Z][\Î˜Ù[\ÛZ[‹ZZYÚB‹[Y[[™K][Y^İ^X[YÛœšYÚÜY[‹\šYÚŒLœØÛÛÜ˜\ŠKXXØÙ[YY\
-NÙ›Û\Ú^™NŒKŒ\™[NÙ›Û]ÙZYÚŒB‹[Y[[™K[[™^ÚZYÚŒL	NÜÜÚ][Ûœ™[]]™_B‹[Y[[™K[[™N˜™Y›Ü™^ØÛÛ[ˆˆÜÜÚ][Û˜XœÛÛ]NÛYL	NİÜŒØ›İÛNŒİÚYŒ\Ø˜XÚÙÜ›İ[™˜\ŠK\›ÜÙKYÛÛ
-_B‹[Y[[™K[[™N˜Y\ØÛÛ[ˆˆÜÜÚ][Û˜XœÛÛ]NÛYL	NİÜL	NİÚYÚZYÚØ›Ü™\‹\˜Y]\ÎL	NØ˜XÚÙÜ›İ[™˜\ŠKXXØÙ[
-Nİ˜[œÙ›Ü›N˜[œÛ]JML	KML	J_B‹[Y[[™K[X™[ÜY[™Ë[YŒLœÙ›Û\Ú^™NŒKŒM\™[_B‹›˜[Y\ŞÙ\Ü^N™ÜšYÙØ\ŒŒœÛX^]ÚYÌŒÛX\™Ú[Œ]]ßB‹›˜[Y\Èİ›Û™ŞÙ\Ü^N˜›ØÚÎÙ›ÛY˜[Z[N[\˜Kİ\œÚ]™NÙ›Û\Ú^™NŒ‹Œœ™[NØÛÛÜ˜\ŠKXXØÙ[YY\
-NÙ›Û]ÙZYÚB‹›˜[Y\ÈÛX\™Ú[œÙ›Û\Ú^™NŒKŒ\™[_B‹™™\ÜË[›İK™ÚY[›İ^ÛX^]ÚYÛX\™Ú[Œ]]Îİ^X[YÛ˜Ù[\Ù›Û\Ú^™NŒKŒLœ™[NÛ[™KZZYÚŒK_B‹›]\ÚXËXØ\™Âˆ\Ü^N™›^Ø[YÛ‹Z][\Î˜Ù[\ÙØ\ŒMœÛX^]ÚYNÛX\™Ú[Œ]]ÎÜY[™ÎŒNØ›Ü™\Œ\ÛÛY™Ø˜JNKLMËLLŒJNØ›Ü™\‹\˜Y]\ÎŒŒœØ˜XÚÙÜ›İ[™œ™Ø˜JMKMKMKJBŸB‹›]\ÚXË\^^ÂˆÚYNÚZYÚNØ›Ü™\‹\˜Y]\ÎL	NØ›Ü™\ŒØ˜XÚÙÜ›İ[™›[™X\‹YÜ˜YY[
-LÍYYË˜\ŠK\›ÜÙKYÛÛ
-K˜\ŠKXXØÙ[
-JNØÛÛÜÚ]NÙ›Û\Ú^™NŒKŒœ™[NØİ\œÛÜœÚ[\Ø›Ş\ÚYİÎŒN™Ø˜JNKLMËLLŒŒŠNÙ›^Œ]]ÂŸB‹›]\ÚXË[Y]^İ^X[YÛ›YB‹›]\ÚXË[Y]HÛX[Ù›ÛY˜[Z[N“[ÛÙ\œ˜]Ø[œË\Ù\šYİ^]˜[œÙ›Ü›N\\˜Ø\ÙNÛ]\‹\ÜXÚ[™Î‹ŒL™[NØÛÛÜ˜\ŠKZ[šË\ÛÙ
-NÙ›Û\Ú^™N‹Œœ™[_B‹›]\ÚXË[Y]Hİ›Û™ŞÙ\Ü^N˜›ØÚÎÙ›Û\Ú^™NŒKŒ\™[NÛX\™Ú[‹]ÜB‹›]\ÚXË[Y]HÜ[ØÛÛÜ˜\ŠKZ[šË\ÛÙ
-_B‹˜Ûİ[İÛÙ\Ü^N™ÜšYÙÜšY][\]KXÛÛ[[œÎœ™\X]
-YœŠNÙØ\ÛX^]ÚYÛX\™Ú[ŒL]]ÈB‹˜Ûİ[X›ŞØ›Ü™\Œ\ÛÛY™Ø˜JNKLMËLLŒÌŠNØ›Ü™\‹\˜Y]\ÎŒNÜY[™ÎŒM\Ø˜XÚÙÜ›İ[™œ™Ø˜JMKMKMKJNİ^X[YÛ˜Ù[\ŸB‹˜Ûİ[X›ŞÙ\Ü^N˜›ØÚÎÙ›Û\Ú^™NŒœ™[NÙ›Û]ÙZYÚØÛÛÜ˜\ŠKXXØÙ[YY\
-_B‹˜Ûİ[X›ŞÜ[Ù›ÛY˜[Z[N“[ÛÙ\œ˜]Ø[œË\Ù\šYÙ›Û\Ú^™N‹M\™[NÛ]\‹\ÜXÚ[™Î‹ŒL™[Nİ^]˜[œÙ›Ü›N\\˜Ø\ÙNØÛÛÜ˜\ŠKZ[šË\ÛÙ
-_B‹™ÚY\[ÂˆÚY›X^XÛÛ[ÛX^]ÚYŒL	NÛX\™Ú[ŒN]]ÈÜY[™ÎŒLMÜØ›Ü™\‹\˜Y]\ÎNN\Ø˜XÚÙÜ›İ[™œ™Ø˜JŒM‹MŒËMMËŒŒŠNÂˆ›Ü™\Œ\ÛÛY™Ø˜JNKLMËLLŒ
-NÙ›ÛY˜[Z[N“[ÛÙ\œ˜]Ø[œË\Ù\šYÙ›Û\Ú^™N‹Í\™[NÛ]\‹\ÜXÚ[™Î‹Œ[BŸB‹˜ÛÜÚ[™Şİ^X[YÛ˜Ù[\ÜY[™ÎMB‹˜ÛÜÚ[™ÈœØÜš\Ù›Û\Ú^™N™[_B‹˜ÛÜÚ[™ÈÙ›Û\Ú^™NŒKŒ\™[NÛ]\‹\ÜXÚ[™Î‹Œ[_B‹™›Ø][™Ë[]\ÚXŞÂˆÜÚ][Û™š^YÜšYÚŒMœØ›İÛNŒNŞ‹Z[™^ŒÌİÚYLœÚZYÚLœØ›Ü™\‹\˜Y]\ÎL	NØ›Ü™\Œ\ÛÛY™Ø˜JMKMKMKJNÂˆ˜XÚÙÜ›İ[™œ™Ø˜JNKLMËLLLŠNØÛÛÜÚ]NØ›Ş\ÚYİÎŒL\™Ø˜JL‹Ì‹Œ
-NÙ\Ü^N™ÜšYÜXÙKZ][\Î˜Ù[\Øİ\œÛÜœÚ[\Ù›Û\Ú^™NŒ\™[NÂˆ˜XÚÙ›ÜYš[\˜›\Š
-BŸB‹œ™]™X[ÛÜXÚ]NŒİ˜[œÙ›Ü›N˜[œÛ]VJN
-Nİ˜[œÚ][Û›ÜXÚ]HÈX\ÙK˜[œÙ›Ü›HÈX\Ù_B‹œ™]™X[š\ÚX›^ÛÜXÚ]NŒNİ˜[œÙ›Ü›N››Û™_BYYXJZ[‹]ÚYÍŒ
-^ÂˆœYÙ^ÜY[™ÎŒLBˆ™ÜšYLÙÜšY][\]KXÛÛ[[œÎŒYœˆYœŸBˆœÙXİ[ÛÜY[™ÎœBŸBYYXJX^]ÚYÌ
-^Âˆš\›ŞÛZ[‹ZZYÚšØ›Ü™\‹\˜Y]\ÎŒœBˆœÙXİ[ÛØ›Ü™\‹\˜Y]\ÎŒ\ÜY[™ÎŒÌMÜBˆ˜Ûİ[X›ŞÙ›Û\Ú^™NŒKM\™[_Bˆ˜Ûİ[İÛÙØ\œBˆ™]KXšYŞÙØ\Z[\Ü[Bˆš\›È™]KXšYÈİ›Û™ŞÙ›Û\Ú^™NŒ‹\™[_BŸBYYXJ™Y™\œË\™YXÙY[[İ[Ûœ™YXÙJ^Âˆ[ÜØÜ›ÛX™Z]š[Ü˜]]ßKœ™]™X[ÛÜXÚ]NŒNİ˜[œÙ›Ü›N››Û™Nİ˜[œÚ][Û››Û™_BŸBÜİ[O‚ÚXY‚›ÙO‚]ˆÛ\ÜÏHš[›ÈˆYHš[›Èˆ\šXK[[Ù[HYHˆ›ÛOH™X[ÙÈ‚ˆ]ˆÛ\ÜÏHš[›ËXØ\™‚ˆİ™ÈÛ\ÜÏH˜Ü›İÛˆˆšY]Ğ›ŞHŒLŒÌˆ\šXKZY[HYH‚ˆ]H“LLLÚLLMˆ[LÌŒŒLLˆHLŒÌLN[MËNMŒLŒNMˆN[ËNLÍHÚL‹Ï‚ˆÚ\˜ÛHŞHŒˆŞOHHˆHŒÈ‹ÏÚ\˜ÛHŞHŒˆŞOHŒNHˆHŒÈ‹ÏÚ\˜ÛHŞHMˆˆŞOHŒNHˆHŒÈ‹Ï‚ˆÜİ™Ï‚ˆ]ˆÛ\ÜÏH™^YXœ›İÈ“Z\Èˆpì[ÜÏÙ]‚ˆHÛ\ÜÏHœØÜš\’]šOÚO‚ˆ]ˆÛ\ÜÏH™]H”ğèX˜YÈMH›İšY[Xœ™HHŒÙ]‚ˆ]ˆÛ\ÜÏH™[\ˆ‚ˆ]ÛˆÛ\ÜÏH˜ˆ‹\š[X\HˆYH™[\“]\ÚXÈ‘[˜\ˆÛÛˆpîœÚXØOØ]Û‚ˆ]ÛˆÛ\ÜÏH˜ˆ‹\ÙXÛÛ™\HˆYH™[\”Ú[[‘[˜\ˆÚ[ˆpîœÚXØOØ]Û‚ˆÙ]‚ˆÙ]‚Ù]‚‚]ÛˆÛ\ÜÏH™›Ø][™Ë[]\ÚXÈˆYH™›Ø][™Ó]\ÚXÈˆ\šXK[X™[H”™\›ÙXÚ\ˆÈ][™\ˆpîœÚXØHˆ]OH“pîœÚXØH¸¦jØ]Û‚]ˆYH[İ]X™RÜİˆ\šXKZY[HYHˆİ[OHœÜÚ][Û™š^YİÚYŒ\ÚZYÚŒ\Ûİ™\™›İÎšY[ÛÜXÚ]N‹ŒNÜÚ[\‹Y]™[Î››Û™HÙ]‚‚XZ[ˆÛ\ÜÏHœYÙH‚ÙXİ[ÛˆÛ\ÜÏHš\›È‚ˆİ™ÈÛ\ÜÏH˜›İ[šXØ[ˆšY]Ğ›ŞHŒŒŒŒˆ\šXKZY[HYH‚ˆ]H“LÌLÍŒNLLˆLMˆŒ‹Ï‚ˆ]H“MŒÈNËLÍKLŒM‹MËLŒMMHNKMÈÌÈNŒMV“MÎHMLØÌÍLNËMÈËMMLMËNKLÍHLËLÈM“NMˆLL˜ËLÌKLŒLÍKMKLMMLˆNMˆÌMÈML–“LLHÍØÌËLMHÍ‹LÍˆNMKLM‹NLLKLNVˆ‹Ï‚ˆ[\ÙHŞHLÈˆŞOHŒŒÈˆHŒMˆˆOHÈˆ˜[œÙ›Ü›OHœ›İ]JLÍHLÈŒÊH‹Ï[\ÙHŞHÈˆŞOHŒLÍHˆHŒMHˆOHÈˆ˜[œÙ›Ü›OHœ›İ]JÌÈLÍJH‹Ï‚ˆÜİ™Ï‚ˆİ™ÈÛ\ÜÏH˜›İ[šXØ[œˆˆšY]Ğ›ŞHŒŒŒŒˆ\šXKZY[HYH‚ˆ]H“LÌLÍŒNLLˆLMˆŒ‹Ï‚ˆ]H“MŒÈNËLÍKLŒM‹MËLŒMMHNKMÈÌÈNŒMV“MÎHMLØÌÍLNËMÈËMMLMËNKLÍHLËLÈM“NMˆLL˜ËLÌKLŒLÍKMKLMMLˆNMˆÌMÈML–“LLHÍØÌËLMHÍ‹LÍˆNMKLM‹NLLKLNVˆ‹Ï‚ˆÜİ™Ï‚ˆ]ˆÛ\ÜÏHš\›ËZ[›™\ˆ‚ˆ]ˆÛ\ÜÏHˆ“Z\Èˆpì[ÜÏÙ]‚ˆˆÛ\ÜÏHœØÜš\’]šOÚ‚ˆ]ˆÛ\ÜÏH™]šY\ˆÙ]‚ˆÛ\ÜÏH˜ÛÜH‘\İ0è\È[š]YÈHÙ[Xœ˜\ˆÛÛ›ZYÛÈ[ˆ0ëXH]YHİX\™\°êH\˜HÚY[\™KÜ‚ˆ]ˆÛ\ÜÏH™]KXšYÈÜ[”ğàPQÏÜÜ[İ›Û™ÏŒMÜİ›Û™ÏÜ[““Õ’QSP”‘OœŒŒÜÜ[Ù]‚ˆ]ˆÛ\ÜÏHœØÜ›ÛİYH‘\Û^˜H\˜H\ØİXœš\ˆÜÈ][\È8¡¤ÏÙ]‚ˆÙ]‚ÜÙXİ[Û‚‚ÙXİ[ÛˆÛ\ÜÏHœÙXİ[Ûˆ™]™X[‚ˆ]ˆÛ\ÜÏHšÚXÚÙ\ˆ•[ˆY]›ÈØ\0ë][ÏÙ]‚ˆˆÛ\ÜÏHœÙXİ[Û‹]]HÛÛˆ[ÛÜ˜^°ìÛˆ[›ÏÚ‚ˆÛ\ÜÏHœ][İH¸ 'ŞHZ›È]°è\ÈZHšpìY^‹\˜HÛÛY[˜\ˆ[ˆY]›ÈØ\0ë][Ë›ÙXYH[[[ÜˆH]ZY[™\Èpè\È]ZY\›Ë¸ 'OÜ‚ˆ]ˆÛ\ÜÏH™]šY\ˆÙ]‚ˆÛ\ÜÏH˜ÛÜH]\ÛÜ›È[ˆZHÛÜ˜^°ìÛˆZ[\ÈH™XİY\™ÜËšYZ›ÜÈH™XÚY[\ËˆÜˆÙ\ˆ\HH[ÜË\È[\Ü[H]YH\İ0ê\È[ˆZ\ÈMHpì[ÜËÜ‚ÜÙXİ[Û‚‚ÙXİ[ÛˆÛ\ÜÏHœÙXİ[Ûˆ™]™X[‚ˆ]ˆÛ\ÜÏHšÚXÚÙ\ˆÛÛˆ]XÚÈØ\špì[ÏÙ]‚ˆˆÛ\ÜÏHœÙXİ[Û‹]]H“ZH˜[Z[XOÚ‚ˆ]ˆÛ\ÜÏH›˜[Y\È‚ˆ]ˆÛ\ÜÏH˜Ø\™‚ˆİ›Û™Ï“Z\ÈY™\ÏÜİ›Û™Ï‚ˆ\\›ÈÛÛ™\˜\È˜\°ëX\ÏÜ‚ˆ“X\°ëXH[Z˜[™˜H\›°è[™^ˆ˜[\ÏÜ‚ˆÙ]‚ˆ]ˆÛ\ÜÏH˜Ø\™‚ˆİ›Û™Ï“Z\ÈYš[›ÜÏÜİ›Û™Ï‚ˆ’Ø]H[X[˜H[˜\›ÈÛÛ™\˜\ÏÜ‚ˆœ˜[™Ûˆ[œš\]YH[˜\›ÈÛÛ™\˜\ÏÜ‚ˆÙ]‚ˆÙ]‚ÜÙXİ[Û‚‚ÙXİ[ÛˆÛ\ÜÏHœÙXİ[Ûˆ™]™X[‚ˆ]ˆÛ\ÜÏHšÚXÚÙ\ˆ‘0ìÛ™HÙ\°èOÙ]‚ˆˆÛ\ÜÏHœÙXİ[Û‹]]H‘][\ÏÚ‚ˆ]ˆÛ\ÜÏH™ÜšYLˆ‚ˆ\XÛHÛ\ÜÏH˜Ø\™‚ˆİ™ÈÛ\ÜÏHšXÛÛˆˆšY]Ğ›ŞHŒˆ\šXKZY[HYH]H“NNLMHNŒÌZÍŒÓLŒÌ[L‹LLÈLˆLÓLÌÌUŒŒŒLSLÈNÚLŒMSLLÌZLÌˆSLÈLZL‹ÏÜİ™Ï‚ˆÏ“Z\ØHHYÜ˜YXÚ[ZY[ÏÚÏ‚ˆ]ˆÛ\ÜÏH[YHŒOÙ]‚ˆ]ˆÛ\ÜÏHœXÙH’YÛ\ÚXHØ[ˆX›È\0ìÜİÛÙ]‚ˆ]ˆÛ\ÜÏH˜Y™\ÜÈÛØ[ÛÛpè[Ù]‚ˆHÛ\ÜÏH›X\Xˆˆ\™Ù]H—Ø›[šÈˆ™[H››ÛÜ[™\ˆˆ™YHšÎ‹ËİİİË™ÛÛÙÛK˜ÛÛKÛX\ËÜÙX\˜ÚÏØ\OLIœ]Y\ORYÛ\ÚXILŒØ[‰LŒX›ÉLŒ\	PÌÉPŒÜİÛ	LŒÛØ[ÛÛIPÌÉPL[ˆ¸£%ˆ™\ˆXšXØXÚpìÛØO‚ˆØ\XÛO‚ˆ\XÛHÛ\ÜÏH˜Ø\™‚ˆİ™ÈÛ\ÜÏHšXÛÛˆˆšY]Ğ›ŞHŒˆ\šXKZY[HYH]H“LNHL›LˆM˜ËK‹LÈKMÈ\ËM‹Œ‹LËMËNSLÈ“LŒˆÌİŒMÓLMHMMLÎLÚLÛLˆMËKKLÈM‹HÌÍ‹ÌˆÍˆÛL‹LMM‹HÍ]ŒMSLÍˆMLÈ‹ÏÜİ™Ï‚ˆÏ”™XÙ\ÚpìÛÚÏ‚ˆ]ˆÛ\ÜÏH[YHÎŒÌOÙ]‚ˆ]ˆÛ\ÜÏHœXÙH”Ø[0ìÛˆÜÈÛX]\ÏÙ]‚ˆ]ˆÛ\ÜÏH˜Y™\ÜÈØ[Z[›ÈHØ[H›ÜØHÎÛÛˆØ[H›ÜØOÙ]‚ˆHÛ\ÜÏH›X\Xˆˆ\™Ù]H—Ø›[šÈˆ™[H››ÛÜ[™\ˆˆ™YHšÎ‹ËİİİË™ÛÛÙÛK˜ÛÛKÛX\ËÜÙX\˜ÚÏØ\OLIœ]Y\OTØ[	PÌÉPŒÛ‰LŒÜÉLŒÛX]\ÉLŒØ[Z[›ÉLŒILŒØ[ILŒ›ÜØILŒ	LŒÛÛÛšXILŒØ[ILŒ›ÜØILŒÛØ[ÛÛIPÌÉPL[ˆ¸£%ˆ™\ˆXšXØXÚpìÛØO‚ˆØ\XÛO‚ˆÙ]‚ÜÙXİ[Û‚‚ÙXİ[ÛˆÛ\ÜÏHœÙXİ[Ûˆ™]™X[‚ˆ]ˆÛ\ÜÏHšÚXÚÙ\ˆ”›ÙÜ˜[XHHH›ØÚOÙ]‚ˆˆÛ\ÜÏHœÙXİ[Û‹]]H’][™\˜\š[ÏÚ‚ˆ]ˆÛ\ÜÏH[Y[[™H‚ˆ]ˆÛ\ÜÏH[Y[[™K\›İÈ]ˆÛ\ÜÏH[Y[[™K][YHÎŒÌOÙ]]ˆÛ\ÜÏH[Y[[™K[[™HÙ]]ˆÛ\ÜÏH[Y[[™K[X™[”™XÙ\ÚpìÛÙ]Ù]‚ˆ]ˆÛ\ÜÏH[Y[[™K\›İÈ]ˆÛ\ÜÏH[Y[[™K][YHŒMHOÙ]]ˆÛ\ÜÏH[Y[[™K[[™HÙ]]ˆÛ\ÜÏH[Y[[™K[X™[•˜[ÏÙ]Ù]‚ˆ]ˆÛ\ÜÏH[Y[[™K\›İÈ]ˆÛ\ÜÏH[Y[[™K][YHNŒMHOÙ]]ˆÛ\ÜÏH[Y[[™K[[™HÙ]]ˆÛ\ÜÏH[Y[[™K[X™[Ù[˜OÙ]Ù]‚ˆ]ˆÛ\ÜÏH[Y[[™K\›İÈ]ˆÛ\ÜÏH[Y[[™K][YHŒLŒOÙ]]ˆÛ\ÜÏH[Y[[™K[[™HÙ]]ˆÛ\ÜÏH[Y[[™K[X™[‘šY\İOÙ]Ù]‚ˆÙ]‚ÜÙXİ[Û‚‚ÙXİ[ÛˆÛ\ÜÏHœÙXİ[Ûˆ™]™X[‚ˆ]ˆÛ\ÜÏHšÚXÚÙ\ˆ”\˜HXÛÛ\pìX\ˆHÙ[Xœ˜XÚpìÛÙ]‚ˆˆÛ\ÜÏHœÙXİ[Û‹]]HğìÙYÛÈH™\İ[Y[OÚ‚ˆ]ˆÛ\ÜÏH˜Ø\™ˆİ[OH›X^]ÚYÛX\™Ú[Œ]]È‚ˆİ™ÈÛ\ÜÏHšXÛÛˆˆšY]Ğ›ŞHŒˆ\šXKZY[HYH]H“LŒˆ[LLNˆL‹NˆHÌN[KLÌNMˆ‹LL–“LÌˆMİLÈM›HKN‹ÏÜİ™Ï‚ˆ]ˆÛ\ÜÏH[YH‘›Ü›X[Ù]‚ˆÛ\ÜÏH™™\ÜË[›İHÛÛˆ]XÚÈØ\špì[È\ÈY[[ÜÈ]š]\ˆÜÈÛ›ÜÈİ›Û™Ï˜™ZYÙOÜİ›Û™ÏˆHİ›Û™Ïœ›ÜØH[ÏÜİ›Û™Ï‹XH]YH\İ0è[ˆ™\Ù\˜YÜÈ\˜HH]Z[˜ÙXpìY\˜KÜ‚ˆÙ]‚ÜÙXİ[Û‚‚ÙXİ[ÛˆÛ\ÜÏHœÙXİ[Ûˆ™]™X[‚ˆ]ˆÛ\ÜÏHšÚXÚÙ\ˆ“ZHØ[˜ÚpìÛˆ\ÜXÚX[Ù]‚ˆˆÛ\ÜÏHœÙXİ[Û‹]]H“pîœÚXØOÚ‚ˆ]ˆÛ\ÜÏH›]\ÚXËXØ\™‚ˆ]ÛˆÛ\ÜÏH›]\ÚXË\^HˆYH›]\ÚXÔ^Hˆ\šXK[X™[H”™\›ÙXÚ\ˆpîœÚXØH¸¥­Ø]Û‚ˆ]ˆÛ\ÜÏH›]\ÚXË[Y]H‚ˆÛX[ZÜ˜HİY[˜OÜÛX[‚ˆİ›Û™Ï‘Ş\ŞHÛÛX[Üİ›Û™Ï‚ˆÜ[Ü\İ[Ø]\œÏÜÜ[‚ˆÙ]‚ˆÙ]‚ÜÙXİ[Û‚‚ÙXİ[ÛˆÛ\ÜÏHœÙXİ[Ûˆ™]™X[‚ˆ]ˆÛ\ÜÏHšÚXÚÙ\ˆ•[ˆ][HÜÚ[Û˜[Ù]‚ˆˆÛ\ÜÏHœÙXİ[Û‹]]H”İYÙ\™[˜ÚXHH™YØ[ÏÚ‚ˆÛ\ÜÏH™ÚY[›İH•HÛÛ\pìpëXH[ˆ\İH0ëXH[ˆ\ÜXÚX[\È[YZ›Üˆ™YØ[Ëˆ\›ÈÚH\ÙX\È\›YH[ˆØœÙ\]Z[ËYÜ˜YXÙ\°êH]YHÙXH[ˆY™Xİ]›ËÜ‚ˆ]ˆÛ\ÜÏH™ÚY\[¸§"H]šXHHÛØœ™\ÏÙ]‚ÜÙXİ[Û‚‚ÙXİ[ÛˆÛ\ÜÏHœÙXİ[Ûˆ™]™X[‚ˆ]ˆÛ\ÜÏHšÚXÚÙ\ˆØYH™^ˆ˜[HY[›ÜÏÙ]‚ˆˆÛ\ÜÏHœÙXİ[Û‹]]HİY[H™YÜ™\Ú]˜OÚ‚ˆ]ˆÛ\ÜÏH˜Ûİ[İÛˆˆYH˜Ûİ[İÛˆ‚ˆ]ˆÛ\ÜÏH˜Ûİ[X›ŞˆYH™^\ÈŒØÜ[‘0ëX\ÏÜÜ[Ù]‚ˆ]ˆÛ\ÜÏH˜Ûİ[X›ŞˆYHšİ\œÈŒØÜ[’Ü˜\ÏÜÜ[Ù]‚ˆ]ˆÛ\ÜÏH˜Ûİ[X›ŞˆYH›Z[]\ÈŒØÜ[“Z[]ÜÏÜÜ[Ù]‚ˆ]ˆÛ\ÜÏH˜Ûİ[X›ŞˆYHœÙXÛÛ™ÈŒØÜ[”ÙYİ[™ÜÏÜÜ[Ù]‚ˆÙ]‚ÜÙXİ[Û‚‚ÙXİ[ÛˆÛ\ÜÏHœÙXİ[ÛˆÛÜÚ[™È™]™X[‚ˆ]ˆÛ\ÜÏHšÚXÚÙ\ˆŒM0­ÈLH0­ÈŒÙ]‚ˆ]ˆÛ\ÜÏHœØÜš\°¨UH\Ü\›ÈOÙ]‚ˆ‘\Ü\˜[[ÜÈÛÛ\ˆÛÛˆİH™\Ù[˜ÚXKÜ‚ˆ]ˆÛ\ÜÏH™]šY\ˆÙ]‚ˆ“]XÚ\ÈÜ˜XÚX\ÏÜ‚ÜÙXİ[Û‚ÛXZ[‚‚ØÜš\‚˜ÛÛœİ’QS×ÒQI×ÒŞ’YÍİ‘IÎÂ›]]\ÚXÓÛY˜[ÙNÂ™[˜İ[Ûˆİ\]\ÚXÊ
-^ÂˆYŠ]\ÚXÓÛŠ\™]\›ÂˆÛÛœİÜİYØİ[Y[™Ù][[Y[RY
-	Ş[İ]X™RÜİ	ÊNÂˆÛÛœİYœ˜[YOYØİ[Y[˜Ü™X]Q[[Y[
-	ÚYœ˜[YIÊNÂˆYœ˜[YKšYIÛ]\ÚXÑœ˜[YIÎÂˆYœ˜[YKÚYIÌIÎÚYœ˜[YKšZYÚIÌIÎÚYœ˜[YK˜[İÏIØ]]Ü^IÎÂˆYœ˜[YKœÜ˜ÏXÎ‹ËİİİË[İ]X™K˜ÛÛKÙ[X™YÉÕ’QS×ÒQOØ]]Ü^OLI›ÛÜLIœ^[\İIÕ’QS×ÒQI˜ÛÛ›ÛÏL	›[Ù\İœ˜[™[™ÏLIœ™[LÂˆÜİš[›™\’SIÉÎÚÜİ˜\[™Ú[
-Yœ˜[YJNÛ]\ÚXÓÛ]YNÜŞ[˜Ó]\ÚXĞ]ÛœÊ
-NÂŸB™[˜İ[ÛˆİÜ]\ÚXÊ
-^ÂˆØİ[Y[™Ù][[Y[RY
-	Ş[İ]X™RÜİ	ÊKš[›™\’SIÉÎÛ]\ÚXÓÛY˜[ÙNÜŞ[˜Ó]\ÚXĞ]ÛœÊ
-NÂŸB™[˜İ[ÛˆÙÙÛS]\ÚXÊ
-^Û]\ÚXÓÛÜİÜ]\ÚXÊ
-Nœİ\]\ÚXÊ
-_B™[˜İ[ÛˆŞ[˜Ó]\ÚXĞ]ÛœÊ
-^ÂˆÛÛœİYØİ[Y[™Ù][[Y[RY
-	Û]\ÚXÔ^IÊKYØİ[Y[™Ù][[Y[RY
-	Ù›Ø][™Ó]\ÚXÉÊNÂˆYŠ
-^Ü^ÛÛ[[]\ÚXÓÛÉø¡hIÎ‰ø¥­‰ÎÜœÙ]]šX]J	Ø\šXK[X™[	Ë]\ÚXÓÛÉÑ][™\ˆpîœÚXØIÎ‰Ô™\›ÙXÚ\ˆpîœÚXØIÊ_BˆYŠŠ^Ù‹^ÛÛ[[]\ÚXÓÛÉø¡hIÎ‰ø¦j‰ßBŸB™[˜İ[Ûˆ[\ŠÚ]]\ÚXÊ^ÂˆYŠÚ]]\ÚXÊ\İ\]\ÚXÊ
-NÂˆØİ[Y[™Ù][[Y[RY
-	Ú[›ÉÊK˜Û\ÜÓ\İ˜Y
-	ÚY[‰ÊNÂˆØİ[Y[˜›ÙKœİ[K›İ™\™›İÏIÉÎÂŸB™Øİ[Y[˜›ÙKœİ[K›İ™\™›İÏIÚY[‰ÎÂ™Øİ[Y[™Ù][[Y[RY
-	Ù[\“]\ÚXÉÊK˜Y]™[\İ[™\Š	ØÛXÚÉË
+body{margin:0;color:var(--ink);font-family:"Cormorant Garamond",serif;background:radial-gradient(circle at 12% 7%,rgba(230,199,194,.62),transparent 28%),radial-gradient(circle at 88% 32%,rgba(232,215,197,.8),transparent 31%),linear-gradient(180deg,#f5dedb,#faece8 38%,#f1dcda)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.2;background-image:linear-gradient(90deg,rgba(255,255,255,.55) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.45) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(#000,transparent 92%)}
+a{text-decoration:none;color:inherit}.page{width:min(100%,1080px);margin:auto;padding:16px 13px 76px}
+.intro{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:radial-gradient(circle at 50% 18%,rgba(255,255,255,.78),transparent 35%),linear-gradient(160deg,#eed0cd,#f9ebe6 55%,#ead2ca);transition:.7s}
+.intro.hide{opacity:0;visibility:hidden}.intro-card{width:min(88vw,410px);min-height:72vh;padding:42px 25px 32px;text-align:center;background:rgba(255,249,245,.86);border:1px solid rgba(158,94,88,.46);border-radius:34px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.intro-card:before,.intro-card:after{content:"";position:absolute;width:170px;height:170px;border:1px solid rgba(216,163,157,.35);border-radius:50%}.intro-card:before{left:-85px;top:-75px}.intro-card:after{right:-90px;bottom:-80px}
+.crown{font-size:3.5rem;color:var(--deep);margin-bottom:10px}.eyebrow{font:600 .68rem Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.27em;color:var(--deep)}
+.script{font-family:Allura,cursive;color:var(--deep);font-weight:400;line-height:.92}.intro h1{font-size:clamp(5rem,22vw,7.4rem);margin:12px 0}.intro .date{font-size:1.18rem;letter-spacing:.06em;margin:19px 0 30px}
+.entry{display:flex;flex-direction:column;gap:10px;align-items:center}.btn{border:0;border-radius:999px;padding:13px 22px;font:500 .76rem Montserrat,sans-serif;letter-spacing:.06em;cursor:pointer}.primary{background:linear-gradient(135deg,#b9756e,#d08d85);color:#fff;box-shadow:0 10px 25px rgba(158,94,88,.23)}.ghost{background:transparent;border:1px solid rgba(158,94,88,.38);color:var(--ink)}
+.panel,.hero{position:relative;border:1px solid rgba(158,94,88,.33);background:rgba(255,249,245,.88);box-shadow:var(--shadow);border-radius:30px;overflow:hidden}.panel:after,.hero:after{content:"";position:absolute;inset:11px;border:1px solid rgba(216,163,157,.2);border-radius:21px;pointer-events:none}
+.hero{min-height:91vh;display:grid;place-items:center;text-align:center;padding:45px 22px;margin:8px 0 18px;background:linear-gradient(rgba(255,249,245,.82),rgba(255,249,245,.91)),radial-gradient(circle at 10% 10%,var(--palo),transparent 32%),radial-gradient(circle at 92% 90%,var(--champ),transparent 34%)}
+.floral{position:absolute;font-size:clamp(3rem,14vw,7rem);color:rgba(185,117,110,.34);line-height:1}.floral.tl{left:10px;top:14px;transform:rotate(-22deg)}.floral.br{right:8px;bottom:18px;transform:rotate(155deg)}
+.hero-inner{position:relative;z-index:2;max-width:660px}.hero .xv{font-size:1.35rem;letter-spacing:.2em;text-transform:uppercase}.hero h2{font-size:clamp(6rem,25vw,11rem);margin:15px 0 3px}.divider{width:150px;height:1px;margin:21px auto;background:linear-gradient(90deg,transparent,var(--rg),transparent);position:relative}.divider:after{content:"*";position:absolute;left:50%;top:50%;transform:translate(-50%,-53%);background:var(--paper);padding:0 8px;color:var(--deep)}
+.hero .invite{font-size:1.3rem;line-height:1.45}.date-big{display:flex;align-items:center;justify-content:center;gap:11px;margin:28px 0 9px;font-size:1.15rem;text-transform:uppercase}.date-big strong{font-size:3rem;font-weight:400;color:var(--deep)}.scroll{margin-top:37px;font:500 .62rem Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.2em;color:#886966}
+.section{padding:33px 19px;margin:17px 0}.kicker{text-align:center;font:600 .64rem Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.22em;color:var(--deep)}.title{text-align:center;font:400 clamp(2.9rem,12vw,4.7rem) Allura,cursive;color:var(--deep);margin:8px 0 17px;line-height:1}.copy,.quote{max-width:700px;margin:auto;text-align:center;line-height:1.52}.copy{font-size:1.17rem}.quote{font-size:1.45rem;font-style:italic}
+.grid{display:grid;gap:16px}.card{position:relative;padding:25px 18px;text-align:center;border:1px solid rgba(158,94,88,.3);border-radius:23px;background:rgba(255,255,255,.47)}.card h3{font:400 2.55rem Allura,cursive;color:var(--deep);margin:0 0 7px}.time{font-size:1.5rem;font-weight:600;color:var(--deep);margin:5px 0}.place{font-size:1.22rem}.address{font-size:.98rem;line-height:1.35;color:#876663;margin:5px 0}.map{display:inline-block;margin-top:14px;padding:12px 18px;border-radius:999px;background:linear-gradient(135deg,#b9756e,#d08d85);color:white;font:500 .7rem Montserrat,sans-serif;letter-spacing:.06em;box-shadow:0 9px 20px rgba(158,94,88,.2)}
+.names{display:grid;gap:14px}.names .card strong{display:block;font:400 2.15rem Allura,cursive;color:var(--deep)}.names p{margin:4px 0;font-size:1.08rem}
+.timeline{max-width:560px;margin:auto}.row{display:grid;grid-template-columns:85px 20px 1fr;align-items:center;min-height:65px}.row .t{text-align:right;padding-right:10px;font-size:1.05rem;font-weight:600;color:var(--deep)}.line{height:100%;position:relative}.line:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--rg)}.line:after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:#b9756e;transform:translate(-50%,-50%)}.label{padding-left:12px;font-size:1.12rem}
+.music{display:flex;align-items:center;gap:15px;max-width:580px;margin:auto;padding:18px;border:1px solid rgba(158,94,88,.28);border-radius:22px;background:rgba(255,255,255,.48)}.play{width:58px;height:58px;flex:0 0 auto;border:0;border-radius:50%;background:linear-gradient(135deg,var(--rg),#b9756e);color:#fff;font-size:1.1rem;cursor:pointer}.music small{font:500 .6rem Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.12em;color:#8b6863}.music strong{display:block;font-size:1.25rem;margin-top:3px}.music span{color:#876663}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:620px;margin:12px auto 0}.count{padding:14px 4px;border:1px solid rgba(158,94,88,.3);border-radius:17px;background:rgba(255,255,255,.45);text-align:center}.count b{display:block;font-size:1.7rem;font-weight:400;color:var(--deep)}.count span{font:500 .5rem Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.08em}
+.pill{width:max-content;max-width:100%;margin:17px auto 0;padding:10px 16px;border-radius:999px;border:1px solid rgba(158,94,88,.26);background:rgba(216,163,157,.2);font:500 .72rem Montserrat,sans-serif;letter-spacing:.06em}
+.close{text-align:center;padding:48px 22px}.close .script{font-size:4.2rem}.close p{font-size:1.08rem}
+.float{position:fixed;right:15px;bottom:18px;z-index:30;width:51px;height:51px;border:1px solid rgba(255,255,255,.55);border-radius:50%;background:rgba(185,117,110,.94);color:#fff;box-shadow:0 10px 25px rgba(92,56,53,.28);cursor:pointer}
+.reveal{opacity:0;transform:translateY(17px);transition:.75s}.reveal.show{opacity:1;transform:none}
+@media(min-width:760px){.page{padding:24px 23px 90px}.grid,.names{grid-template-columns:1fr 1fr}.section{padding:42px 36px}}
+@media(max-width:420px){.hero{min-height:88vh}.section{border-radius:25px}.count b{font-size:1.45rem}.date-big{gap:8px}.date-big strong{font-size:2.55rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<div class="intro" id="intro">
+  <div class="intro-card">
+    <div class="crown">&#9813;</div>
+    <div class="eyebrow">Mis XV a&ntilde;os</div>
+    <h1 class="script">Hatzi</h1>
+    <div class="date">S&aacute;bado 14 de noviembre de 2026</div>
+    <div class="entry">
+      <button class="btn primary" id="enterMusic">Entrar con m&uacute;sica</button>
+      <button class="btn ghost" id="enterSilent">Entrar sin m&uacute;sica</button>
+    </div>
+  </div>
+</div>
+<button class="float" id="floatMusic" aria-label="M&uacute;sica">&#9835;</button>
+<div id="yt" style="position:fixed;width:1px;height:1px;overflow:hidden;opacity:.001;pointer-events:none"></div>
 
-OO™[\ŠYJJNÂ™Øİ[Y[™Ù][[Y[RY
-	Ù[\”Ú[[	ÊK˜Y]™[\İ[™\Š	ØÛXÚÉË
+<main class="page">
+<section class="hero">
+  <div class="floral tl">&#10048;</div><div class="floral br">&#10048;</div>
+  <div class="hero-inner">
+    <div class="xv">Mis XV a&ntilde;os</div>
+    <h2 class="script">Hatzi</h2>
+    <div class="divider"></div>
+    <p class="invite">Est&aacute;s invitado a celebrar conmigo un d&iacute;a que guardar&eacute; para siempre.</p>
+    <div class="date-big"><span>S&aacute;bado</span><strong>14</strong><span>Noviembre<br>2026</span></div>
+    <div class="scroll">Desliza para descubrir los detalles</div>
+  </div>
+</section>
 
-OO™[\Š˜[ÙJJNÂ™Øİ[Y[™Ù][[Y[RY
-	Û]\ÚXÔ^IÊK˜Y]™[\İ[™\Š	ØÛXÚÉËÙÙÛS]\ÚXÊNÂ™Øİ[Y[™Ù][[Y[RY
-	Ù›Ø][™Ó]\ÚXÉÊK˜Y]™[\İ[™\Š	ØÛXÚÉËÙÙÛS]\ÚXÊNÂ‚˜ÛÛœİ\™Ù][™]È]J	ÌŒ‹LLKLMNŒŒLŒ	ÊK™Ù][YJ
-NÂ™[˜İ[ÛˆXÚÊ
-^Âˆ]Y™SX]›X^
-\™Ù]Q]K››İÊ
-JNÂˆÛÛœİSX]™›ÛÜŠY™‹Î
-NÙY™‰ONÂˆÛÛœİSX]™›ÛÜŠY™‹ÌÍŒ
-NÙY™‰OLÍŒÂˆÛÛœİOSX]™›ÛÜŠY™‹ÍŒ
-NÙY™‰OMŒÂˆÛÛœİÏSX]™›ÛÜŠY™‹ÌL
-NÂˆØİ[Y[™Ù][[Y[RY
-	Ù^\ÉÊK^ÛÛ[Tİš[™Ê
-KœYİ\
-‹	Ì	ÊNÂˆØİ[Y[™Ù][[Y[RY
-	Úİ\œÉÊK^ÛÛ[Tİš[™Ê
-KœYİ\
-‹	Ì	ÊNÂˆØİ[Y[™Ù][[Y[RY
-	ÛZ[]\ÉÊK^ÛÛ[Tİš[™ÊJKœYİ\
-‹	Ì	ÊNÂˆØİ[Y[™Ù][[Y[RY
-	ÜÙXÛÛ™ÉÊK^ÛÛ[Tİš[™ÊÊKœYİ\
-‹	Ì	ÊNÂŸBXÚÊ
-NÜÙ][\˜[
-XÚËL
-NÂ˜ÛÛœİ[Ï[™]È[\œÙXİ[Û“ØœÙ\™\Š[šY\ÏO™[šY\Ë™›Ü‘XXÚ
-OOÚYŠKš\Ò[\œÙXİ[™Ê^ÙK\™Ù]˜Û\ÜÓ\İ˜Y
-	İš\ÚX›IÊNÚ[Ë[›ØœÙ\™JK\™Ù]
-__JKİ™\ÚÛ‹ŒLŸJNÂ™Øİ[Y[œ]Y\TÙ[XİÜ[
-	Ëœ™]™X[	ÊK™›Ü‘XXÚ
-[Oš[Ë›ØœÙ\™J[
-JNÂÜØÜš\‚Ø›ÙO‚Ú[
+<section class="section panel reveal">
+  <div class="kicker">Un nuevo cap&iacute;tulo</div>
+  <h2 class="title">Con el coraz&oacute;n lleno</h2>
+  <p class="quote">&ldquo;Hoy dejo atr&aacute;s mi ni&ntilde;ez, para comenzar un nuevo cap&iacute;tulo, rodeada del amor de quienes m&aacute;s quiero.&rdquo;</p>
+  <div class="divider"></div>
+  <p class="copy">Atesoro en mi coraz&oacute;n miles de recuerdos viejos y recientes. Por ser parte de ellos, es importante que est&eacute;s en mis 15 a&ntilde;os.</p>
+</section>
+
+<section class="section panel reveal">
+  <div class="kicker">Con mucho cari&ntilde;o</div>
+  <h2 class="title">Mi familia</h2>
+  <div class="names">
+    <div class="card"><strong>Mis padres</strong><p>Arturo Contreras Far&iacute;as</p><p>Mar&iacute;a Alejandra Hern&aacute;ndez Valdes</p></div>
+    <div class="card"><strong>Mis padrinos</strong><p>Kate Ileana Alfaro Contreras</p><p>Brandon Enrique Alfaro Contreras</p></div>
+  </div>
+</section>
+
+<section class="section panel reveal">
+  <div class="kicker">D&oacute;nde ser&aacute;</div>
+  <h2 class="title">Detalles</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>Misa de agradecimiento</h3>
+      <div class="time">6:00 PM</div>
+      <div class="place">Iglesia San Pablo Ap&oacute;stol</div>
+      <div class="address">Coalcom&aacute;n</div>
+      <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Iglesia%20San%20Pablo%20Apostol%20Coalcoman">Ver ubicaci&oacute;n</a>
+    </article>
+    <article class="card">
+      <h3>Recepci&oacute;n</h3>
+      <div class="time">7:30 PM</div>
+      <div class="place">Sal&oacute;n Los Tomates</div>
+      <div class="address">Camino a Santa Rosa #88, Col. Santa Rosa</div>
+      <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Salon%20Los%20Tomates%20Camino%20a%20Santa%20Rosa%2088%20Colonia%20Santa%20Rosa%20Coalcoman">Ver ubicaci&oacute;n</a>
+    </article>
+  </div>
+</section>
+
+<section class="section panel reveal">
+  <div class="kicker">Programa de la noche</div>
+  <h2 class="title">Itinerario</h2>
+  <div class="timeline">
+    <div class="row"><div class="t">7:30 PM</div><div class="line"></div><div class="label">Recepci&oacute;n</div></div>
+    <div class="row"><div class="t">8:15 PM</div><div class="line"></div><div class="label">Vals</div></div>
+    <div class="row"><div class="t">9:15 PM</div><div class="line"></div><div class="label">Cena</div></div>
+    <div class="row"><div class="t">10:00 PM</div><div class="line"></div><div class="label">Fiesta</div></div>
+  </div>
+</section>
+
+<section class="section panel reveal">
+  <div class="kicker">Para acompa&ntilde;ar la celebraci&oacute;n</div>
+  <h2 class="title">C&oacute;digo de vestimenta</h2>
+  <div class="card" style="max-width:680px;margin:auto">
+    <div class="time">Formal</div>
+    <p class="copy">Con mucho cari&ntilde;o les pedimos evitar los tonos <strong>beige</strong> y <strong>rosa palo</strong>, ya que est&aacute;n reservados para la quincea&ntilde;era.</p>
+  </div>
+</section>
+
+<section class="section panel reveal">
+  <div class="kicker">Mi canci&oacute;n especial</div>
+  <h2 class="title">M&uacute;sica</h2>
+  <div class="music">
+    <button class="play" id="musicPlay" aria-label="Reproducir m&uacute;sica">&#9654;</button>
+    <div><small>Ahora suena</small><strong>Gypsy Woman</strong><span>Crystal Waters</span></div>
+  </div>
+</section>
+
+<section class="section panel reveal">
+  <div class="kicker">Un detalle opcional</div>
+  <h2 class="title">Sugerencia de regalo</h2>
+  <p class="copy">Tu compa&ntilde;&iacute;a en este d&iacute;a tan especial es el mejor regalo. Pero si deseas darme un obsequio, agradecer&eacute; que sea en efectivo.</p>
+  <div class="pill">Lluvia de sobres</div>
+</section>
+
+<section class="section panel reveal">
+  <div class="kicker">Cada vez falta menos</div>
+  <h2 class="title">Cuenta regresiva</h2>
+  <div class="countdown">
+    <div class="count"><b id="days">00</b><span>D&iacute;as</span></div>
+    <div class="count"><b id="hours">00</b><span>Horas</span></div>
+    <div class="count"><b id="minutes">00</b><span>Minutos</span></div>
+    <div class="count"><b id="seconds">00</b><span>Segundos</span></div>
+  </div>
+</section>
+
+<section class="panel close reveal">
+  <div class="kicker">14 &middot; 11 &middot; 2026</div>
+  <div class="script">&iexcl;Te espero!</div>
+  <p>Esperamos contar con su presencia.</p>
+  <div class="divider"></div>
+  <p>Muchas gracias</p>
+</section>
+</main>
+
+<script>
+const VIDEO_ID='_KztNIg4cvE';let musicOn=false;
+function sync(){const p=document.getElementById('musicPlay'),f=document.getElementById('floatMusic');if(p)p.textContent=musicOn?'II':'>';if(f)f.textContent=musicOn?'II':'M'}
+function startMusic(){if(musicOn)return;const host=document.getElementById('yt'),i=document.createElement('iframe');i.width='1';i.height='1';i.allow='autoplay';i.src='https://www.youtube.com/embed/'+VIDEO_ID+'?autoplay=1&loop=1&playlist='+VIDEO_ID+'&controls=0&rel=0';host.innerHTML='';host.appendChild(i);musicOn=true;sync()}
+function stopMusic(){document.getElementById('yt').innerHTML='';musicOn=false;sync()}
+function toggleMusic(){musicOn?stopMusic():startMusic()}
+function enter(withMusic){if(withMusic)startMusic();document.getElementById('intro').classList.add('hide');document.body.style.overflow=''}
+document.body.style.overflow='hidden';
+document.getElementById('enterMusic').onclick=()=>enter(true);
+document.getElementById('enterSilent').onclick=()=>enter(false);
+document.getElementById('musicPlay').onclick=toggleMusic;
+document.getElementById('floatMusic').onclick=toggleMusic;
+const target=new Date('2026-11-14T18:00:00-06:00').getTime();
+function tick(){let x=Math.max(0,target-Date.now()),d=Math.floor(x/86400000);x%=86400000;let h=Math.floor(x/3600000);x%=3600000;let m=Math.floor(x/60000);x%=60000;let s=Math.floor(x/1000);days.textContent=String(d).padStart(2,'0');hours.textContent=String(h).padStart(2,'0');minutes.textContent=String(m).padStart(2,'0');seconds.textContent=String(s).padStart(2,'0')}
+tick();setInterval(tick,1000);
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
