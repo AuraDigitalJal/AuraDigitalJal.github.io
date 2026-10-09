@@ -1,0 +1,37 @@
+name: One-time Aura homepage flash fix
+on:
+  push:
+    paths:
+      - ".github/workflows/aura-first-paint-once.yml"
+permissions:
+  contents: write
+jobs:
+  patch-home:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply minimal first-paint fix
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("index.html")
+          s=p.read_text(encoding="utf-8")
+          a="<style id=\"aura-preview-boot\">html.aura-preview-await body{visibility:hidden!important}</style>\n  <script>if(new URLSearchParams(location.search).has(\"preview\"))document.documentElement.classList.add(\"aura-preview-await\");</script>"
+          b="<style id=\"aura-preview-boot\">html.aura-preview-await body{visibility:hidden!important}html.aura-preview-await:not(.aura-preview-mode)::after{content:\"AURA DIGITAL\";position:fixed;inset:0;display:grid;place-items:center;background:#faf7f1;color:#151515;font:600 15px/1 system-ui,sans-serif;letter-spacing:.26em;z-index:2147483647}</style>\n  <script>(function(){var root=document.documentElement;var isPreview=new URLSearchParams(location.search).has(\"preview\");root.classList.add(\"aura-preview-await\");if(isPreview){root.classList.add(\"aura-preview-mode\");}else{document.addEventListener(\"DOMContentLoaded\",function(){root.classList.remove(\"aura-preview-await\");},{once:true});}})();</script>"
+          assert len(s)>7000000, "Unexpected homepage file size; refusing change"
+          assert s.count(a)==1, "Boot snippet changed; refusing change"
+          updated=s.replace(a,b,1)
+          assert len(updated)-len(s)==len(b)-len(a), "Unexpected change size"
+          p.write_text(updated,encoding="utf-8")
+          print("Patched only the homepage boot snippet.")
+          PY
+      - name: Commit fix and remove temporary workflow
+        shell: bash
+        run: |
+          git config user.name "Aura Digital Updates"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          git rm .github/workflows/aura-first-paint-once.yml
+          git commit -m "Fix homepage initial paint without changing page data"
+          git push origin HEAD:main
