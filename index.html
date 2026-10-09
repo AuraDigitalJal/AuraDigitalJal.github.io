@@ -7,8 +7,8 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <style id="aura-preview-boot">html.aura-preview-await body{visibility:hidden!important}html.aura-preview-await:not(.aura-preview-mode)::after{content:"AURA DIGITAL";position:fixed;inset:0;display:grid;place-items:center;background:#faf7f1;color:#151515;font:600 15px/1 system-ui,sans-serif;letter-spacing:.26em;z-index:2147483647}</style>
-  <script>(function(){var root=document.documentElement;var isPreview=new URLSearchParams(location.search).has("preview");root.classList.add("aura-preview-await");if(isPreview){root.classList.add("aura-preview-mode");}else{document.addEventListener("DOMContentLoaded",function(){root.classList.remove("aura-preview-await");},{once:true});}})();</script>
+  <style id="aura-preview-boot">html.aura-preview-await body{visibility:hidden!important}</style>
+  <script>document.documentElement.classList.add("aura-preview-await");</script>
   <title>Aura Digital | Experiencias digitales</title>
   <meta name="description" content="Invitaciones digitales, menús, páginas web y galerías para fotógrafos.">
   <meta property="og:type" content="website">
@@ -1066,7 +1066,7 @@ img,svg,video,canvas{max-width:100%}
 
   function apply(){window.CURRENT_AURA_DATA=data;applyMeta();applyTheme();renderNav();renderHero();renderServices();renderInvitationGallery();renderFeature('menus');renderFeature('web');renderFeature('galleries');renderWhy();renderProcess();renderCtaFooter();applySectionOrder();setEditMode(editMode)}
   window.addEventListener('message',e=>{const m=e.data||{};if(m.type==='AURA_PREVIEW_STATE'&&m.state){data=deepMerge(structuredClone(base),m.state);setEditMode(Boolean(m.editMode));apply();document.documentElement.classList.remove('aura-preview-await');if(m.highlightPath)highlightPath(m.highlightPath)}else if(m.type==='AURA_HIGHLIGHT_PATH'){highlightPath(m.path)}});
-  bindShell();bindPreviewEditing();apply();
+  bindShell();bindPreviewEditing();try{apply()}finally{if(!previewMode)document.documentElement.classList.remove('aura-preview-await')}
 })();
 
 </script>
