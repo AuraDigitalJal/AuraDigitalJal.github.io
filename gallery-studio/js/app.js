@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const VERSION = '1.4.29';
+  const VERSION = '1.4.30';
   const $ = id => document.getElementById(id);
   const SECTION_DEFS = [
     ['getting-ready', 'Getting Ready', 'Los Preparativos'],
@@ -630,7 +630,7 @@
   function absoluteGalleryBase(input) {
     const url=safeExternalUrl(input);
     if(!url)return '';
-    const u=new URL(url);u.search='';u.hash='';
+    const u=new URL(url);u.protocol='https:';u.search='';u.hash='';
     if(!u.pathname.endsWith('/'))u.pathname+='/';
     return u.href;
   }
@@ -639,6 +639,16 @@
     const who=String(owner||'').trim(),repo=String(repoName||'').trim();
     if(!who||!repo)return '';
     return repo.toLowerCase()===`${who.toLowerCase()}.github.io`?`https://${who}.github.io/`:`https://${who}.github.io/${encodeURIComponent(repo)}/`;
+  }
+
+  // Usar el dominio y protocolo canónicos de Aura Digital, como PlataformaPro.
+  function resolvedGalleryPublicUrl(owner, repoName, candidate='') {
+    const who=String(owner||'').trim(),repo=String(repoName||'').trim();
+    if(who.toLowerCase()==='auradigitaljal' && repo){
+      const isRoot=repo.toLowerCase()===`${who.toLowerCase()}.github.io`;
+      return isRoot?'https://auradigitaljal.com/':`https://auradigitaljal.com/${encodeURIComponent(repo)}/`;
+    }
+    return absoluteGalleryBase(candidate)||suggestedPagesUrl(who,repo);
   }
 
   async function createSocialImage() {
@@ -1828,6 +1838,7 @@ qsa('[data-gallery-more]').forEach(b=>b.addEventListener('click',()=>{const grid
         catch(e){if(e.status!==404 && e.status!==403)console.warn('No fue posible consultar Pages antes de publicar',e);}
       }
       if(!suggestedPublicUrl)suggestedPublicUrl=suggestedPagesUrl(githubUser.login,repoName);
+      suggestedPublicUrl=resolvedGalleryPublicUrl(githubUser.login,repoName,suggestedPublicUrl);
       const pkg = await buildPackage(p => {
         if (p.stage === 'optimize') {
           bar.value = .5 * (p.total ? p.current / p.total : 0);
@@ -1886,12 +1897,13 @@ qsa('[data-gallery-more]').forEach(b=>b.addEventListener('click',()=>{const grid
       const fallback = repoName.toLowerCase() === `${owner.toLowerCase()}.github.io`
         ? `https://${owner}.github.io/`
         : `https://${owner}.github.io/${repoName}/`;
-      const url = pages?.html_url ? (pages.html_url.endsWith('/') ? pages.html_url : `${pages.html_url}/`) : fallback;
+      const url = resolvedGalleryPublicUrl(owner,repoName,pages?.html_url||fallback);
 
       bar.value = 1; label.textContent = 'Publicación enviada';
       status.textContent = created
         ? 'Galería publicada. GitHub Pages puede tardar unos segundos en completar el primer despliegue.'
         : 'Galería actualizada correctamente.';
+      state.sharePublicUrl=url; $('sharePublicUrl').value=url;
       $('githubPagesUrl').value = url; $('githubPagesLink').href = url; $('githubPagesActions').hidden = false;
       btn.textContent = 'Actualizar publicación';
     } catch (e) {
