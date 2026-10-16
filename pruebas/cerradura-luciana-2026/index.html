@@ -32,25 +32,25 @@ button { font:inherit; cursor:pointer; }
 .enter:focus-visible { outline:3px solid #f6d383; outline-offset:-8px; }
 .enter-hint {
  position:absolute;
- top:36.8%; left:50%; bottom:auto;
+ top:36.2%; left:50%; bottom:auto;
  transform:translate(-50%,-50%);
- width:clamp(108px,32vw,142px); height:clamp(108px,32vw,142px);
+ width:clamp(98px,28vw,128px); height:clamp(98px,28vw,128px);
  max-width:none; aspect-ratio:1;
- display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
- padding:15px; text-align:center;
+ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+ padding:12px; text-align:center;
  border:1px solid rgba(233,199,144,.78); border-radius:50%;
  background:linear-gradient(155deg,rgba(255,251,245,.66),rgba(255,220,231,.48));
  box-shadow:0 4px 16px rgba(99,52,60,.16),inset 0 1px rgba(255,255,255,.68);
  backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
  text-shadow:0 1px 3px rgba(255,255,255,.58);
 }
-.enter-hint .sparkle { display:flex; align-items:center; justify-content:center; gap:6px; font-size:16px; line-height:1; color:#b98a55; }
-.enter-hint .sparkle::before,.enter-hint .sparkle::after { content:""; display:block; width:19px; height:1px; background:linear-gradient(90deg,transparent,#c5a071); }
+.enter-hint .sparkle { display:flex; align-items:center; justify-content:center; gap:5px; font-size:14px; line-height:1; color:#b98a55; }
+.enter-hint .sparkle::before,.enter-hint .sparkle::after { content:""; display:block; width:16px; height:1px; background:linear-gradient(90deg,transparent,#c5a071); }
 .enter-hint .sparkle::after { transform:rotate(180deg); }
-.enter-hint strong { font-size:clamp(11px,2.8vw,13px); font-weight:500; line-height:1.25; letter-spacing:.07em; text-transform:uppercase; white-space:normal; color:#7e4b5f; }
-.enter-hint small { font-size:clamp(10px,2.5vw,12px); line-height:1.24; font-family:Georgia,"Times New Roman",serif; letter-spacing:.01em; opacity:.95; color:#8a5b6d; }
+.enter-hint strong { font-size:clamp(10px,2.5vw,12px); font-weight:500; line-height:1.25; letter-spacing:.07em; text-transform:uppercase; white-space:normal; color:#7e4b5f; }
+.enter-hint small { font-size:clamp(9px,2.2vw,11px); line-height:1.24; font-family:Georgia,"Times New Roman",serif; letter-spacing:.01em; opacity:.95; color:#8a5b6d; }
 @media (max-width:350px) {
- .enter-hint { width:106px; height:106px; gap:4px; padding:12px; }
+ .enter-hint { width:94px; height:94px; gap:3px; padding:10px; }
 }
 .enter[disabled] { opacity:0; visibility:hidden; pointer-events:none; }
 .replay {
