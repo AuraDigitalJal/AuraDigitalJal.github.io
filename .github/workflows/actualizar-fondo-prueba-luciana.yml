@@ -1,0 +1,31 @@
+name: Actualizar imagen final de la prueba
+on:
+  push:
+    paths:
+      - '.github/workflows/actualizar-fondo-prueba-luciana.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  imagen-prueba:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Descargar imagen nueva sin alterar otros archivos
+        env:
+          IMG: "https://at.adobe.com/tyguO680mYf2Py8U"
+        run: |
+          set -euo pipefail
+          TARGET="pruebas/cerradura-luciana-2026/contenido.jpg"
+          curl -fLsS --retry 3 "$IMG" -o "$TARGET"
+          echo "f5f4b8d1d613cb31e43ddac820aee3f9c7e9eab8400f9a3a373bb04f2dd23da9  $TARGET" | sha256sum -c -
+          file "$TARGET"
+      - name: Guardar imagen solo en la prueba
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pruebas/cerradura-luciana-2026/contenido.jpg
+          if ! git diff --cached --quiet; then
+            git commit -m "Actualizar imagen final de la prueba publicitaria de Luciana"
+            git push origin HEAD:main
+          fi
