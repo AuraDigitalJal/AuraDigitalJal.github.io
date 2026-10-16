@@ -134,56 +134,66 @@ button { font:inherit; cursor:pointer; }
 .poster-hotspot {
  position:absolute; z-index:6;
  display:flex; align-items:center; justify-content:center;
- border:0; padding:0; background:transparent; color:#85536c;
+ margin:0; border:0; padding:0; background:transparent; color:#85536c;
  text-align:center; cursor:pointer; -webkit-tap-highlight-color:transparent;
  pointer-events:none; visibility:hidden;
 }
 .app.is-finished .poster-hotspot { pointer-events:auto; visibility:visible; }
 .poster-hotspot:focus-visible { outline:2px solid #ae7c73; outline-offset:2px; border-radius:18px; }
-.poster-date { left:34.5%; top:48.2%; width:44.8%; height:8.3%; }
-.poster-place { left:34.6%; top:59.2%; width:44.5%; height:8.5%; }
-.poster-gallery,.poster-confirm { top:71.7%; height:7.2%; }
-.poster-gallery { left:32.1%; width:17%; }
-.poster-confirm { left:65%; width:16.2%; }
-/* Cápsulas delicadas sobre los marcos impresos: sin emojis ni botones sólidos. */
+/* Todos los centros se alinean con los centros de los cuatro marcos de la imagen. */
+.poster-date  { left:34.8%; top:48.9%; width:44.4%; height:7.8%; } /* centro: 57.0%, 52.8% */
+.poster-place { left:34.8%; top:60.0%; width:44.4%; height:7.8%; } /* centro: 57.0%, 63.9% */
+.poster-gallery,.poster-confirm { top:72.2%; height:7.0%; } /* centro vertical: 75.7% */
+.poster-gallery { left:32.8%; width:16.4%; } /* centro: 41.0% */
+.poster-confirm { left:64.7%; width:16.6%; } /* centro: 73.0% */
+/* Cápsulas centradas, con margen interior para evitar tapar la filigrana. */
 .hotspot-capsule {
- display:inline-flex; align-items:center; justify-content:center; gap:1.4cqw;
- width:78%; max-width:254px; min-height:9.5cqw;
- padding:2.1cqw 2.6cqw;
- border:1px solid rgba(188,135,110,.72);
- border-radius:999px;
- background:linear-gradient(155deg,rgba(255,253,248,.84),rgba(246,212,224,.73));
- box-shadow:0 2px 8px rgba(112,73,79,.15),inset 0 1px 0 rgba(255,255,255,.83);
+ box-sizing:border-box;
+ display:inline-flex; align-items:center; justify-content:center; gap:1.1cqw;
+ width:73%; max-width:calc(100% - 4cqw); min-height:6.8cqw;
+ padding:1.0cqw 2.0cqw;
+ border:1px solid rgba(188,135,110,.72); border-radius:999px;
+ background:linear-gradient(155deg,rgba(255,253,248,.85),rgba(246,212,224,.75));
+ box-shadow:0 2px 8px rgba(112,73,79,.14),inset 0 1px rgba(255,255,255,.83);
  backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
- color:#89516c; font:600 clamp(12px,3.3cqw,17px)/1.12 Georgia,"Times New Roman",serif;
- letter-spacing:.015em; white-space:nowrap; text-shadow:0 1px rgba(255,255,255,.6);
+ color:#89516c; font:600 clamp(9px,2.7cqw,16px)/1.16 Georgia,"Times New Roman",serif;
+ letter-spacing:0; white-space:nowrap; text-shadow:0 1px rgba(255,255,255,.6);
  transition:background .22s ease,box-shadow .22s ease,transform .22s ease;
 }
+.capsule-label {
+ display:block; flex:0 1 auto; min-width:0; max-width:100%;
+ white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
 .hotspot-capsule::after {
- content:""; flex:none; width:1.5cqw; height:1.5cqw;
- border-top:1.5px solid #a87485; border-right:1.5px solid #a87485;
- transform:rotate(45deg); margin-left:0.4cqw;
+ content:""; display:block; flex:none;
+ width:1.3cqw; height:1.3cqw;
+ border-top:1.4px solid #a87485; border-right:1.4px solid #a87485;
+ transform:rotate(45deg); margin:0 0.35cqw 0 0;
 }
 .poster-gallery .hotspot-capsule,.poster-confirm .hotspot-capsule {
- width:95%; min-height:8cqw; gap:1cqw;
- padding:1.5cqw 1.2cqw;
- font-size:clamp(10px,2.7cqw,14px);
+ width:89%; max-width:calc(100% - 1.5cqw); min-height:5.6cqw;
+ gap:0.65cqw; padding:0.7cqw 0.8cqw;
+ font-size:clamp(7px,2.1cqw,12px); letter-spacing:0;
 }
 .poster-gallery .hotspot-capsule::after,.poster-confirm .hotspot-capsule::after {
- width:1.2cqw; height:1.2cqw; margin-left:0;
+ width:1.0cqw; height:1.0cqw; margin:0 0.3cqw 0 0;
 }
 .poster-hotspot:hover .hotspot-capsule {
- background:linear-gradient(155deg,rgba(255,250,247,.94),rgba(244,204,221,.90));
- box-shadow:0 4px 13px rgba(112,73,79,.21),inset 0 1px #fff;
- transform:translateY(-1px);
+ background:linear-gradient(155deg,rgba(255,250,247,.95),rgba(244,204,221,.90));
+ box-shadow:0 4px 13px rgba(112,73,79,.20),inset 0 1px #fff; transform:translateY(-1px);
 }
-.poster-hotspot:active .hotspot-capsule { transform:scale(.96); background:rgba(240,203,217,.94); }
+.poster-hotspot:active .hotspot-capsule {
+ transform:scale(.97); background:rgba(240,203,217,.94);
+}
 @media (prefers-reduced-motion:no-preference) {
  .app.is-finished .hotspot-capsule { animation:capsule-appear .62s ease both; }
  .app.is-finished .poster-place .hotspot-capsule { animation-delay:.10s; }
  .app.is-finished .poster-gallery .hotspot-capsule { animation-delay:.20s; }
  .app.is-finished .poster-confirm .hotspot-capsule { animation-delay:.26s; }
- @keyframes capsule-appear { from { opacity:0; transform:translateY(6px) scale(.96); } to { opacity:1; transform:translateY(0) scale(1); } }
+ @keyframes capsule-appear {
+  from { opacity:0; transform:translateY(5px) scale(.97); }
+  to { opacity:1; transform:translateY(0) scale(1); }
+ }
 }
 /* Capa elegante para mostrar información en la prueba sin contactar a los invitados reales. */
 .demo-overlay {
@@ -224,10 +234,10 @@ button { font:inherit; cursor:pointer; }
  </video>
  <section class="layer content poster-stage" aria-label="Invitación de cumpleaños María Luciana">
   <img class="poster-photo" src="contenido.jpg?v=publicidad-botones-1" alt="María Luciana, seis años, jardín encantado con cuatro marcos decorativos" draggable="false">
-  <button type="button" class="poster-hotspot poster-date" data-demo="fecha" aria-label="Ver fecha y hora de la celebración"><span class="hotspot-capsule">Fecha y hora</span></button>
-  <button type="button" class="poster-hotspot poster-place" data-demo="ubicacion" aria-label="Ver ubicación del evento"><span class="hotspot-capsule">Ver ubicación</span></button>
-  <button type="button" class="poster-hotspot poster-gallery" data-demo="galeria" aria-label="Abrir galería de muestra"><span class="hotspot-capsule">Galería</span></button>
-  <button type="button" class="poster-hotspot poster-confirm" data-demo="confirmar" aria-label="Ver ejemplo de confirmación por WhatsApp"><span class="hotspot-capsule">Confirmar</span></button>
+  <button type="button" class="poster-hotspot poster-date" data-demo="fecha" aria-label="Ver fecha y hora de la celebración"><span class="hotspot-capsule"><span class="capsule-label">Fecha y hora</span></span></button>
+  <button type="button" class="poster-hotspot poster-place" data-demo="ubicacion" aria-label="Ver ubicación del evento"><span class="hotspot-capsule"><span class="capsule-label">Ver ubicación</span></span></button>
+  <button type="button" class="poster-hotspot poster-gallery" data-demo="galeria" aria-label="Abrir galería de muestra"><span class="hotspot-capsule"><span class="capsule-label">Galería</span></span></button>
+  <button type="button" class="poster-hotspot poster-confirm" data-demo="confirmar" aria-label="Ver ejemplo de confirmación por WhatsApp"><span class="hotspot-capsule"><span class="capsule-label">Confirmar</span></span></button>
  </section>
  
  <audio id="music" src="musica.mp3?v=alice-theme-20261016" preload="auto" loop></audio>
