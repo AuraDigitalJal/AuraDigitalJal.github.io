@@ -55,6 +55,32 @@ button { font:inherit; cursor:pointer; }
 .app.is-loading .status { opacity:1; }
 @media (min-width:600px) { .app { border-left:1px solid #fffb; border-right:1px solid #fffb; } }
 @media (prefers-reduced-motion:reduce) { .cover,.film,.content { transition-duration:.15s; } }
+
+/* Confirmación WhatsApp: encajada en el recuadro crema de la ilustración final */
+.rsvp-link {
+ position:absolute; z-index:8; left:50%; top:70.85%;
+ transform:translate(-50%,-50%) scale(.94);
+ display:flex; align-items:center; justify-content:center; gap:8px;
+ width:min(53%,248px); min-height:42px; padding:7px 9px;
+ background:linear-gradient(180deg,rgba(255,250,246,.98),rgba(251,219,225,.97));
+ border:1.5px solid #b98e5e; border-radius:999px;
+ box-shadow:0 3px 9px #a56e7630,inset 0 1px #fff;
+ color:#824a60; text-decoration:none;
+ font:600 clamp(11px,3.15vw,14px)/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ white-space:nowrap;
+ opacity:0; visibility:hidden; pointer-events:none;
+ transition:opacity .5s ease,transform .6s ease,visibility .5s;
+}
+.rsvp-link:focus-visible { outline:3px solid #8a516c; outline-offset:3px; }
+.rsvp-link:active { background:#f5d4dd; }
+.rsvp-logo { display:grid;place-items:center;flex:none;width:26px;height:26px;border-radius:50%;background:#25d366;box-shadow:inset 0 1px #ffffff80; }
+.rsvp-logo svg { display:block;width:17px;height:17px;fill:white; }
+.app.is-finished .rsvp-link {
+ opacity:1; visibility:visible; pointer-events:auto;
+ transform:translate(-50%,-50%) scale(1);
+ transition-delay:.28s;
+}
+@media (min-width:600px) { .rsvp-link { font-size:14px; } }
 </style>
 </head>
 <body>
@@ -63,7 +89,11 @@ button { font:inherit; cursor:pointer; }
  <video class="layer film" id="film" preload="auto" muted playsinline webkit-playsinline x-webkit-airplay="deny" disablepictureinpicture>
   <source src="transicion.mp4" type="video/mp4">
  </video>
- <img class="layer content" src="contenido.jpg?v=luciana-20261015" alt="Jardín fantástico con castillo, flores y una merienda de cuento" draggable="false">
+ <img class="layer content" src="contenido.jpg?v=luciana-20261015" alt="Invitación de cumpleaños de María Luciana" draggable="false">
+ <a class="rsvp-link" href="https://wa.me/523316030653?text=%C2%A1Hola!%20%F0%9F%92%97%0A%0ACon%20mucho%20gusto%20confirmo%20mi%20asistencia%20al%20cumplea%C3%B1os%20de%20Mar%C3%ADa%20Luciana.%20%F0%9F%8E%80%0A%0AAsistiremos%20___%20personas.%0A%0A%C2%A1Muchas%20gracias%20por%20invitarnos%20a%20compartir%20este%20d%C3%ADa%20tan%20especial!" target="_blank" rel="noopener noreferrer" aria-label="Confirmar asistencia por WhatsApp al cumpleaños de María Luciana">
+  <span class="rsvp-logo" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.099-.472-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.76-1.653-2.057-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.148-.174.198-.298.297-.496.1-.198.05-.371-.025-.52-.075-.148-.67-1.612-.916-2.206-.242-.579-.487-.5-.67-.51l-.57-.01c-.198 0-.52.074-.792.37s-1.04 1.017-1.04 2.48 1.065 2.875 1.213 3.074c.15.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.695.626.712.227 1.36.195 1.872.118.571-.086 1.758-.718 2.006-1.412.248-.694.248-1.288.173-1.413-.074-.124-.272-.198-.57-.347M12.004 21.785h-.004a9.97 9.97 0 01-4.738-1.207l-.34-.202-3.523.924.94-3.437-.222-.352a9.959 9.959 0 01-1.527-5.317c.003-5.506 4.484-9.987 9.992-9.987a9.926 9.926 0 017.069 2.931 9.926 9.926 0 012.927 7.071c-.003 5.506-4.484 9.987-9.99 9.987m8.494-18.48A11.935 11.935 0 0012.006 0C5.392 0 .007 5.384.004 12a11.96 11.96 0 001.593 5.976L0 24l6.193-1.624A11.959 11.959 0 0011.999 24h.005c6.613 0 12-5.383 12.003-12a11.94 11.94 0 00-3.51-8.49"/></svg></span>
+  <span>Confirmar mi asistencia</span>
+ </a>
  <button type="button" class="enter" id="enter" aria-label="Toca la cerradura para iniciar la animación">
   <span class="enter-hint"><span class="sparkle" aria-hidden="true">✧</span><strong>Toca para entrar</strong><small>Descubre la magia</small></span>
  </button>
