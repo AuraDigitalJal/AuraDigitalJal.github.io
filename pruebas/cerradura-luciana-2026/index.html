@@ -265,6 +265,28 @@ button { font:inherit; cursor:pointer; }
 .countdown-unit span{font:500 clamp(9px,2.3vw,11px)/1.25 system-ui,sans-serif;color:#926c7a}
 .countdown-finished{color:#89566b;font:italic 17px/1.4 Georgia,serif}
 @media(max-height:710px){.date-calendar{padding-top:8px;padding-bottom:8px}.date-countdown{padding-top:8px}.date-month{margin-bottom:8px}}
+
+/* Tarjeta de ubicación inspirada en el formato de Aura Plataforma. */
+.aura-location{max-width:350px;width:100%;margin:0 auto;color:#86596e}
+.aura-location-heading{display:flex;flex-direction:column;align-items:center;gap:5px;padding:0 6px 15px}
+.aura-location-kicker{font:600 10px/1.45 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.2em;color:#ad7b8b}
+.aura-location-icon{display:grid;place-items:center;margin:5px 0 0;width:46px;height:46px;border-radius:50%;border:1px solid #d3ad8a;background:linear-gradient(160deg,#fff9f6,#f4dae3);color:#ad7589}
+.aura-location-icon svg{width:22px;height:22px}
+.aura-location-heading strong{font:normal clamp(25px,7vw,34px)/1.12 Georgia,serif;color:#88556b}
+.aura-location-address{font:normal clamp(14px,4vw,17px)/1.35 Georgia,serif;color:#906a76}
+.aura-map-toggle{margin:4px auto 0;width:100%;min-height:45px;display:flex;align-items:center;justify-content:space-between;padding:10px 15px;border:1px solid rgba(202,151,121,.65);border-radius:12px;background:rgba(255,251,247,.7);font:600 13px/1.4 system-ui,sans-serif;color:#905f76;text-align:left}
+.aura-map-toggle-sign{font:normal 22px/1 Georgia,serif;color:#b37e92;transition:transform .2s ease}
+.aura-map-toggle[aria-expanded="true"] .aura-map-toggle-sign{transform:rotate(45deg)}
+.aura-map-panel[hidden]{display:none}
+.aura-map-panel{margin:0 auto 13px;padding:9px 0 0}
+.aura-map-frame{width:100%;aspect-ratio:16/10;min-height:170px;overflow:hidden;border-radius:13px;border:1px solid rgba(211,166,137,.68);background:#f6e5e3}
+.aura-map-frame iframe{width:100%;height:100%;display:block;border:0;filter:saturate(.86) contrast(.96)}
+.aura-map-placeholder{height:100%;min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:18px;background:linear-gradient(155deg,rgba(250,229,232,.8),rgba(255,250,239,.84));color:#95687b;font:normal 13px/1.55 system-ui,sans-serif;text-align:center}
+.aura-map-placeholder svg{width:33px;height:33px;color:#b0798c}
+.aura-map-link{display:inline-flex;align-items:center;justify-content:center;gap:7px;margin:14px auto 0;padding:12px 17px;border-radius:999px;border:1px solid #c89e83;background:linear-gradient(140deg,rgba(249,223,229,.9),rgba(255,252,247,.94));color:#865268;text-decoration:none;font:600 clamp(11px,3vw,13px)/1.4 system-ui,sans-serif;box-shadow:0 3px 12px rgba(118,73,89,.08)}
+.aura-map-link span{font-size:16px;line-height:1}
+.aura-map-link:hover,.aura-map-toggle:hover{background:rgba(247,214,227,.84)}
+.aura-map-link:focus-visible,.aura-map-toggle:focus-visible{outline:2px solid #985d76;outline-offset:3px}
 </style>
 </head>
 <body>
@@ -313,6 +335,55 @@ button { font:inherit; cursor:pointer; }
  const detailTitle=document.getElementById("demoTitle");
  const detailBody=document.getElementById("demoBody");
  const detailClose=document.getElementById("demoClose");
+
+ const auraLocationUrl="https://maps.app.goo.gl/LTwAFXYZmcoGsfCq5";
+ let auraLocationSeq=0;
+ function auraCoords(input){
+  const s=String(input||"").replace(/&amp;/g,"&");
+  const patterns=[
+   /!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/i,
+   /[?&#](?:q|query|destination|center|ll)=\s*(-?\d+(?:\.\d+)?)\s*[, ]\s*(-?\d+(?:\.\d+)?)/i,
+   /@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)(?:,|\/|$)/i,
+   /(?:geo:|^|\s)(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)(?:\s|$)/i
+  ];
+  for(const pattern of patterns){
+   const m=s.match(pattern);if(!m)continue;const lat=+m[1],lng=+m[2];
+   if(Number.isFinite(lat)&&Number.isFinite(lng)&&Math.abs(lat)<=90&&Math.abs(lng)<=180)return[lat,lng];
+  }
+  return null;
+ }
+ async function auraResolveMap(){
+  const direct=auraCoords(auraLocationUrl);if(direct)return direct;
+  const services=[
+   {url:"https://api.domainee.dev/v1/tools/redirect-checker?url="+encodeURIComponent(auraLocationUrl),options:{cache:"no-store"},take:j=>j?.data?.finalUrl||j?.data?.final_url||""},
+   {url:"https://www.redirectcheck.org/api/check",options:{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url:auraLocationUrl,method:"GET",followMetaRefresh:true}),cache:"no-store"},take:j=>j?.final_result?.final_url||j?.finalResult?.finalUrl||j?.data?.finalUrl||""}
+  ];
+  for(const s of services){
+   const ctrl=new AbortController(),timeout=setTimeout(()=>ctrl.abort(),4500);
+   try{const res=await fetch(s.url,{...s.options,signal:ctrl.signal});if(!res.ok)continue;const coords=auraCoords(s.take(await res.json()));if(coords)return coords;}catch(e){}finally{clearTimeout(timeout)}
+  }
+  return null;
+ }
+ function auraBindMap(){
+  const btn=detailBody.querySelector("#auraMapToggle"),panel=detailBody.querySelector("#auraMapPanel"),frame=detailBody.querySelector("#auraMapFrame"),status=detailBody.querySelector("#auraMapStatus");
+  if(!btn||!panel||!frame)return;
+  btn.addEventListener("click",async()=>{
+   const expanded=panel.hidden;panel.hidden=!expanded;
+   btn.setAttribute("aria-expanded",String(expanded));
+   btn.querySelector("span:first-child").textContent=expanded?"Ocultar mapa":"Ver mapa";
+   if(!expanded||frame.querySelector("iframe"))return;
+   if(status)status.textContent="Buscando el pin exacto del enlace de Google Maps…";
+   const seq=++auraLocationSeq;
+   const coords=await auraResolveMap();
+   if(seq!==auraLocationSeq||!detailBody.contains(frame))return;
+   if(!coords){if(status)status.textContent="Para ver el punto exacto, abre la ubicación en Google Maps.";return;}
+   const iframe=document.createElement("iframe");
+   iframe.loading="lazy";iframe.title="Mapa de la ubicación compartida";iframe.referrerPolicy="no-referrer-when-downgrade";
+   iframe.setAttribute("allowfullscreen","");
+   iframe.src="https://www.google.com/maps?q="+encodeURIComponent(coords.join(","))+"&hl=es&t=m&z=16&output=embed";
+   frame.replaceChildren(iframe);
+  });
+ }
  let previousFocus=null;
  let countdownInterval=null;
  const countdownTarget=new Date("2026-11-13T15:00:00-06:00").getTime();
@@ -327,7 +398,7 @@ button { font:inherit; cursor:pointer; }
  }
  const details={
   fecha:{title:"Fecha y hora",content:"<div class=\"date-experience\">\n <div class=\"date-month\"><span class=\"date-rule\"></span><span>Noviembre 2026</span><span class=\"date-rule\"></span></div>\n <div class=\"date-calendar\" aria-label=\"Calendario noviembre 2026; el viernes 13 está señalado con un corazón\">\n  <div class=\"date-weekdays\"><span class=\"date-day-name\" aria-label=\"Domingo\">D</span><span class=\"date-day-name\" aria-label=\"Lunes\">L</span><span class=\"date-day-name\" aria-label=\"Martes\">M</span><span class=\"date-day-name\" aria-label=\"Miércoles\">M</span><span class=\"date-day-name\" aria-label=\"Jueves\">J</span><span class=\"date-day-name\" aria-label=\"Viernes\">V</span><span class=\"date-day-name\" aria-label=\"Sábado\">S</span></div><div class=\"date-grid\"><span class=\"date-day\">1</span><span class=\"date-day\">2</span><span class=\"date-day\">3</span><span class=\"date-day\">4</span><span class=\"date-day\">5</span><span class=\"date-day\">6</span><span class=\"date-day\">7</span><span class=\"date-day\">8</span><span class=\"date-day\">9</span><span class=\"date-day\">10</span><span class=\"date-day\">11</span><span class=\"date-day\">12</span><span class=\"date-day date-special\" aria-label=\"Viernes 13 de noviembre, día del evento\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5A5.5 5.5 0 0 1 7.5 3c1.74 0 3.41.81 4.5 2.09A5.95 5.95 0 0 1 16.5 3 5.5 5.5 0 0 1 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\"/></svg></span><span class=\"date-day\">14</span><span class=\"date-day\">15</span><span class=\"date-day\">16</span><span class=\"date-day\">17</span><span class=\"date-day\">18</span><span class=\"date-day\">19</span><span class=\"date-day\">20</span><span class=\"date-day\">21</span><span class=\"date-day\">22</span><span class=\"date-day\">23</span><span class=\"date-day\">24</span><span class=\"date-day\">25</span><span class=\"date-day\">26</span><span class=\"date-day\">27</span><span class=\"date-day\">28</span><span class=\"date-day\">29</span><span class=\"date-day\">30</span><span class=\"date-day is-empty\" aria-hidden=\"true\"></span><span class=\"date-day is-empty\" aria-hidden=\"true\"></span><span class=\"date-day is-empty\" aria-hidden=\"true\"></span><span class=\"date-day is-empty\" aria-hidden=\"true\"></span><span class=\"date-day is-empty\" aria-hidden=\"true\"></span></div>\n </div>\n <div class=\"date-event-info\"><strong>Viernes 13 de noviembre</strong><span>3:00 p. m.</span></div>\n <div class=\"date-countdown\" id=\"dateCountdown\" aria-label=\"Cuenta regresiva para el viernes 13 de noviembre de 2026 a las 3 de la tarde\">\n  <p class=\"countdown-heading\">Faltan para nuestro día especial</p><div class=\"countdown-grid\"><div class=\"countdown-unit\"><strong data-count=\"days\">00</strong><span>Días</span></div><div class=\"countdown-unit\"><strong data-count=\"hours\">00</strong><span>Horas</span></div><div class=\"countdown-unit\"><strong data-count=\"minutes\">00</strong><span>Minutos</span></div><div class=\"countdown-unit\"><strong data-count=\"seconds\">00</strong><span>Segundos</span></div></div>\n  <p class=\"countdown-finished\" id=\"countdownFinished\" hidden>¡Llegó el gran día!</p>\n </div>\n</div>"},
-  ubicacion:{title:"Ubicación",content:'<p class="detail-strong">Jardín Real</p><p>Coto 11, casa club</p><a class="demo-cta" href="https://www.google.com/maps/search/?api=1&query=Jard%C3%ADn%20Real%20coto%2011%20casa%20club" target="_blank" rel="noopener noreferrer">Buscar en Google Maps</a><p class="demo-muted">Confirma la dirección exacta antes de viajar.</p>'},
+  ubicacion:{title:"Ubicación",content:"<div class=\"aura-location\">\n <div class=\"aura-location-heading\"><span class=\"aura-location-kicker\">Nos vemos aquí</span><span class=\"aura-location-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z\"/><circle cx=\"12\" cy=\"10\" r=\"2.4\"/></svg></span><strong>Jardín Real</strong><span class=\"aura-location-address\">Coto 11 · Casa club</span></div>\n <button class=\"aura-map-toggle\" id=\"auraMapToggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"auraMapPanel\"><span>Ver mapa</span><span class=\"aura-map-toggle-sign\" aria-hidden=\"true\">+</span></button>\n <div class=\"aura-map-panel\" id=\"auraMapPanel\" hidden><div class=\"aura-map-frame\" id=\"auraMapFrame\"><div class=\"aura-map-placeholder\" id=\"auraMapPlaceholder\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z\"/><circle cx=\"12\" cy=\"10\" r=\"2.4\"/></svg><span id=\"auraMapStatus\">Preparando el mapa de la ubicación…</span></div></div></div>\n <a class=\"aura-map-link\" href=\"https://maps.app.goo.gl/LTwAFXYZmcoGsfCq5\" target=\"_blank\" rel=\"noopener noreferrer\">Abrir ubicación en Google Maps <span aria-hidden=\"true\">↗</span></a>\n</div>"},
   galeria:{title:"Galería de muestra",content:'<p class="demo-muted">Ejemplo de cómo se vería una galería de imágenes integrada en la invitación.</p><div class="demo-gallery-grid"><img loading="lazy" src="miniatura-whatsapp.jpg" alt="Escena de jardín fantástico"><img loading="lazy" src="portada.jpg" alt="Cerradura de entrada mágica"></div>'},
   confirmar:{title:"Confirmar",content:'<p class="detail-strong">¿Nos acompañas?</p><p>En una invitación personalizada, aquí tus invitados pueden confirmar por WhatsApp con un mensaje preparado para enviar.</p><p class="demo-muted">Vista de demostración: no se envían mensajes a la clienta.</p>'}
  };
@@ -336,9 +407,11 @@ button { font:inherit; cursor:pointer; }
   stopCountdown();
   previousFocus=document.activeElement;detailTitle.textContent=d.title;detailBody.innerHTML=d.content;
   detailOverlay.classList.add("is-open");detailOverlay.setAttribute("aria-hidden","false");detailClose.focus();
+  if(kind==="ubicacion")auraBindMap();
   if(kind==="fecha"){updateCountdown();countdownInterval=setInterval(updateCountdown,1000);}
  }
  function closeDemo(){
+  ++auraLocationSeq;
   stopCountdown();
   detailOverlay.classList.remove("is-open");detailOverlay.setAttribute("aria-hidden","true");
   if(previousFocus && typeof previousFocus.focus==="function")previousFocus.focus();
