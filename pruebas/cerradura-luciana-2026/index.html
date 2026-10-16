@@ -178,6 +178,21 @@ button { font:inherit; cursor:pointer; }
 .poster-gallery .hotspot-capsule::after,.poster-confirm .hotspot-capsule::after {
  width:1.0cqw; height:1.0cqw; margin:0 0.3cqw 0 0;
 }
+/* Ajuste exclusivo de Confirmar: texto íntegro dentro del marco inferior derecho. */
+.poster-confirm .hotspot-capsule {
+ width:96%;
+ max-width:calc(100% - .5cqw);
+ min-height:5.6cqw;
+ gap:.3cqw;
+ padding:.55cqw .45cqw;
+ font-size:clamp(7.5px,1.85cqw,10.5px);
+ letter-spacing:-.01em;
+}
+.poster-confirm .hotspot-capsule::after {
+ width:.75cqw;
+ height:.75cqw;
+ margin:0 .12cqw 0 0;
+}
 .poster-hotspot:hover .hotspot-capsule {
  background:linear-gradient(155deg,rgba(255,250,247,.95),rgba(244,204,221,.90));
  box-shadow:0 4px 13px rgba(112,73,79,.20),inset 0 1px #fff; transform:translateY(-1px);
