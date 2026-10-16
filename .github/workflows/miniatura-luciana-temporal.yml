@@ -1,0 +1,32 @@
+name: Publicar miniatura María Luciana
+on:
+  push:
+    paths:
+      - '.github/workflows/miniatura-luciana-temporal.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Descargar miniatura optimizada y verificar
+        env:
+          IMAGE_SOURCE: "https://at.adobe.com/69k6ScEeYjVnGmYv"
+        run: |
+          set -euo pipefail
+          FILE="pruebas/cerradura-luciana-2026/miniatura-whatsapp.jpg"
+          curl -fLsS --retry 3 "$IMAGE_SOURCE" -o "$FILE"
+          echo "355a219ba5d1328ea1dae8a83af91aafe0155a30d863621886e7562faf80d40a  $FILE" | sha256sum -c -
+          test "$(stat -c %s "$FILE")" -gt 100000
+          file "$FILE"
+      - name: Guardar únicamente la miniatura
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pruebas/cerradura-luciana-2026/miniatura-whatsapp.jpg
+          if ! git diff --cached --quiet; then
+            git commit -m "Agregar miniatura horizontal optimizada de María Luciana"
+            git push origin HEAD:main
+          fi
