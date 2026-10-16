@@ -1,0 +1,32 @@
+name: Agregar música María Luciana
+on:
+  push:
+    paths:
+      - '.github/workflows/agregar-musica-luciana.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  agregar-musica:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Descargar canción enviada y verificar integridad
+        env:
+          MUSICA_URL: "https://at.adobe.com/FqQIq5KtrtILAE6h"
+        run: |
+          set -euo pipefail
+          TARGET="pruebas/cerradura-luciana-2026/musica.mp3"
+          curl -fLsS --retry 3 "$MUSICA_URL" -o "$TARGET"
+          echo "d9798a98e8a2ca3a81c2fb31c9b3daa27fefa8c3aa44de1b674a7a7d9bfad4d1  $TARGET" | sha256sum -c -
+          file "$TARGET"
+          ls -lh "$TARGET"
+      - name: Guardar audio en GitHub
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pruebas/cerradura-luciana-2026/musica.mp3
+          if ! git diff --cached --quiet; then
+            git commit -m "Agregar Alice's Theme original para música de Luciana"
+            git push origin HEAD:main
+          fi
