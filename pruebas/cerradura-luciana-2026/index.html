@@ -259,6 +259,7 @@ button { font:inherit; cursor:pointer; }
 .date-countdown{padding:12px 0 2px;border-top:1px solid rgba(197,156,116,.6)}
 .date-countdown .countdown-heading{margin:0 0 10px;font:italic 15px/1.35 Georgia,serif;color:#96647a}
 .countdown-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.countdown-grid[hidden],.countdown-finished[hidden]{display:none}
 .countdown-unit{min-width:0;padding:9px 2px 8px;border-radius:11px;border:1px solid rgba(193,143,118,.52);background:linear-gradient(160deg,rgba(255,255,252,.82),rgba(249,222,229,.70));box-shadow:0 3px 9px rgba(122,77,90,.08);display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center}
 .countdown-unit strong{font:normal clamp(20px,6vw,27px)/1 Georgia,serif;color:#925c74;font-variant-numeric:tabular-nums}
 .countdown-unit span{font:500 clamp(9px,2.3vw,11px)/1.25 system-ui,sans-serif;color:#926c7a}
