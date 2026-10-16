@@ -31,17 +31,27 @@ button { font:inherit; cursor:pointer; }
 .enter { position:absolute; inset:0; z-index:5; border:0; padding:0; background:transparent; color:#fff9ef; width:100%; height:100%; touch-action:manipulation; transition:opacity .3s ease; }
 .enter:focus-visible { outline:3px solid #f6d383; outline-offset:-8px; }
 .enter-hint {
- position:absolute; bottom:max(4.5%,env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%);
- width:max-content; max-width:86%; display:flex; flex-direction:column; align-items:center; gap:6px;
- padding:11px 24px 12px; border:1px solid #fff8; border-radius:35px;
- background:linear-gradient(135deg,#8b5976bd,#aa738caf);
- box-shadow:0 5px 22px #512b3c28, inset 0 1px #fff8; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); text-shadow:0 1px 9px #53354875;
+ position:absolute;
+ top:36.8%; left:50%; bottom:auto;
+ transform:translate(-50%,-50%);
+ width:clamp(108px,32vw,142px); height:clamp(108px,32vw,142px);
+ max-width:none; aspect-ratio:1;
+ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+ padding:15px; text-align:center;
+ border:1px solid rgba(233,199,144,.78); border-radius:50%;
+ background:linear-gradient(155deg,rgba(255,251,245,.66),rgba(255,220,231,.48));
+ box-shadow:0 4px 16px rgba(99,52,60,.16),inset 0 1px rgba(255,255,255,.68);
+ backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
+ text-shadow:0 1px 3px rgba(255,255,255,.58);
 }
-.enter-hint .sparkle { display:flex; align-items:center; justify-content:center; gap:7px; font-size:15px; line-height:1; color:#ffe4a8; }
-.enter-hint .sparkle::before,.enter-hint .sparkle::after { content:""; display:block; width:29px; height:1px; background:linear-gradient(90deg,transparent,#ffe7bf); }
+.enter-hint .sparkle { display:flex; align-items:center; justify-content:center; gap:6px; font-size:16px; line-height:1; color:#b98a55; }
+.enter-hint .sparkle::before,.enter-hint .sparkle::after { content:""; display:block; width:19px; height:1px; background:linear-gradient(90deg,transparent,#c5a071); }
 .enter-hint .sparkle::after { transform:rotate(180deg); }
-.enter-hint strong { font-size:12px; font-weight:normal; letter-spacing:.14em; text-transform:uppercase; white-space:nowrap; }
-.enter-hint small { font-size:11px; font-family:system-ui,-apple-system,sans-serif; letter-spacing:.05em; opacity:.93; }
+.enter-hint strong { font-size:clamp(11px,2.8vw,13px); font-weight:500; line-height:1.25; letter-spacing:.07em; text-transform:uppercase; white-space:normal; color:#7e4b5f; }
+.enter-hint small { font-size:clamp(10px,2.5vw,12px); line-height:1.24; font-family:Georgia,"Times New Roman",serif; letter-spacing:.01em; opacity:.95; color:#8a5b6d; }
+@media (max-width:350px) {
+ .enter-hint { width:106px; height:106px; gap:4px; padding:12px; }
+}
 .enter[disabled] { opacity:0; visibility:hidden; pointer-events:none; }
 .replay {
  position:absolute; top:max(17px,env(safe-area-inset-top)); right:16px; z-index:10;
@@ -94,8 +104,8 @@ button { font:inherit; cursor:pointer; }
   <span class="rsvp-logo" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.099-.472-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.76-1.653-2.057-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.148-.174.198-.298.297-.496.1-.198.05-.371-.025-.52-.075-.148-.67-1.612-.916-2.206-.242-.579-.487-.5-.67-.51l-.57-.01c-.198 0-.52.074-.792.37s-1.04 1.017-1.04 2.48 1.065 2.875 1.213 3.074c.15.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.695.626.712.227 1.36.195 1.872.118.571-.086 1.758-.718 2.006-1.412.248-.694.248-1.288.173-1.413-.074-.124-.272-.198-.57-.347M12.004 21.785h-.004a9.97 9.97 0 01-4.738-1.207l-.34-.202-3.523.924.94-3.437-.222-.352a9.959 9.959 0 01-1.527-5.317c.003-5.506 4.484-9.987 9.992-9.987a9.926 9.926 0 017.069 2.931 9.926 9.926 0 012.927 7.071c-.003 5.506-4.484 9.987-9.99 9.987m8.494-18.48A11.935 11.935 0 0012.006 0C5.392 0 .007 5.384.004 12a11.96 11.96 0 001.593 5.976L0 24l6.193-1.624A11.959 11.959 0 0011.999 24h.005c6.613 0 12-5.383 12.003-12a11.94 11.94 0 00-3.51-8.49"/></svg></span>
   <span>Confirmar mi asistencia</span>
  </a>
- <button type="button" class="enter" id="enter" aria-label="Toca la cerradura para iniciar la animación">
-  <span class="enter-hint"><span class="sparkle" aria-hidden="true">✧</span><strong>Toca para entrar</strong><small>Descubre la magia</small></span>
+ <button type="button" class="enter" id="enter" aria-label="Toca para descubrir la magia y comenzar la animación">
+  <span class="enter-hint"><span class="sparkle" aria-hidden="true">✧</span><strong>Toca para</strong><small>descubrir la magia</small></span>
  </button>
  <span class="status" id="status" aria-live="polite">Abriendo la puerta mágica…</span>
  <button type="button" class="replay" id="replay" aria-label="Volver a ver la animación" title="Repetir">
