@@ -239,6 +239,31 @@ button { font:inherit; cursor:pointer; }
 .demo-gallery-grid {display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0 0;}
 .demo-gallery-grid img {width:100%;height:190px;object-fit:cover;border-radius:9px;box-shadow:0 2px 10px #7450622a;}
 .demo-gallery-grid img:last-child {object-position:center;}
+
+/* Calendario del 13: corazón en lugar del número. */
+.date-experience{width:100%;max-width:338px;margin:0 auto}
+.date-month{display:flex;align-items:center;justify-content:center;gap:13px;margin:3px auto 12px;color:#a36a7d;font:normal clamp(20px,5.5vw,25px)/1.3 Georgia,serif}
+.date-rule{height:1px;width:27px;background:linear-gradient(90deg,#ecd3b9,#c59d74)}
+.date-rule:last-child{transform:rotate(180deg)}
+.date-calendar{padding:12px 13px 10px;background:rgba(255,255,252,.66);border:1px solid rgba(206,164,122,.48);border-radius:15px;box-shadow:inset 0 1px rgba(255,255,255,.83)}
+.date-weekdays,.date-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center}
+.date-weekdays{margin-bottom:5px}
+.date-day-name{font:600 11px/1.7 system-ui,sans-serif;color:#b78491}
+.date-day{aspect-ratio:1;min-width:0;display:flex;justify-content:center;align-items:center;font:normal clamp(11px,3.2vw,14px)/1.1 Georgia,serif;color:#71505d}
+.date-day.is-empty{visibility:hidden}
+.date-special{border-radius:50%;background:radial-gradient(circle,rgba(252,217,226,.86),rgba(251,225,232,.25) 78%);border:1px solid rgba(198,149,153,.5)}
+.date-special svg{width:70%;height:70%;max-width:27px;max-height:27px;fill:#cb7294;filter:drop-shadow(0 1px 1px rgba(141,65,89,.24))}
+.date-event-info{display:flex;flex-direction:column;gap:3px;margin:12px auto 10px;color:#874d6c}
+.date-event-info strong{font:normal clamp(16px,4.5vw,21px)/1.3 Georgia,serif}
+.date-event-info span{font:normal clamp(15px,4vw,18px)/1.3 Georgia,serif;color:#956e60}
+.date-countdown{padding:12px 0 2px;border-top:1px solid rgba(197,156,116,.6)}
+.date-countdown .countdown-heading{margin:0 0 10px;font:italic 15px/1.35 Georgia,serif;color:#96647a}
+.countdown-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.countdown-unit{min-width:0;padding:9px 2px 8px;border-radius:11px;border:1px solid rgba(193,143,118,.52);background:linear-gradient(160deg,rgba(255,255,252,.82),rgba(249,222,229,.70));box-shadow:0 3px 9px rgba(122,77,90,.08);display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center}
+.countdown-unit strong{font:normal clamp(20px,6vw,27px)/1 Georgia,serif;color:#925c74;font-variant-numeric:tabular-nums}
+.countdown-unit span{font:500 clamp(9px,2.3vw,11px)/1.25 system-ui,sans-serif;color:#926c7a}
+.countdown-finished{color:#89566b;font:italic 17px/1.4 Georgia,serif}
+@media(max-height:710px){.date-calendar{padding-top:8px;padding-bottom:8px}.date-countdown{padding-top:8px}.date-month{margin-bottom:8px}}
 </style>
 </head>
 <body>
@@ -288,18 +313,32 @@ button { font:inherit; cursor:pointer; }
  const detailBody=document.getElementById("demoBody");
  const detailClose=document.getElementById("demoClose");
  let previousFocus=null;
+ let countdownInterval=null;
+ const countdownTarget=new Date("2026-11-13T15:00:00-06:00").getTime();
+ function stopCountdown(){if(countdownInterval!==null){clearInterval(countdownInterval);countdownInterval=null;}}
+ function updateCountdown(){
+  const timer=detailBody.querySelector("#dateCountdown");if(!timer)return;
+  const remaining=Math.max(0,countdownTarget-Date.now());
+  const values={days:Math.floor(remaining/86400000),hours:Math.floor(remaining/3600000)%24,minutes:Math.floor(remaining/60000)%60,seconds:Math.floor(remaining/1000)%60};
+  for(const [key,value] of Object.entries(values)){const node=timer.querySelector('[data-count="'+key+'"]');if(node)node.textContent=String(value).padStart(2,"0");}
+  const grid=timer.querySelector(".countdown-grid"),done=timer.querySelector("#countdownFinished");
+  if(grid)grid.hidden=remaining===0;if(done)done.hidden=remaining>0;
+ }
  const details={
-  fecha:{title:"Fecha y hora",content:'<p class="detail-strong">Viernes 13 de noviembre de 2026</p><p>3:00 p. m.</p>'},
+  fecha:{title:"Fecha y hora",content:"<div class=\"date-experience\">\n <div class=\"date-month\"><span class=\"date-rule\"></span><span>Noviembre 2026</span><span class=\"date-rule\"></span></div>\n <div class=\"date-calendar\" aria-label=\"Calendario noviembre 2026; el viernes 13 está señalado con un corazón\">\n  <div class=\"date-weekdays\"><span class=\"date-day-name\" aria-label=\"Domingo\">D</span><span class=\"date-day-name\" aria-label=\"Lunes\">L</span><span class=\"date-day-name\" aria-label=\"Martes\">M</span><span class=\"date-day-name\" aria-label=\"Miércoles\">M</span><span class=\"date-day-name\" aria-label=\"Jueves\">J</span><span class=\"date-day-name\" aria-label=\"Viernes\">V</span><span class=\"date-day-name\" aria-label=\"Sábado\">S</span></div><div class=\"date-grid\"><span class=\"date-day\">1</span><span class=\"date-day\">2</span><span class=\"date-day\">3</span><span class=\"date-day\">4</span><span class=\"date-day\">5</span><span class=\"date-day\">6</span><span class=\"date-day\">7</span><span class=\"date-day\">8</span><span class=\"date-day\">9</span><span class=\"date-day\">10</span><span class=\"date-day\">11</span><span class=\"date-day\">12</span><span class=\"date-day date-special\" aria-label=\"Viernes 13 de noviembre, día del evento\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5A5.5 5.5 0 0 1 7.5 3c1.74 0 3.41.81 4.5 2.09A5.95 5.95 0 0 1 16.5 3 5.5 5.5 0 0 1 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\"/></svg></span><span class=\"date-day\">14</span><span class=\"date-day\">15</span><span class=\"date-day\">16</span><span class=\"date-day\">17</span><span class=\"date-day\">18</span><span class=\"date-day\">19</span><span class=\"date-day\">20</span><span class=\"date-day\">21</span><span class=\"date-day\">22</span><span class=\"date-day\">23</span><span class=\"date-day\">24</span><span class=\"date-day\">25</span><span class=\"date-day\">26</span><span class=\"date-day\">27</span><span class=\"date-day\">28</span><span class=\"date-day\">29</span><span class=\"date-day\">30</span><span class=\"date-day is-empty\" aria-hidden=\"true\"></span><span class=\"date-day is-empty\" aria-hidden=\"true\"></span><span class=\"date-day is-empty\" aria-hidden=\"true\"></span><span class=\"date-day is-empty\" aria-hidden=\"true\"></span><span class=\"date-day is-empty\" aria-hidden=\"true\"></span></div>\n </div>\n <div class=\"date-event-info\"><strong>Viernes 13 de noviembre</strong><span>3:00 p. m.</span></div>\n <div class=\"date-countdown\" id=\"dateCountdown\" aria-label=\"Cuenta regresiva para el viernes 13 de noviembre de 2026 a las 3 de la tarde\">\n  <p class=\"countdown-heading\">Faltan para nuestro día especial</p><div class=\"countdown-grid\"><div class=\"countdown-unit\"><strong data-count=\"days\">00</strong><span>Días</span></div><div class=\"countdown-unit\"><strong data-count=\"hours\">00</strong><span>Horas</span></div><div class=\"countdown-unit\"><strong data-count=\"minutes\">00</strong><span>Minutos</span></div><div class=\"countdown-unit\"><strong data-count=\"seconds\">00</strong><span>Segundos</span></div></div>\n  <p class=\"countdown-finished\" id=\"countdownFinished\" hidden>¡Llegó el gran día!</p>\n </div>\n</div>"},
   ubicacion:{title:"Ubicación",content:'<p class="detail-strong">Jardín Real</p><p>Coto 11, casa club</p><a class="demo-cta" href="https://www.google.com/maps/search/?api=1&query=Jard%C3%ADn%20Real%20coto%2011%20casa%20club" target="_blank" rel="noopener noreferrer">Buscar en Google Maps</a><p class="demo-muted">Confirma la dirección exacta antes de viajar.</p>'},
   galeria:{title:"Galería de muestra",content:'<p class="demo-muted">Ejemplo de cómo se vería una galería de imágenes integrada en la invitación.</p><div class="demo-gallery-grid"><img loading="lazy" src="miniatura-whatsapp.jpg" alt="Escena de jardín fantástico"><img loading="lazy" src="portada.jpg" alt="Cerradura de entrada mágica"></div>'},
   confirmar:{title:"Confirmar",content:'<p class="detail-strong">¿Nos acompañas?</p><p>En una invitación personalizada, aquí tus invitados pueden confirmar por WhatsApp con un mensaje preparado para enviar.</p><p class="demo-muted">Vista de demostración: no se envían mensajes a la clienta.</p>'}
  };
  function openDemo(kind){
   const d=details[kind];if(!d||!app.classList.contains("is-finished"))return;
+  stopCountdown();
   previousFocus=document.activeElement;detailTitle.textContent=d.title;detailBody.innerHTML=d.content;
   detailOverlay.classList.add("is-open");detailOverlay.setAttribute("aria-hidden","false");detailClose.focus();
+  if(kind==="fecha"){updateCountdown();countdownInterval=setInterval(updateCountdown,1000);}
  }
  function closeDemo(){
+  stopCountdown();
   detailOverlay.classList.remove("is-open");detailOverlay.setAttribute("aria-hidden","true");
   if(previousFocus && typeof previousFocus.focus==="function")previousFocus.focus();
  }
