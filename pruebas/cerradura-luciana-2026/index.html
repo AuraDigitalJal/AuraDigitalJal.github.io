@@ -133,28 +133,58 @@ button { font:inherit; cursor:pointer; }
 .poster-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:fill; user-select:none; -webkit-user-drag:none; pointer-events:none; }
 .poster-hotspot {
  position:absolute; z-index:6;
- display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.1cqw;
- border:0; padding:0 1.3cqw;
- background:rgba(255,248,241,.04); color:#88516b;
- border-radius:12px; text-align:center; cursor:pointer;
- font-family:Georgia,"Times New Roman",serif;
- font-weight:600; line-height:1.12; letter-spacing:.015em;
- text-shadow:0 1px 0 rgba(255,255,255,.55);
- -webkit-tap-highlight-color:transparent;
+ display:flex; align-items:center; justify-content:center;
+ border:0; padding:0; background:transparent; color:#85536c;
+ text-align:center; cursor:pointer; -webkit-tap-highlight-color:transparent;
  pointer-events:none; visibility:hidden;
- transition:background .2s ease, transform .2s ease;
 }
 .app.is-finished .poster-hotspot { pointer-events:auto; visibility:visible; }
-.poster-hotspot:hover { background:rgba(255,233,235,.37); }
-.poster-hotspot:active { background:rgba(247,212,226,.55); transform:scale(.98); }
-.poster-hotspot:focus-visible { outline:2px solid #af7f69; outline-offset:-4px; }
+.poster-hotspot:focus-visible { outline:2px solid #ae7c73; outline-offset:2px; border-radius:18px; }
 .poster-date { left:34.5%; top:48.2%; width:44.8%; height:8.3%; }
 .poster-place { left:34.6%; top:59.2%; width:44.5%; height:8.5%; }
-.poster-date .hotspot-heading,.poster-place .hotspot-heading { font-size:clamp(13px,3.5cqw,20px); }
-.hotspot-subline { font-size:clamp(10px,2.55cqw,15px); font-weight:400; color:#ab7383; }
-.poster-gallery,.poster-confirm { top:71.7%; height:7.2%; font-size:clamp(11px,2.9cqw,17px); white-space:nowrap; }
+.poster-gallery,.poster-confirm { top:71.7%; height:7.2%; }
 .poster-gallery { left:32.1%; width:17%; }
 .poster-confirm { left:65%; width:16.2%; }
+/* Cápsulas delicadas sobre los marcos impresos: sin emojis ni botones sólidos. */
+.hotspot-capsule {
+ display:inline-flex; align-items:center; justify-content:center; gap:1.4cqw;
+ width:78%; max-width:254px; min-height:9.5cqw;
+ padding:2.1cqw 2.6cqw;
+ border:1px solid rgba(188,135,110,.72);
+ border-radius:999px;
+ background:linear-gradient(155deg,rgba(255,253,248,.84),rgba(246,212,224,.73));
+ box-shadow:0 2px 8px rgba(112,73,79,.15),inset 0 1px 0 rgba(255,255,255,.83);
+ backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
+ color:#89516c; font:600 clamp(12px,3.3cqw,17px)/1.12 Georgia,"Times New Roman",serif;
+ letter-spacing:.015em; white-space:nowrap; text-shadow:0 1px rgba(255,255,255,.6);
+ transition:background .22s ease,box-shadow .22s ease,transform .22s ease;
+}
+.hotspot-capsule::after {
+ content:""; flex:none; width:1.5cqw; height:1.5cqw;
+ border-top:1.5px solid #a87485; border-right:1.5px solid #a87485;
+ transform:rotate(45deg); margin-left:0.4cqw;
+}
+.poster-gallery .hotspot-capsule,.poster-confirm .hotspot-capsule {
+ width:95%; min-height:8cqw; gap:1cqw;
+ padding:1.5cqw 1.2cqw;
+ font-size:clamp(10px,2.7cqw,14px);
+}
+.poster-gallery .hotspot-capsule::after,.poster-confirm .hotspot-capsule::after {
+ width:1.2cqw; height:1.2cqw; margin-left:0;
+}
+.poster-hotspot:hover .hotspot-capsule {
+ background:linear-gradient(155deg,rgba(255,250,247,.94),rgba(244,204,221,.90));
+ box-shadow:0 4px 13px rgba(112,73,79,.21),inset 0 1px #fff;
+ transform:translateY(-1px);
+}
+.poster-hotspot:active .hotspot-capsule { transform:scale(.96); background:rgba(240,203,217,.94); }
+@media (prefers-reduced-motion:no-preference) {
+ .app.is-finished .hotspot-capsule { animation:capsule-appear .62s ease both; }
+ .app.is-finished .poster-place .hotspot-capsule { animation-delay:.10s; }
+ .app.is-finished .poster-gallery .hotspot-capsule { animation-delay:.20s; }
+ .app.is-finished .poster-confirm .hotspot-capsule { animation-delay:.26s; }
+ @keyframes capsule-appear { from { opacity:0; transform:translateY(6px) scale(.96); } to { opacity:1; transform:translateY(0) scale(1); } }
+}
 /* Capa elegante para mostrar información en la prueba sin contactar a los invitados reales. */
 .demo-overlay {
  position:absolute; inset:0; z-index:25; display:flex; align-items:center; justify-content:center;
@@ -194,10 +224,10 @@ button { font:inherit; cursor:pointer; }
  </video>
  <section class="layer content poster-stage" aria-label="Invitación de cumpleaños María Luciana">
   <img class="poster-photo" src="contenido.jpg?v=publicidad-botones-1" alt="María Luciana, seis años, jardín encantado con cuatro marcos decorativos" draggable="false">
-  <button type="button" class="poster-hotspot poster-date" data-demo="fecha" aria-label="Ver fecha y hora de la celebración"><span class="hotspot-heading">Fecha y hora</span><span class="hotspot-subline">Ver los detalles</span></button>
-  <button type="button" class="poster-hotspot poster-place" data-demo="ubicacion" aria-label="Ver ubicación del evento"><span class="hotspot-heading">Ubicación</span><span class="hotspot-subline">Cómo llegar</span></button>
-  <button type="button" class="poster-hotspot poster-gallery" data-demo="galeria" aria-label="Abrir galería de muestra">Galería</button>
-  <button type="button" class="poster-hotspot poster-confirm" data-demo="confirmar" aria-label="Ver ejemplo de confirmación por WhatsApp">Confirmar</button>
+  <button type="button" class="poster-hotspot poster-date" data-demo="fecha" aria-label="Ver fecha y hora de la celebración"><span class="hotspot-capsule">Fecha y hora</span></button>
+  <button type="button" class="poster-hotspot poster-place" data-demo="ubicacion" aria-label="Ver ubicación del evento"><span class="hotspot-capsule">Ver ubicación</span></button>
+  <button type="button" class="poster-hotspot poster-gallery" data-demo="galeria" aria-label="Abrir galería de muestra"><span class="hotspot-capsule">Galería</span></button>
+  <button type="button" class="poster-hotspot poster-confirm" data-demo="confirmar" aria-label="Ver ejemplo de confirmación por WhatsApp"><span class="hotspot-capsule">Confirmar</span></button>
  </section>
  
  <audio id="music" src="musica.mp3?v=alice-theme-20261016" preload="auto" loop></audio>
