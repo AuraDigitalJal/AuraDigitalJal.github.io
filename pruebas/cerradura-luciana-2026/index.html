@@ -60,7 +60,7 @@ button { font:inherit; cursor:pointer; }
 <body>
 <main class="app" id="app">
  <img class="layer cover" src="portada.jpg" alt="Cerradura dorada rodeada de flores pastel" draggable="false">
- <video class="layer film" id="film" preload="auto" playsinline webkit-playsinline x-webkit-airplay="deny" disablepictureinpicture>
+ <video class="layer film" id="film" preload="auto" muted playsinline webkit-playsinline x-webkit-airplay="deny" disablepictureinpicture>
   <source src="transicion.mp4" type="video/mp4">
  </video>
  <img class="layer content" src="contenido.jpg?v=luciana-20261015" alt="Jardín fantástico con castillo, flores y una merienda de cuento" draggable="false">
@@ -89,7 +89,7 @@ button { font:inherit; cursor:pointer; }
   enter.disabled=true;
   status.textContent="Abriendo la puerta mágica…";
   video.currentTime=0;
-  video.muted=false;
+  video.muted=true; // Solo el video de transición, sin afectar la música independiente.
   const result=video.play();
   if(result&&typeof result.then==="function"){
    result.then(()=>{app.classList.remove("is-loading");app.classList.add("is-playing");waiting=false;})
