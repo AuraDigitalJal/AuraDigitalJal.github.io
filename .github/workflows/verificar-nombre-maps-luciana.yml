@@ -1,0 +1,30 @@
+name: Verificar nombre de ubicación
+on:
+  push:
+    paths:
+      - '.github/workflows/verificar-nombre-maps-luciana.yml'
+permissions:
+  contents: read
+jobs:
+  consultar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Consultar nombre real en Google Maps
+        run: |
+          python3 - <<'PY'
+          import requests,re,html,json
+          url='https://maps.app.goo.gl/LTwAFXYZmcoGsfCq5'
+          for ua in ['Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/129 Safari/537.36','Googlebot']:
+            try:
+              r=requests.get(url,headers={'User-Agent':ua,'Accept-Language':'es-MX,es;q=0.9'},timeout=15,allow_redirects=True)
+              print('HTTP:',r.status_code)
+              print('FINAL_URL:',r.url[:1400])
+              print('REDIRECTS:',[(z.status_code,z.headers.get('Location','')[:300]) for z in r.history])
+              print('TITLE:',html.unescape(re.search(r'<title[^>]*>(.*?)</title>',r.text,re.I|re.S).group(1)).strip()[:500] if re.search(r'<title[^>]*>(.*?)</title>',r.text,re.I|re.S) else '(none)')
+              for prop in ['og:title','og:description','description']:
+                match=re.search(r'<meta[^>]*(?:property|name)=[\"\']'+re.escape(prop)+r'[\"\'][^>]*content=[\"\']([^\"\']+)',r.text,re.I)
+                if match:print(prop+':',html.unescape(match.group(1))[:300])
+              print('LENGTH:',len(r.content))
+              if r.status_code==200:break
+            except Exception as e:print('EXCEPTION:',str(e)[:300])
+          PY
