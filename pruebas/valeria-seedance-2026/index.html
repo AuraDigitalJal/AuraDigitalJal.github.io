@@ -211,11 +211,24 @@ function renderCountdown(){
 }
 renderCountdown();setInterval(renderCountdown,1000);
 
-// Configuración lista para integrar las ubicaciones verificadas al recibir los enlaces de Google Maps.
-// "embed" muestra el mapa dentro de la tarjeta; "link" abre Google Maps en otra pestaña.
+// Google Maps: tarjetas internas con mapa interactivo por dirección.
+// Los enlaces abreviados son los facilitados por la clienta, en el orden ceremonia y recepción.
+function embeddedMap(query){
+ return "https://maps.google.com/maps?hl=es&q="+encodeURIComponent(query)+"&z=16&output=embed";
+}
 const mapPlaces={
- ceremony:{title:"Templo San Judas Tadeo",address:"Calle Ricardo Flores Magón, colonia El Periodista",embed:"",link:""},
- reception:{title:"Salón de Eventos Real Campestre",address:"Calle Lázaro Cárdenas #115, colonia Popular Campestre",embed:"",link:""}
+ ceremony:{
+  title:"Templo San Judas Tadeo",
+  address:"Calle Ricardo Flores Magón, colonia El Periodista, Uruapan, Michoacán",
+  embed:embeddedMap("Templo San Judas Tadeo, Ricardo Flores Magón, colonia El Periodista, Uruapan, Michoacán, México"),
+  link:"https://maps.app.goo.gl/of8SGd4qG7Rd4AGw9"
+ },
+ reception:{
+  title:"Salón de Eventos Real Campestre",
+  address:"Calle Lázaro Cárdenas #115, colonia Popular Campestre, Uruapan, Michoacán",
+  embed:embeddedMap("Real Campestre Multisalón, Lázaro Cárdenas 115, Popular Campestre, 60100 Uruapan, Michoacán, México"),
+  link:"https://maps.app.goo.gl/ZvKBc7Eb4MX3eMiP9"
+ }
 };
 const mapModal=document.getElementById("mapModal");
 const mapFrame=document.getElementById("mapFrame");
