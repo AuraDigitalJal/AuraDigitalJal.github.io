@@ -24,12 +24,15 @@
       object-fit:cover;
       object-position:center;
       background:transparent;
-      transform:scale(1.035);
       border:0;
       outline:none;
       box-shadow:none;
     }
-    .seal {position:absolute; z-index:5; top:66%;left:50%;transform:translate(-50%,-50%);width:min(24vw,14.2dvh);height:min(24vw,14.2dvh);min-width:72px;min-height:72px;border:0;border-radius:50%;background:transparent;cursor:pointer;touch-action:manipulation; -webkit-tap-highlight-color:transparent}
+    /* Alineación calculada usando el primer y último fotograma de Seedance */
+    #cover img { transform:translate(-1.55%,-1.16%) scale(1.026); }
+    #motion video { transform:scale(1.035); }
+    #end img { transform:translate(-1.57%,0%) scale(1.067); }
+    .seal {position:absolute; z-index:5; top:64.8%;left:48.45%;transform:translate(-50%,-50%);width:min(24vw,14.2dvh);height:min(24vw,14.2dvh);min-width:72px;min-height:72px;border:0;border-radius:50%;background:transparent;cursor:pointer;touch-action:manipulation; -webkit-tap-highlight-color:transparent}
     .seal:focus-visible {outline:3px solid #a55c6a; outline-offset:5px}
     .seal::after {content:"";display:block;position:absolute;inset:3px;border-radius:50%;border:1.5px solid #fff9;animation:pulse 2.7s ease-in-out infinite;pointer-events:none}
     @keyframes pulse {0%,100%{transform:scale(1);opacity:.45}50%{transform:scale(1.13);opacity:.1}}
