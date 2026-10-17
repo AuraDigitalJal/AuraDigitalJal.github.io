@@ -27,8 +27,10 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
 .scene > img, .scene > video { width:100%;height:100%;position:absolute;inset:0;display:block;object-fit:contain;object-position:center;transform:none;filter:none;clip-path:none;border:0;background:transparent; }
 .seal { position:absolute;z-index:4;top:64%;left:49%;transform:translate(-50%,-50%);width:24%;height:15%;padding:0;border:0;border-radius:50%;background:transparent;cursor:pointer;touch-action:manipulation; }
 .seal:focus-visible,button:focus-visible,a:focus-visible { outline:2px solid #a96a77;outline-offset:3px; }
-.hidden-tool { position:absolute;right:12px;top:max(12px,env(safe-area-inset-top));z-index:4;display:flex;gap:7px; }
-.hidden-tool button { border:1px solid #cb969fa8;color:var(--ink);background:#fff8f2e8;box-shadow:0 3px 15px #663e461a;padding:8px 13px;border-radius:30px;font:12px Georgia,serif;cursor:pointer; }
+.hidden-tool { position:absolute;right:12px;top:max(12px,env(safe-area-inset-top));z-index:4; }
+.hidden-tool button { display:grid;place-items:center;width:35px;height:35px;padding:0;border:1px solid rgba(142,89,101,.22);border-radius:50%;background:rgba(255,248,245,.38);color:rgba(120,74,86,.68);box-shadow:0 2px 9px rgba(89,50,60,.07);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);cursor:pointer;transition:background .2s ease,color .2s ease; }
+.hidden-tool button:active { background:rgba(255,248,245,.65); }
+.hidden-tool svg { width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round; }
 #notice { position:absolute;z-index:8;left:6%;right:6%;bottom:7%;background:#fff9f2ed;color:#805460;border-radius:12px;padding:13px;text-align:center;font-size:13px;box-shadow:0 3px 12px #775e6240; }
 [hidden] { display:none!important; }
 @media (prefers-reduced-motion:reduce) { .scene {transition:none} }
@@ -48,7 +50,7 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
 </section>
 <section id="parents" class="scene" aria-label="Padres y padrinos" aria-hidden="true">
  <img src="padres-padrinos.jpg" draggable="false" alt="Padres: Miguel Ángel Ayala González y Marisol Zamudio Miranda. Padrinos: Roberto Carlos Juárez Garibay y Yarely Zamudio Miranda.">
- <div class="hidden-tool"><button id="back" type="button">Portada</button><button id="replay" type="button">Repetir</button></div>
+ <div class="hidden-tool"><button id="back" type="button" aria-label="Reiniciar invitación y volver a la portada" title="Reiniciar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11a9 9 0 1 1 2.6 6.4"/><path d="M3 4v7h7"/></svg></button></div>
 </section>
 <p id="notice" role="status" aria-live="polite" hidden></p>
 </div></main>
@@ -78,7 +80,6 @@ function play() {
  } else show(motion);
 }
 document.getElementById("open").addEventListener("click",play);
-document.getElementById("replay").addEventListener("click",()=>{activeVideo=false;play();});
 document.getElementById("back").addEventListener("click",reset);
 video.addEventListener("ended",finish);
 video.addEventListener("error",()=>{activeVideo=false;msg("No se pudo cargar el video.");show(cover);});
