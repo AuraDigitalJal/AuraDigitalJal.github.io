@@ -44,7 +44,7 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
  <button id="open" class="seal" type="button" aria-label="Tocar el sello para abrir la invitación"></button>
 </section>
 <section id="motion" class="scene" aria-label="Video de apertura" aria-hidden="true">
- <video id="transition" preload="auto" playsinline webkit-playsinline poster="portada.jpg" disablepictureinpicture controlslist="nodownload noplaybackrate" aria-label="El sobre se abre mostrando la tarjeta de padres y padrinos">
+ <video id="transition" muted preload="auto" playsinline webkit-playsinline poster="portada.jpg" disablepictureinpicture controlslist="nodownload noplaybackrate" aria-label="El sobre se abre mostrando la tarjeta de padres y padrinos">
   <source src="transicion.mp4" type="video/mp4">
  </video>
 </section>
@@ -66,7 +66,7 @@ function reset(){activeVideo=false;video.pause();try{video.currentTime=0;}catch(
 function play() {
  if(activeVideo)return;
  activeVideo=true;msg("");video.controls=false;video.pause();try{video.currentTime=0;}catch(e){}
- video.muted=false;
+ video.muted=true;video.volume=0;
  let result;
  try{result=video.play();}catch(e){result=Promise.reject(e);}
  if(result&&typeof result.then==="function") {
