@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f2dfdb">
+<meta name="description" content="Mis XV años · Valeria Guadalupe · Viernes 11 de diciembre de 2026">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:title" content="Valeria Guadalupe | Mis XV años">
+<meta property="og:description" content="Acompáñame a celebrar mis XV años · 11 de diciembre de 2026">
+<meta property="og:site_name" content="Aura Digital">
+<title>Valeria Guadalupe | Mis XV años</title>
+<link rel="preload" as="image" href="portada.jpg">
+<link rel="preload" as="image" href="padres-padrinos.jpg">
+<style>
+:root { color-scheme:light; --rose:#824e59; }
+* {box-sizing:border-box}
+html,body {margin:0;min-height:100%;width:100%;overflow:hidden;background:#f4e4e0}
+body {font-family:Georgia,'Times New Roman',serif; -webkit-tap-highlight-color:transparent}
+main {width:100vw;height:100vh;height:100dvh;display:grid;place-items:center;overflow:hidden;background:#f4e4e0}
+.stage {position:relative;width:min(100vw,56.25dvh);aspect-ratio:9/16;max-height:100dvh;overflow:hidden;background:#f3e0dc;isolation:isolate;box-shadow:0 0 38px #74526012}
+.scene {position:absolute;inset:0;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,visibility .22s ease}
+.scene.is-active {opacity:1;visibility:visible;pointer-events:auto}
+.scene > img,.scene > video {display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;background:transparent;border:0;outline:0;transform:none;clip-path:none;}
+.open {position:absolute;top:63.5%;left:48.7%;transform:translate(-50%,-50%);width:23%;height:13.5%;z-index:2;border:0;border-radius:50%;background:transparent;cursor:pointer;touch-action:manipulation}
+.open:focus-visible {outline:2px solid #a96575;outline-offset:3px}
+.controls {position:absolute;z-index:4;right:10px;top:max(12px,env(safe-area-inset-top));display:flex;gap:8px}
+.controls button {cursor:pointer;color:var(--rose);background:#fffdf6e6;border:1px solid #cfa7ae7a;padding:8px 11px;border-radius:100px;font-size:12px;box-shadow:0 2px 10px #633c4420;backdrop-filter:blur(4px)}
+.controls button:focus-visible {outline:2px solid #9c6872;outline-offset:3px}
+#notice {position:absolute;inset:auto 5% 5%;z-index:6;margin:auto;padding:12px;border-radius:12px;background:#fff9f1f3;color:#824e59;text-align:center;font-size:13px}
+[hidden] {display:none!important}
+@media(prefers-reduced-motion:reduce){.scene{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<div class="stage" aria-label="Invitación de XV años de Valeria Guadalupe">
+ <section id="cover" class="scene is-active" aria-label="Portada de Valeria">
+  <img src="portada.jpg" alt="Portada rosa con sobre y sello de lacre V, Valeria Guadalupe, 11 de diciembre de 2026" draggable="false" fetchpriority="high">
+  <button id="open" class="open" type="button" aria-label="Tocar el sello para abrir la invitación"></button>
+ </section>
+ <section id="film" class="scene" aria-label="Video de apertura" aria-hidden="true">
+  <video id="transition" playsinline webkit-playsinline preload="auto" poster="portada.jpg" disablepictureinpicture controlslist="nodownload noplaybackrate" aria-label="Apertura del sobre y presentación de padres y padrinos">
+   <source src="transicion.mp4" type="video/mp4">
+  </video>
+ </section>
+ <section id="details" class="scene" aria-label="Padres y padrinos" aria-hidden="true">
+  <img src="padres-padrinos.jpg" alt="Papás Miguel Ángel Ayala González y Marisol Zamudio Miranda; padrinos Roberto Carlos Juárez Garibay y Yarely Zamudio Miranda" draggable="false">
+  <nav class="controls" aria-label="Controles de la invitación">
+   <button type="button" id="home" aria-label="Volver a la portada">Portada</button>
+   <button type="button" id="replay" aria-label="Repetir transición">Repetir</button>
+  </nav>
+ </section>
+ <p id="notice" role="status" aria-live="polite" hidden></p>
+</div>
+</main>
+<script>
+(()=>{
+ const cover=document.getElementById('cover');
+ const film=document.getElementById('film');
+ const details=document.getElementById('details');
+ const video=document.getElementById('transition');
+ const notice=document.getElementById('notice');
+ const scenes=[cover,film,details];
+ let running=false;
+ function show(scene){scenes.forEach(s=>{const on=s===scene;s.classList.toggle('is-active',on);s.setAttribute('aria-hidden',String(!on));});}
+ function inform(message){notice.textContent=message;notice.hidden=!message;}
+ function finish(){if(!running)return;running=false;video.pause();inform('');show(details);}
+ function reset(){running=false;video.pause();video.currentTime=0;video.controls=false;inform('');show(cover);}
+ function start(){
+  if(running)return;
+  running=true;inform('');video.controls=false;
+  video.pause();try{video.currentTime=0;}catch(e){}
+  const result=video.play();
+  if(result&&typeof result.then==='function'){
+    result.then(()=>show(film)).catch(()=>{running=false;inform('Toca reproducir para ver la animación.');show(film);video.controls=true;});
+  }else{show(film);}
+ }
+ document.getElementById('open').addEventListener('click',start);
+ document.getElementById('home').addEventListener('click',reset);
+ document.getElementById('replay').addEventListener('click',start);
+ video.addEventListener('playing',()=>{if(running){show(film);inform('');}});
+ video.addEventListener('ended',finish);
+ video.addEventListener('error',()=>{running=false;inform('No pudo cargarse el video.');show(cover);});
+ video.addEventListener('timeupdate',()=>{if(running&&Number.isFinite(video.duration)&&video.duration-video.currentTime<0.06)finish();});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden&&running)video.pause();});
+ const prefetch=new Image();prefetch.src='padres-padrinos.jpg';
+})();
+</script>
+</body>
+</html>
