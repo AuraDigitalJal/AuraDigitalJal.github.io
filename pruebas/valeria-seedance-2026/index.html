@@ -74,6 +74,11 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
 .location-panel > img.location-ornament {z-index:1;object-fit:contain;filter:drop-shadow(0 .45cqw .95cqw rgba(112,67,78,.13));}
 .location-panel.in-view .location-ornament {animation:labelReveal 1s cubic-bezier(.21,.76,.26,1) both;}
 @media (prefers-reduced-motion:reduce){.location-panel.in-view .location-ornament{animation:none}}
+/* Etiqueta de itinerario con canal alfa: una capa sobre el fondo floral fijo. */
+.itinerary-panel{background:transparent;}
+.itinerary-panel > img.itinerary-ornament{z-index:1;object-fit:cover;object-position:center;filter:drop-shadow(0 .5cqw .95cqw rgba(112,67,78,.13));}
+.itinerary-panel.in-view .itinerary-ornament{animation:labelReveal 1s cubic-bezier(.21,.76,.26,1) both;}
+@media (prefers-reduced-motion:reduce){.itinerary-panel.in-view .itinerary-ornament{animation:none;}}
 .location-panel .location-data {position:absolute;left:19%;width:62%;z-index:2;text-align:center;color:#795059;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:.35cqw;padding:0;text-shadow:0 1px 1px rgba(255,250,246,.5);}
 .location-panel .location-data.ceremony {top:40.1%;height:12.6%;}
 .location-panel .location-data.reception {top:64.9%;height:13.3%;}
@@ -182,8 +187,8 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
     <button class="location-map-button" type="button" data-map-open="reception" aria-label="Ver mapa de la recepción"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>Ver en Maps</button>
    </div>
   </div>
-  <div class="story-panel itinerary-panel" aria-label="Itinerario y código de vestimenta">
-   <img src="itinerario-vestimenta.jpg" draggable="false" alt="Itinerario: 6:00 p. m. misa, 7:00 p. m. recepción, 8:15 p. m. vals, 9:30 p. m. cena y 10:00 p. m. fiesta. Código de vestimenta formal. Con mucho cariño, les pedimos evitar beige y rosa, reservados para la quinceañera.">
+  <div class="story-panel itinerary-panel" aria-label="Itinerario y código de vestimenta sobre la misma base floral">
+   <img class="itinerary-ornament ornamental-label" src="itinerario-vestimenta-etiqueta.png" draggable="false" alt="Itinerario: 6:00 p. m. misa, 7:00 p. m. recepción, 8:15 p. m. vals, 9:30 p. m. cena y 10:00 p. m. fiesta. Código de vestimenta formal. Con mucho cariño, les pedimos evitar beige y rosa, reservados para la quinceañera.">
   </div>
 
   <div class="story-panel gift-rsvp-panel" aria-label="Sugerencia de regalo y confirmación de asistencia">
@@ -267,7 +272,7 @@ if("IntersectionObserver" in window){
  const labelObserver=new IntersectionObserver(entries=>{
   for(const entry of entries)entry.target.classList.toggle("in-view",entry.isIntersecting);
  },{root:storyScroll,threshold:0.38});
- document.querySelectorAll(".date-panel,.location-panel").forEach(panel=>labelObserver.observe(panel));
+ document.querySelectorAll(".date-panel,.location-panel,.itinerary-panel").forEach(panel=>labelObserver.observe(panel));
 }
 
 const calendar=document.getElementById("dateCalendar");
