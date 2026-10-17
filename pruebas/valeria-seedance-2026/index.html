@@ -56,6 +56,15 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
 .date-countdown div {display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.1cqw .2cqw .85cqw;border:1px solid rgba(190,132,142,.3);border-radius:1.5cqw;background:rgba(251,239,235,.40);min-width:0;}
 .date-countdown strong {font-weight:400;line-height:1.2;font-size:5cqw;color:#93636a;}
 .date-countdown small {font-size:2cqw;letter-spacing:.08em;color:#9b767a;margin-top:.45cqw;}
+
+/* Ubicaciones: textos HTML nítidos sobre la lámina floral original. */
+.location-panel .location-data {position:absolute;left:17.5%;width:65%;z-index:2;text-align:center;color:#795059;display:flex;flex-direction:column;align-items:center;gap:1.6cqw;text-shadow:0 1px 1px rgba(255,250,246,.48);}
+.location-panel .location-data.ceremony {top:40.7%;}
+.location-panel .location-data.reception {top:67.9%;}
+.location-data .loc-time {font:normal 4.35cqw/1.25 Georgia,serif;letter-spacing:.04em;color:#956d75;}
+.location-data .loc-name {font:normal 4.45cqw/1.25 Georgia,serif;color:#80535e;}
+.location-data .loc-street {font:normal 3.35cqw/1.35 Georgia,serif;color:#805963;}
+.location-data .loc-colony {font:normal 3.25cqw/1.35 Georgia,serif;color:#916c74;}
 #notice { position:absolute;z-index:8;left:6%;right:6%;bottom:7%;background:#fff9f2ed;color:#805460;border-radius:12px;padding:13px;text-align:center;font-size:13px;box-shadow:0 3px 12px #775e6240; }
 [hidden] { display:none!important; }
 @media (prefers-reduced-motion:reduce) { .scene {transition:none} }
@@ -93,6 +102,22 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
      <div><strong data-until="minutes">00</strong><small>MIN.</small></div>
      <div><strong data-until="seconds">00</strong><small>SEG.</small></div>
     </div>
+   </div>
+  </div>
+
+  <div class="story-panel location-panel" aria-label="Ubicaciones de la ceremonia y recepción">
+   <img src="ubicaciones-fondo.jpg" draggable="false" alt="Fondo rosa floral para los lugares de ceremonia y recepción de Valeria Guadalupe.">
+   <div class="location-data ceremony">
+    <div class="loc-time">6:00 p. m.</div>
+    <div class="loc-name">Templo San Judas Tadeo</div>
+    <div class="loc-street">Calle Ricardo Flores Magón</div>
+    <div class="loc-colony">Colonia El Periodista</div>
+   </div>
+   <div class="location-data reception">
+    <div class="loc-time">7:00 p. m.</div>
+    <div class="loc-name">Salón de Eventos Real Campestre</div>
+    <div class="loc-street">Calle Lázaro Cárdenas #115</div>
+    <div class="loc-colony">Colonia Popular Campestre</div>
    </div>
   </div>
  </div>
