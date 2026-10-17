@@ -40,7 +40,7 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
 .story-panel > img {display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;transform:none;filter:none;pointer-events:none;user-select:none;}
 /* Fondo inmóvil durante el desplazamiento: las etiquetas pasan por encima. */
 #parents {background:#eddad7 url("fondo-floral-limpio.jpg") center / contain no-repeat;}
-.parents-panel,.date-panel {background:transparent;}
+.parents-panel,.date-panel,.location-panel {background:transparent;}
 /* Padres y padrinos: PNG transparente auténtico, conservando bordes y texto. */
 .parents-panel > img.ornamental-label {z-index:1;filter:drop-shadow(0 .55cqw 1.1cqw rgba(112,67,78,.13));}
 /* Etiqueta del calendario: PNG real con canal alfa, sin polígonos CSS. */
@@ -70,9 +70,13 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
 .date-countdown small {font-size:2cqw;letter-spacing:.08em;color:#9b767a;margin-top:.45cqw;}
 
 /* Cada bloque queda dentro de su recuadro floral, sin tocar el título ni los adornos. */
-.location-panel .location-data {position:absolute;left:19%;width:62%;z-index:2;text-align:center;color:#795059;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:0;padding:.3cqw 0;text-shadow:0 1px 1px rgba(255,250,246,.5);}
-.location-panel .location-data.ceremony {top:40.4%;height:12.6%;}
-.location-panel .location-data.reception {top:67.0%;height:13.5%;}
+/* La etiqueta PNG RGBA va flotando sobre el fondo floral inmóvil, sin máscaras poligonales. */
+.location-panel > img.location-ornament {z-index:1;object-fit:contain;filter:drop-shadow(0 .45cqw .95cqw rgba(112,67,78,.13));}
+.location-panel.in-view .location-ornament {animation:labelReveal 1s cubic-bezier(.21,.76,.26,1) both;}
+@media (prefers-reduced-motion:reduce){.location-panel.in-view .location-ornament{animation:none}}
+.location-panel .location-data {position:absolute;left:19%;width:62%;z-index:2;text-align:center;color:#795059;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:.35cqw;padding:0;text-shadow:0 1px 1px rgba(255,250,246,.5);}
+.location-panel .location-data.ceremony {top:40.1%;height:12.6%;}
+.location-panel .location-data.reception {top:64.9%;height:13.3%;}
 .location-data .loc-time {font:normal 4.05cqw/1.12 Georgia,serif;letter-spacing:.05em;color:#966772;}
 .location-data .loc-name {font:normal 3.8cqw/1.15 Georgia,serif;color:#79505a;max-width:100%;}
 .location-data .loc-street {font:normal 3.0cqw/1.2 Georgia,serif;color:#805963;white-space:nowrap;}
@@ -161,8 +165,8 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
    </div>
   </div>
 
-  <div class="story-panel location-panel" aria-label="Ubicaciones de la ceremonia y recepción">
-   <img src="ubicaciones-fondo.jpg" draggable="false" alt="Fondo rosa floral para los lugares de ceremonia y recepción de Valeria Guadalupe.">
+  <div class="story-panel location-panel" aria-label="Ubicaciones de la ceremonia y recepción sobre etiqueta ornamental transparente">
+   <img class="location-ornament ornamental-label" src="ubicaciones-etiqueta.png" draggable="false" alt="Etiqueta ornamental de Ubicación, con espacios independientes para ceremonia y recepción.">
    <div class="location-data ceremony">
     <div class="loc-time">6:00 p. m.</div>
     <div class="loc-name">Templo San Judas Tadeo</div>
@@ -260,11 +264,10 @@ const preloadedLabel=new Image();preloadedLabel.src="padres-padrinos-etiqueta.pn
 const storyScroll=document.getElementById("storyScroll");
 /* Animar la etiqueta del calendario cuando realmente entra en pantalla. */
 if("IntersectionObserver" in window){
- const dateLayer=document.querySelector(".date-panel");
  const labelObserver=new IntersectionObserver(entries=>{
   for(const entry of entries)entry.target.classList.toggle("in-view",entry.isIntersecting);
  },{root:storyScroll,threshold:0.38});
- if(dateLayer)labelObserver.observe(dateLayer);
+ document.querySelectorAll(".date-panel,.location-panel").forEach(panel=>labelObserver.observe(panel));
 }
 
 const calendar=document.getElementById("dateCalendar");
