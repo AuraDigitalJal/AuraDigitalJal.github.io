@@ -1,0 +1,31 @@
+name: Import invitation audio
+on:
+  push:
+    paths:
+      - ".github/workflows/valeria-import-audio.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import-recording:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout invitation
+        uses: actions/checkout@v4
+      - name: Download the supplied audio and encode standard MP3
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --silent --show-error --output "$RUNNER_TEMP/source-audio" 'https://at.adobe.com/XqKEyVHFOPFKclvw'
+          test -s "$RUNNER_TEMP/source-audio"
+          ffmpeg -hide_banner -loglevel error -y -i "$RUNNER_TEMP/source-audio" -vn -ar 44100 -ac 2 -codec:a libmp3lame -b:a 112k pruebas/valeria-seedance-2026/yellow-valeria.mp3
+          test -s pruebas/valeria-seedance-2026/yellow-valeria.mp3
+          file pruebas/valeria-seedance-2026/yellow-valeria.mp3
+      - name: Save to invitation repository
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pruebas/valeria-seedance-2026/yellow-valeria.mp3
+          git commit -m "Add user-provided Yellow recording for Valeria invitation"
+          git push
