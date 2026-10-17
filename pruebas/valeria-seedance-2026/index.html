@@ -127,8 +127,9 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
 </section>
 <section id="parents" class="scene" aria-label="Padres, padrinos y fecha de los XV años" aria-hidden="true">
  <div class="story-scroll" id="storyScroll" aria-label="Desliza hacia arriba para ver el calendario">
-  <div class="story-panel parents-panel">
-   <img src="padres-padrinos.jpg" draggable="false" alt="Padres: Miguel Ángel Ayala González y Marisol Zamudio Miranda. Padrinos: Roberto Carlos Juárez Garibay y Yarely Zamudio Miranda.">
+  <div class="story-panel parents-panel" aria-label="Fondo floral para la futura etiqueta de padres y padrinos">
+   <img class="base-background" src="fondo-floral-limpio.jpg" draggable="false" alt="Fondo floral rosa empolvado de peonías y pétalos, sin etiqueta ni texto.">
+   <!-- La etiqueta se añadirá por separado como una capa transparente encima de este fondo. -->
    <div class="hidden-tool"><button id="back" type="button" aria-label="Reiniciar invitación y volver a la portada" title="Reiniciar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11a9 9 0 1 1 2.6 6.4"/><path d="M3 4v7h7"/></svg></button></div>
   </div>
   <div class="story-panel date-panel" aria-label="Hay noches que se viven una vez y se recuerdan toda la vida. Espero que seas parte de la mía. Calendario de diciembre de 2026 y cuenta regresiva.">
@@ -242,7 +243,7 @@ video.addEventListener("ended",finish);
 video.addEventListener("error",()=>{activeVideo=false;msg("No se pudo cargar el video.");show(cover);});
 video.addEventListener("timeupdate",()=>{if(activeVideo&&Number.isFinite(video.duration)&&video.duration-video.currentTime<0.065)finish();});
 document.addEventListener("visibilitychange",()=>{if(document.hidden&&activeVideo)video.pause();else if(!document.hidden&&activeVideo)video.play().catch(()=>finish());});
-const preloaded=new Image();preloaded.src="padres-padrinos.jpg";
+const preloaded=new Image();preloaded.src="fondo-floral-limpio.jpg";
 const storyScroll=document.getElementById("storyScroll");
 const calendar=document.getElementById("dateCalendar");
 for(const name of ["D","L","M","M","J","V","S"]) {
