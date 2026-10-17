@@ -79,18 +79,41 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
 .itinerary-panel > img.itinerary-ornament{z-index:1;object-fit:cover;object-position:center;filter:drop-shadow(0 .5cqw .95cqw rgba(112,67,78,.13));}
 .itinerary-panel.in-view .itinerary-ornament{animation:labelReveal 1s cubic-bezier(.21,.76,.26,1) both;}
 @media (prefers-reduced-motion:reduce){.itinerary-panel.in-view .itinerary-ornament{animation:none;}}
-.location-panel .location-data {position:absolute;left:19%;width:62%;z-index:2;text-align:center;color:#795059;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:.35cqw;padding:0;text-shadow:0 1px 1px rgba(255,250,246,.5);}
-.location-panel .location-data.ceremony {top:40.1%;height:12.6%;}
-.location-panel .location-data.reception {top:64.9%;height:13.3%;}
-.location-data .loc-time {font:normal 4.05cqw/1.12 Georgia,serif;letter-spacing:.05em;color:#966772;}
-.location-data .loc-name {font:normal 3.8cqw/1.15 Georgia,serif;color:#79505a;max-width:100%;}
-.location-data .loc-street {font:normal 3.0cqw/1.2 Georgia,serif;color:#805963;white-space:nowrap;}
-.location-data .loc-colony {font:normal 2.95cqw/1.2 Georgia,serif;color:#916c74;white-space:nowrap;}
-.location-data.reception .loc-name {font-size:3.55cqw;line-height:1.08;}
-.location-data.reception .loc-name span {display:block;}
-.location-map-button {display:inline-flex;align-items:center;justify-content:center;gap:1.25cqw;min-height:4.7cqw;padding:.65cqw 3cqw;border:1px solid rgba(147,89,99,.38);border-radius:100px;background:rgba(218,164,169,.38);color:#81515d;font:normal 2.9cqw/1 Georgia,serif;letter-spacing:.055em;text-transform:uppercase;box-shadow:0 .3cqw .8cqw rgba(108,68,75,.09);cursor:pointer;touch-action:manipulation;text-shadow:none;}
-.location-map-button svg {width:3.25cqw;height:3.25cqw;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-.location-map-button:active {background:rgba(217,157,166,.65);}
+/* Alineación calibrada con los dos recuadros vacíos de la etiqueta RGBA:
+   el fondo floral permanece quieto y los botones siguen siendo interactivos. */
+.location-panel .location-data {
+ position:absolute;left:21.7%;width:56.6%;z-index:2;
+ display:grid;grid-template-rows:auto auto auto;justify-items:center;
+ align-content:space-between;row-gap:.55cqw;
+ padding:.6cqw .7cqw .7cqw;box-sizing:border-box;
+ text-align:center;color:#795059;text-shadow:0 1px 1px rgba(255,250,246,.55);
+}
+.location-panel .location-data.ceremony {top:41.15%;height:12.55%;}
+.location-panel .location-data.reception {top:65.3%;height:12.65%;}
+.location-data .loc-info,.location-data .loc-address{
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ gap:.1cqw;width:100%;min-width:0;
+}
+.location-data .loc-time{font:normal 3.55cqw/1.08 Georgia,serif;letter-spacing:.055em;color:#966772;}
+.location-data .loc-name{font:normal 3.45cqw/1.12 Georgia,serif;color:#79505a;max-width:100%;text-wrap:balance;}
+.location-data .loc-street,.location-data .loc-colony{
+ font:normal 2.75cqw/1.16 Georgia,serif;max-width:100%;white-space:nowrap;
+}
+.location-data .loc-street{color:#805963;}
+.location-data .loc-colony{color:#916c74;}
+.location-data.reception .loc-name{font-size:3.3cqw;line-height:1.08;}
+.location-data.reception .loc-name span{display:block;}
+.location-map-button{
+ display:inline-flex;align-items:center;justify-content:center;gap:1.1cqw;
+ width:70%;min-height:5.55cqw;max-width:100%;padding:.65cqw 1cqw;
+ border:1px solid rgba(147,89,99,.36);border-radius:100px;
+ background:rgba(218,164,169,.47);color:#81515d;
+ font:normal 2.85cqw/1 Georgia,serif;letter-spacing:.05em;
+ text-transform:uppercase;box-shadow:0 .35cqw 1cqw rgba(108,68,75,.12);
+ cursor:pointer;touch-action:manipulation;text-shadow:none;white-space:nowrap;
+}
+.location-map-button svg{width:3.35cqw;height:3.35cqw;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.location-map-button:active{background:rgba(217,157,166,.68);}
 .map-modal {position:absolute;inset:0;z-index:30;display:grid;place-items:center;padding:16px;}
 .map-modal-backdrop {position:absolute;inset:0;background:rgba(80,48,59,.55);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);}
 .map-dialog {position:relative;z-index:1;width:100%;max-width:375px;max-height:94%;display:flex;flex-direction:column;gap:10px;padding:20px 18px 18px;border-radius:21px;border:1px solid rgba(201,157,158,.8);background:#fff8f3;color:#80515d;box-shadow:0 16px 50px rgba(70,41,52,.28);text-align:center;}
@@ -174,17 +197,25 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
   <div class="story-panel location-panel" aria-label="Ubicaciones de la ceremonia y recepción sobre etiqueta ornamental transparente">
    <img class="location-ornament ornamental-label" src="ubicaciones-etiqueta.png" draggable="false" alt="Etiqueta ornamental de Ubicación, con espacios independientes para ceremonia y recepción.">
    <div class="location-data ceremony">
-    <div class="loc-time">6:00 p. m.</div>
-    <div class="loc-name">Templo San Judas Tadeo</div>
-    <div class="loc-street">Calle Ricardo Flores Magón</div>
-    <div class="loc-colony">Colonia El Periodista</div>
+    <div class="loc-info">
+     <div class="loc-time">6:00 p. m.</div>
+     <div class="loc-name">Templo San Judas Tadeo</div>
+    </div>
+    <div class="loc-address">
+     <div class="loc-street">Calle Ricardo Flores Magón</div>
+     <div class="loc-colony">Colonia El Periodista</div>
+    </div>
     <button class="location-map-button" type="button" data-map-open="ceremony" aria-label="Ver mapa de la ceremonia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>Ver en Maps</button>
    </div>
    <div class="location-data reception">
-    <div class="loc-time">7:00 p. m.</div>
-    <div class="loc-name"><span>Salón de Eventos</span><span>Real Campestre</span></div>
-    <div class="loc-street">Calle Lázaro Cárdenas #115</div>
-    <div class="loc-colony">Colonia Popular Campestre</div>
+    <div class="loc-info">
+     <div class="loc-time">7:00 p. m.</div>
+     <div class="loc-name"><span>Salón de Eventos</span><span>Real Campestre</span></div>
+    </div>
+    <div class="loc-address">
+     <div class="loc-street">Calle Lázaro Cárdenas #115</div>
+     <div class="loc-colony">Colonia Popular Campestre</div>
+    </div>
     <button class="location-map-button" type="button" data-map-open="reception" aria-label="Ver mapa de la recepción"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>Ver en Maps</button>
    </div>
   </div>
