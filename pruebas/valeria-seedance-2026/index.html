@@ -45,6 +45,51 @@ main {width:100vw;height:100vh;height:100dvh;display:grid;place-items:center;ove
 }
 #cover .open {z-index:5}
 #details .controls {z-index:6}
+
+/* Secciones posteriores a la tarjeta de padres y padrinos */
+.continue {position:absolute;bottom:4.4%;left:50%;transform:translateX(-50%);
+ z-index:7;border:1px solid rgba(150,91,104,.44);border-radius:99px;
+ padding:11px 19px;background:rgba(255,248,244,.91);color:#814853;
+ box-shadow:0 4px 18px #743e4933;font:500 13px Georgia,serif;letter-spacing:.08em;
+ white-space:nowrap;cursor:pointer;backdrop-filter:blur(7px)}
+#menu {background:#f3e0dc}
+#menu.is-active {overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.menu-page {position:relative;min-height:100%;padding:44px 20px max(34px,env(safe-area-inset-bottom));color:#754752;
+ background:radial-gradient(ellipse at 95% 1%,#efccc8 0%,transparent 45%),radial-gradient(ellipse at -8% 93%,#dfb2b7 0%,transparent 42%),#f8ece8}
+.menu-page:before {content:"";position:absolute;inset:9px;pointer-events:none;border:1px solid #cfa4a9aa;border-radius:130px 130px 22px 22px}
+.menu-page>* {position:relative}
+.menu-top {text-align:center;padding:14px 0 23px}
+.mini-kicker {font-size:10px;letter-spacing:.23em;text-transform:uppercase;color:#976b74}
+.menu-top h1 {font-size:clamp(31px,8vw,43px);font-weight:normal;font-style:italic;margin:8px 0;color:#925963;line-height:1.12}
+.menu-top p {font-size:12px;letter-spacing:.1em;margin:0}
+.menu-ornament {text-align:center;color:#b17b85;letter-spacing:.23em;margin:10px 0 24px;font-size:18px}
+.menu-jump {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:5px 0 25px}
+.menu-jump a {padding:9px 4px;background:#fff8f3bb;border:1px solid #dec4c1;color:#925a66;text-align:center;border-radius:9px;text-decoration:none;font-size:11px;line-height:1.4}
+.event-card {background:rgba(255,250,246,.86);border:1px solid rgba(186,126,140,.33);
+ box-shadow:0 7px 22px #a2697630;border-radius:14px;padding:23px 17px;text-align:center;margin:14px 0 21px}
+.event-card .eyebrow {font-size:10px;letter-spacing:.23em;text-transform:uppercase;color:#9f7179}
+.event-card h2 {font-size:clamp(28px,8vw,37px);font-weight:normal;font-style:italic;color:#9b6471;margin:8px 0 13px}
+.event-card h3 {font-size:20px;font-weight:normal;margin:13px 0 8px;color:#754c57}
+.event-card p {line-height:1.65;margin:8px 0;font-size:14px}
+.event-card .bigdate {font-size:62px;line-height:1;color:#9e6370;margin:12px auto;font-weight:normal}
+.event-card .month {font-size:12px;letter-spacing:.2em;color:#8c5b65}
+.event-card .event-place {font-size:17px;color:#784652}
+.event-card .event-time {font-size:23px;color:#995c69}
+.countdown {display:flex;justify-content:center;gap:11px;margin-top:17px}
+.countdown div {min-width:40px;display:grid;gap:3px}
+.countdown strong {font-size:20px;font-weight:normal;color:#985b68}
+.countdown span {font-size:9px;text-transform:uppercase;letter-spacing:.1em}
+.cal-grid {display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:15px}
+.cal-grid span {display:grid;place-items:center;min-height:27px;font-size:12px;color:#815863}
+.cal-grid .dow {font-size:10px;font-weight:bold;color:#b08087}
+.cal-grid .highlight {border-radius:50%;color:#fff;background:#ac7983;box-shadow:0 2px 7px #a56a7040}
+.action-link {display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;
+ background:#a36a78;color:white!important;border-radius:99px;text-decoration:none;
+ margin-top:12px;font-size:13px;box-shadow:0 4px 12px #8b59654d}
+.menu-bottom {display:flex;justify-content:center;gap:10px;margin:24px 0}
+.menu-bottom button {font:12px Georgia,serif;border:1px solid #cda8af;border-radius:30px;
+ background:#fffaf6bc;color:#86535f;padding:10px 16px;cursor:pointer}
+.aura-sign {font-size:10px;letter-spacing:.2em;text-align:center;color:#aa8386;padding:10px 0 0}
 </style>
 </head>
 <body>
@@ -61,10 +106,58 @@ main {width:100vw;height:100vh;height:100dvh;display:grid;place-items:center;ove
  </section>
  <section id="details" class="scene" aria-label="Padres y padrinos" aria-hidden="true">
   <img src="padres-padrinos.jpg?v=rosa20261017" alt="Papás Miguel Ángel Ayala González y Marisol Zamudio Miranda; padrinos Roberto Carlos Juárez Garibay y Yarely Zamudio Miranda" draggable="false">
+  <button type="button" class="continue" id="continue" aria-label="Continuar con la invitación">Continuar con la invitación ↓</button>
   <nav class="controls" aria-label="Controles de la invitación">
    <button type="button" id="home" aria-label="Volver a la portada">Portada</button>
    <button type="button" id="replay" aria-label="Repetir transición">Repetir</button>
   </nav>
+ </section>
+ <section id="menu" class="scene" aria-label="Información de la celebración" aria-hidden="true">
+  <div class="menu-page">
+   <header class="menu-top">
+    <div class="mini-kicker">Mis XV años</div>
+    <h1>Valeria Guadalupe</h1>
+    <p>Viernes 11 de diciembre de 2026</p>
+    <div class="menu-ornament">── ❧ ♡ ❧ ──</div>
+   </header>
+   <nav class="menu-jump" aria-label="Ir a una sección">
+    <a href="#fecha">Fecha</a><a href="#misa">Ceremonia</a><a href="#fiesta">Recepción</a>
+    <a href="#vestimenta">Vestimenta</a><a href="#regalos">Regalos</a><a href="#rsvp">Confirmar</a>
+   </nav>
+   <article class="event-card" id="fecha">
+    <div class="eyebrow">La fecha especial</div><h2>¡Llegó el momento!</h2>
+    <div class="month">DICIEMBRE · 2026</div><div class="bigdate">11</div>
+    <p>Viernes · Un día para recordar</p>
+    <div class="cal-grid" aria-label="Calendario diciembre 2026"><span class="dow">D</span><span class="dow">L</span><span class="dow">M</span><span class="dow">M</span><span class="dow">J</span><span class="dow">V</span><span class="dow">S</span><span></span><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span class="highlight">11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span></div>
+    <div class="eyebrow" style="margin-top:20px">Faltan</div>
+    <div class="countdown" id="countdown"><div><strong data-cd="days">00</strong><span>Días</span></div><div><strong data-cd="hours">00</strong><span>Horas</span></div><div><strong data-cd="minutes">00</strong><span>Minutos</span></div><div><strong data-cd="seconds">00</strong><span>Segundos</span></div></div>
+   </article>
+   <article class="event-card" id="misa">
+    <div class="eyebrow">Con la bendición de Dios</div><h2>Ceremonia religiosa</h2>
+    <p class="event-place">Iglesia de San Judas Tadeo</p>
+    <p class="event-time">6:00 p. m.</p>
+   </article>
+   <article class="event-card" id="fiesta">
+    <div class="eyebrow">Sigamos celebrando</div><h2>Recepción</h2>
+    <p class="event-place">Real Campestre</p>
+    <p>Te esperamos para compartir una noche inolvidable.</p>
+   </article>
+   <article class="event-card" id="vestimenta">
+    <div class="eyebrow">Para esta ocasión</div><h2>Código de vestimenta</h2>
+    <p class="event-place">Formal</p>
+   </article>
+   <article class="event-card" id="regalos">
+    <div class="eyebrow">Tu presencia es lo más importante</div><h2>Mesa de regalos</h2>
+    <p>Si deseas tener un detalle conmigo, tendremos <strong>lluvia de sobres</strong>.</p>
+   </article>
+   <article class="event-card" id="rsvp">
+    <div class="eyebrow">Será un honor contar contigo</div><h2>¿Nos acompañas?</h2>
+    <p>Confirma tu asistencia por WhatsApp.</p>
+    <a class="action-link" target="_blank" rel="noopener noreferrer" href="https://wa.me/524521034509?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20los%20XV%20a%C3%B1os%20de%20Valeria%20Guadalupe.">Confirmar asistencia ↗</a>
+   </article>
+   <div class="menu-bottom"><button type="button" id="menuBack">Papás y padrinos</button><button type="button" id="menuCover">Volver al inicio</button></div>
+   <div class="aura-sign">AURA DIGITAL · UNA INVITACIÓN ESPECIAL</div>
+  </div>
  </section>
  <p id="notice" role="status" aria-live="polite" hidden></p>
 </div>
@@ -76,7 +169,8 @@ main {width:100vw;height:100vh;height:100dvh;display:grid;place-items:center;ove
  const details=document.getElementById('details');
  const video=document.getElementById('transition');
  const notice=document.getElementById('notice');
- const scenes=[cover,film,details];
+ const menu=document.getElementById('menu');
+ const scenes=[cover,film,details,menu];
  let running=false;
  function show(scene){scenes.forEach(s=>{const on=s===scene;s.classList.toggle('is-active',on);s.setAttribute('aria-hidden',String(!on));});}
  function inform(message){notice.textContent=message;notice.hidden=!message;}
@@ -94,6 +188,17 @@ main {width:100vw;height:100vh;height:100dvh;display:grid;place-items:center;ove
  document.getElementById('open').addEventListener('click',start);
  document.getElementById('home').addEventListener('click',reset);
  document.getElementById('replay').addEventListener('click',start);
+ document.getElementById('continue').addEventListener('click',()=>{show(menu);menu.scrollTop=0;});
+ document.getElementById('menuBack').addEventListener('click',()=>show(details));
+ document.getElementById('menuCover').addEventListener('click',reset);
+ document.querySelectorAll('.menu-jump a').forEach(link=>link.addEventListener('click',e=>{e.preventDefault();document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth',block:'start'});}));
+ const eventStart=new Date('2026-12-11T18:00:00-06:00').getTime();
+ function updateCountdown(){
+  const ms=Math.max(0,eventStart-Date.now());
+  const vals={days:Math.floor(ms/86400000),hours:Math.floor(ms/3600000)%24,minutes:Math.floor(ms/60000)%60,seconds:Math.floor(ms/1000)%60};
+  for(const [key,value] of Object.entries(vals)){const el=document.querySelector('[data-cd="'+key+'"]');if(el)el.textContent=String(value).padStart(2,'0');}
+ }
+ updateCountdown();setInterval(updateCountdown,1000);
  video.addEventListener('playing',()=>{if(running){show(film);inform('');}});
  video.addEventListener('ended',finish);
  video.addEventListener('error',()=>{running=false;inform('No pudo cargarse el video.');show(cover);});
