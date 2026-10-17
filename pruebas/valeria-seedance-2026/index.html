@@ -83,6 +83,31 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
 .map-pending span {font:italic 16px/1.35 Georgia,serif;}
 .map-external {display:inline-flex;align-items:center;align-self:center;justify-content:center;gap:5px;padding:11px 17px;border-radius:99px;color:#fff;background:#a87882;text-decoration:none;font:13px Georgia,serif;}
 .map-dialog [hidden] {display:none!important;}
+
+/* Lámina final: fondos florales coherentes con las páginas anteriores, texto real y enlace funcional. */
+.gift-rsvp-panel{background:#eddad6 url("itinerario-vestimenta.jpg") center/100% 100% no-repeat;color:#7c535d;}
+.final-paper{position:absolute;inset:6% 8% 6%;display:flex;flex-direction:column;align-items:center;justify-content:space-around;gap:1.6cqw;padding:6cqw 4cqw;border:1px solid #c48f97;border-radius:35cqw 35cqw 17cqw 17cqw / 11cqw 11cqw 9cqw 9cqw;background:linear-gradient(155deg,rgba(255,251,246,.985),rgba(254,239,233,.979) 65%,rgba(255,248,240,.98));box-shadow:inset 0 0 0 1cqw #f6dad6,inset 0 0 0 1.3cqw #c8939a,0 1cqw 3cqw #92606933;text-align:center;overflow:hidden;}
+.final-paper:before,.final-paper:after{position:absolute;color:#c48f96;content:"❧";opacity:.6;font-size:8cqw;line-height:1;pointer-events:none;}
+.final-paper:before{top:4cqw;left:5cqw;transform:rotate(-20deg);}
+.final-paper:after{bottom:4cqw;right:5cqw;transform:rotate(160deg);}
+.final-garnish{font-size:3.5cqw;color:#b78a94;letter-spacing:.3em;}
+.gift-detail,.rsvp-detail{z-index:1;position:relative;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.2cqw;}
+.gift-detail{flex:1.22;padding-top:2cqw;}
+.rsvp-detail{flex:.92;padding-bottom:1cqw;}
+.gift-rsvp-panel h2{margin:0;font:italic 7.5cqw/1.08 Georgia,serif;letter-spacing:-.035em;color:#995f6b;}
+.gift-rsvp-panel .section-rule{color:#bb8d93;font:3.2cqw/1 Georgia,serif;letter-spacing:.15em;}
+.gift-envelope{width:20cqw;height:17cqw;filter:drop-shadow(0 .5cqw 1cqw #a36e7a44);}
+.gift-envelope svg{width:100%;height:100%;}
+.gift-detail p{max-width:68cqw;margin:0;color:#77525b;font:3.85cqw/1.42 Georgia,serif;text-wrap:balance;}
+.gift-detail strong{color:#9e6370;}
+.final-divider{width:75%;height:1px;border:0;border-top:1px solid #c6969b;position:relative;flex:none;margin:0;}
+.final-divider:after{content:"♥";color:#c48e96;background:#fdf0e9;font-size:4cqw;position:absolute;top:50%;left:50%;padding:0 3cqw;transform:translate(-50%,-50%);}
+.rsvp-question{font:italic 5cqw/1.2 Georgia,serif;margin:0;color:#91636d;}
+.rsvp-wa{width:100%;max-width:64cqw;min-height:12cqw;display:flex;align-items:center;justify-content:center;gap:2cqw;padding:2cqw;border:1px solid #a7737d;border-radius:45cqw;background:linear-gradient(140deg,#bd8791,#9f6b77);box-shadow:inset 0 0 0 1px #ffffff88,0 1cqw 2cqw #9563753b;text-decoration:none;color:#fff;font:3.9cqw/1.15 Georgia,serif;letter-spacing:.02em;touch-action:manipulation;}
+.rsvp-wa svg{width:6.1cqw;height:6.1cqw;flex:none;stroke:white;stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.rsvp-wa:active{transform:scale(.98);}
+.rsvp-note{max-width:65cqw;color:#98777e;font:3.05cqw/1.35 Georgia,serif;margin:0;text-wrap:balance;}
+@media (prefers-reduced-motion:reduce){.rsvp-wa:active{transform:none}}
 #notice { position:absolute;z-index:8;left:6%;right:6%;bottom:7%;background:#fff9f2ed;color:#805460;border-radius:12px;padding:13px;text-align:center;font-size:13px;box-shadow:0 3px 12px #775e6240; }
 [hidden] { display:none!important; }
 @media (prefers-reduced-motion:reduce) { .scene {transition:none} }
@@ -142,6 +167,32 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
   </div>
   <div class="story-panel itinerary-panel" aria-label="Itinerario y código de vestimenta">
    <img src="itinerario-vestimenta.jpg" draggable="false" alt="Itinerario: 6:00 p. m. misa, 7:00 p. m. recepción, 8:15 p. m. vals, 9:30 p. m. cena y 10:00 p. m. fiesta. Código de vestimenta formal. Con mucho cariño, les pedimos evitar beige y rosa, reservados para la quinceañera.">
+  </div>
+
+  <div class="story-panel gift-rsvp-panel" aria-label="Sugerencia de regalo y confirmación de asistencia">
+   <div class="final-paper">
+    <div class="final-garnish" aria-hidden="true">❧ ♥ ❧</div>
+    <section class="gift-detail" aria-label="Sugerencia de regalo">
+     <h2>Sugerencia de regalo</h2>
+     <div class="section-rule" aria-hidden="true">— ❧ ♡ ❧ —</div>
+     <div class="gift-envelope" aria-hidden="true">
+      <svg viewBox="0 0 120 100"><defs><linearGradient id="giftEnvelope" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe5df"/><stop offset="1" stop-color="#d89ba1"/></linearGradient></defs><rect x="9" y="25" width="102" height="69" rx="7" fill="url(#giftEnvelope)" stroke="#b98088" stroke-width="2"/><path d="M10 28 60 68l50-40M11 91 45 62M109 91 75 62" fill="none" stroke="#b67c86" stroke-width="2"/><path d="M60 52c-5-10-20-7-20 3 0 7 20 19 20 19s20-12 20-19c0-10-15-13-20-3Z" fill="#b67480" stroke="#f3c5c3" stroke-width="2"/><path d="M21 20 26 10l3 11M94 16l5-9 3 12" fill="none" stroke="#ce9c9d" stroke-width="2"/></svg>
+     </div>
+     <p>Tu presencia es el regalo más valioso; sin embargo, si deseas obsequiarme algo, habrá <strong>lluvia de sobres</strong> durante la celebración. ¡Muchas gracias!</p>
+    </section>
+    <div class="final-divider" aria-hidden="true"></div>
+    <section class="rsvp-detail" aria-label="Confirmación de asistencia">
+     <h2>Confirmación de asistencia</h2>
+     <div class="section-rule" aria-hidden="true">— ❧ ♡ ❧ —</div>
+     <p class="rsvp-question">¿Nos acompañas?</p>
+     <a class="rsvp-wa" href="https://wa.me/524521034509?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20los%20XV%20a%C3%B1os%20de%20Valeria%20Guadalupe." target="_blank" rel="noopener noreferrer" aria-label="Confirmar asistencia por WhatsApp al 452 103 4509">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4.3a8 8 0 1 1 14.6-4.2Z"/><path d="M9 8.5c.5 3 3 5.3 6 6 .5.1 1.5-1 1.6-1.6l-2.3-1.1-1.1 1a5 5 0 0 1-2.5-2.4l1-1.1L10.4 7C9.8 7 8.9 8 9 8.5Z"/></svg>
+      <span>Confirmar por WhatsApp</span>
+     </a>
+     <p class="rsvp-note">De preferencia, confirma antes del 15 de noviembre de 2026.</p>
+    </section>
+    <div class="final-garnish" aria-hidden="true">❧ ♥ ❧</div>
+   </div>
   </div>
  </div>
  <div id="mapModal" class="map-modal" hidden>
