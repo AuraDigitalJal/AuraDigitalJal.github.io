@@ -11,8 +11,8 @@
 <meta property="og:description" content="Acompáñame a celebrar mis XV años · 11 de diciembre de 2026">
 <meta property="og:site_name" content="Aura Digital">
 <title>Valeria Guadalupe | Mis XV años</title>
-<link rel="preload" as="image" href="portada.jpg">
-<link rel="preload" as="image" href="padres-padrinos.jpg">
+<link rel="preload" as="image" href="portada.jpg?v=rosa20261017">
+<link rel="preload" as="image" href="padres-padrinos.jpg?v=rosa20261017">
 <style>
 :root { color-scheme:light; --rose:#824e59; }
 * {box-sizing:border-box}
@@ -37,16 +37,16 @@ main {width:100vw;height:100vh;height:100dvh;display:grid;place-items:center;ove
 <main>
 <div class="stage" aria-label="Invitación de XV años de Valeria Guadalupe">
  <section id="cover" class="scene is-active" aria-label="Portada de Valeria">
-  <img src="portada.jpg" alt="Portada rosa con sobre y sello de lacre V, Valeria Guadalupe, 11 de diciembre de 2026" draggable="false" fetchpriority="high">
+  <img src="portada.jpg?v=rosa20261017" alt="Portada rosa con sobre y sello de lacre V, Valeria Guadalupe, 11 de diciembre de 2026" draggable="false" fetchpriority="high">
   <button id="open" class="open" type="button" aria-label="Tocar el sello para abrir la invitación"></button>
  </section>
  <section id="film" class="scene" aria-label="Video de apertura" aria-hidden="true">
-  <video id="transition" playsinline webkit-playsinline preload="auto" poster="portada.jpg" disablepictureinpicture controlslist="nodownload noplaybackrate" aria-label="Apertura del sobre y presentación de padres y padrinos">
+  <video id="transition" playsinline webkit-playsinline preload="auto" poster="portada.jpg?v=rosa20261017" disablepictureinpicture controlslist="nodownload noplaybackrate" aria-label="Apertura del sobre y presentación de padres y padrinos">
    <source src="transicion.mp4" type="video/mp4">
   </video>
  </section>
  <section id="details" class="scene" aria-label="Padres y padrinos" aria-hidden="true">
-  <img src="padres-padrinos.jpg" alt="Papás Miguel Ángel Ayala González y Marisol Zamudio Miranda; padrinos Roberto Carlos Juárez Garibay y Yarely Zamudio Miranda" draggable="false">
+  <img src="padres-padrinos.jpg?v=rosa20261017" alt="Papás Miguel Ángel Ayala González y Marisol Zamudio Miranda; padrinos Roberto Carlos Juárez Garibay y Yarely Zamudio Miranda" draggable="false">
   <nav class="controls" aria-label="Controles de la invitación">
    <button type="button" id="home" aria-label="Volver a la portada">Portada</button>
    <button type="button" id="replay" aria-label="Repetir transición">Repetir</button>
@@ -85,7 +85,7 @@ main {width:100vw;height:100vh;height:100dvh;display:grid;place-items:center;ove
  video.addEventListener('error',()=>{running=false;inform('No pudo cargarse el video.');show(cover);});
  video.addEventListener('timeupdate',()=>{if(running&&Number.isFinite(video.duration)&&video.duration-video.currentTime<0.06)finish();});
  document.addEventListener('visibilitychange',()=>{if(document.hidden&&running)video.pause();});
- const prefetch=new Image();prefetch.src='padres-padrinos.jpg';
+ const prefetch=new Image();prefetch.src='padres-padrinos.jpg?v=rosa20261017';
 })();
 </script>
 </body>
