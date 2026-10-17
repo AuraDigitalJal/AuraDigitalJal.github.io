@@ -31,6 +31,27 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
 .hidden-tool button { display:grid;place-items:center;width:35px;height:35px;padding:0;border:1px solid rgba(142,89,101,.22);border-radius:50%;background:rgba(255,248,245,.38);color:rgba(120,74,86,.68);box-shadow:0 2px 9px rgba(89,50,60,.07);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);cursor:pointer;transition:background .2s ease,color .2s ease; }
 .hidden-tool button:active { background:rgba(255,248,245,.65); }
 .hidden-tool svg { width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round; }
+
+/* Continuación vertical: la lámina de padres se desplaza hacia el calendario */
+.story-scroll {position:absolute;inset:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;scroll-snap-type:y proximity;scrollbar-width:none;touch-action:pan-y;}
+.story-scroll::-webkit-scrollbar {display:none;}
+.story-panel {position:relative;aspect-ratio:9/16;width:100%;height:auto;overflow:hidden;scroll-snap-align:start;container-type:inline-size;background:#f6e7e1;}
+.story-panel > img {display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;transform:none;filter:none;pointer-events:none;user-select:none;}
+.date-widget {position:absolute;z-index:2;top:49.6%;left:16.3%;width:67.4%;height:33.1%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;color:#80575a;font-family:Georgia,"Times New Roman",serif;pointer-events:none;}
+.date-heading {display:flex;align-items:baseline;justify-content:center;gap:1.9cqw;font-size:5.1cqw;font-style:italic;line-height:1.25;color:#906269;white-space:nowrap;}
+.date-heading b {font-size:4.3cqw;font-weight:400;font-style:normal;}
+.date-heading span {font-size:2.8cqw;color:#bd9297;}
+.date-calendar {width:92%;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.47cqw .6cqw;margin:2.1cqw 0 0;font-size:2.85cqw;font-variant-numeric:tabular-nums;}
+.date-calendar span {display:grid;place-items:center;min-height:5.45cqw;aspect-ratio:1;line-height:1;color:#8d6264;}
+.date-calendar .weekday {font-size:2.5cqw;color:#ae838a;font-weight:600;}
+.date-calendar .day-11 {font-weight:bold;background:#b47b85;color:#fff;border-radius:50%;box-shadow:0 .3cqw .8cqw rgba(109,63,74,.13);}
+.date-caption {font-size:2.65cqw;letter-spacing:.11em;margin-top:1.6cqw;}
+.date-rule {font-size:3.1cqw;line-height:1;margin:1.4cqw 0 .4cqw;color:#bd909a;}
+.date-count-label {font-size:3.15cqw;font-style:italic;margin-bottom:1.65cqw;}
+.date-countdown {width:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:1.35cqw;font-variant-numeric:tabular-nums;}
+.date-countdown div {display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.1cqw .2cqw .85cqw;border:1px solid rgba(190,132,142,.3);border-radius:1.5cqw;background:rgba(251,239,235,.40);min-width:0;}
+.date-countdown strong {font-weight:400;line-height:1.2;font-size:5cqw;color:#93636a;}
+.date-countdown small {font-size:2cqw;letter-spacing:.08em;color:#9b767a;margin-top:.45cqw;}
 #notice { position:absolute;z-index:8;left:6%;right:6%;bottom:7%;background:#fff9f2ed;color:#805460;border-radius:12px;padding:13px;text-align:center;font-size:13px;box-shadow:0 3px 12px #775e6240; }
 [hidden] { display:none!important; }
 @media (prefers-reduced-motion:reduce) { .scene {transition:none} }
@@ -48,9 +69,29 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
   <source src="transicion.mp4" type="video/mp4">
  </video>
 </section>
-<section id="parents" class="scene" aria-label="Padres y padrinos" aria-hidden="true">
- <img src="padres-padrinos.jpg" draggable="false" alt="Padres: Miguel Ángel Ayala González y Marisol Zamudio Miranda. Padrinos: Roberto Carlos Juárez Garibay y Yarely Zamudio Miranda.">
- <div class="hidden-tool"><button id="back" type="button" aria-label="Reiniciar invitación y volver a la portada" title="Reiniciar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11a9 9 0 1 1 2.6 6.4"/><path d="M3 4v7h7"/></svg></button></div>
+<section id="parents" class="scene" aria-label="Padres, padrinos y fecha de los XV años" aria-hidden="true">
+ <div class="story-scroll" id="storyScroll" aria-label="Desliza hacia arriba para ver el calendario">
+  <div class="story-panel parents-panel">
+   <img src="padres-padrinos.jpg" draggable="false" alt="Padres: Miguel Ángel Ayala González y Marisol Zamudio Miranda. Padrinos: Roberto Carlos Juárez Garibay y Yarely Zamudio Miranda.">
+   <div class="hidden-tool"><button id="back" type="button" aria-label="Reiniciar invitación y volver a la portada" title="Reiniciar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11a9 9 0 1 1 2.6 6.4"/><path d="M3 4v7h7"/></svg></button></div>
+  </div>
+  <div class="story-panel date-panel" aria-label="Hay noches que se viven una vez y se recuerdan toda la vida. Espero que seas parte de la mía. Calendario de diciembre de 2026 y cuenta regresiva.">
+   <img src="frase-calendario.jpg" draggable="false" alt="Hay noches que se viven una vez y se recuerdan toda la vida. Espero que seas parte de la mía.">
+   <div class="date-widget" aria-label="Calendario y cuenta regresiva interactivos">
+    <div class="date-heading"><span>✦</span> Diciembre <b>2026</b> <span>✦</span></div>
+    <div class="date-calendar" id="dateCalendar" role="group" aria-label="Diciembre de 2026, viernes 11 señalado"></div>
+    <div class="date-caption">11 DE DICIEMBRE · 6:00 P. M.</div>
+    <div class="date-rule" aria-hidden="true">✦ · ♡ · ✦</div>
+    <div class="date-count-label">Faltan para mis XV años</div>
+    <div class="date-countdown" id="dateCountdown" role="timer" aria-label="Cuenta regresiva para el 11 de diciembre de 2026">
+     <div><strong data-until="days">00</strong><small>DÍAS</small></div>
+     <div><strong data-until="hours">00</strong><small>HORAS</small></div>
+     <div><strong data-until="minutes">00</strong><small>MIN.</small></div>
+     <div><strong data-until="seconds">00</strong><small>SEG.</small></div>
+    </div>
+   </div>
+  </div>
+ </div>
 </section>
 <p id="notice" role="status" aria-live="polite" hidden></p>
 </div></main>
@@ -61,7 +102,7 @@ const video=document.getElementById("transition"),notice=document.getElementById
 let activeVideo=false;
 function show(next) {for(const scene of scenes){let current=scene===next;scene.classList.toggle("active",current);scene.setAttribute("aria-hidden",String(!current));}}
 function msg(value){notice.textContent=value;notice.hidden=!value;}
-function finish(){if(!activeVideo)return;activeVideo=false;video.pause();video.controls=false;msg("");show(parents);}
+function finish(){if(!activeVideo)return;activeVideo=false;video.pause();video.controls=false;msg("");show(parents);document.getElementById("storyScroll").scrollTop=0;}
 function reset(){activeVideo=false;video.pause();try{video.currentTime=0;}catch(e){}video.controls=false;msg("");show(cover);}
 function play() {
  if(activeVideo)return;
@@ -86,6 +127,28 @@ video.addEventListener("error",()=>{activeVideo=false;msg("No se pudo cargar el 
 video.addEventListener("timeupdate",()=>{if(activeVideo&&Number.isFinite(video.duration)&&video.duration-video.currentTime<0.065)finish();});
 document.addEventListener("visibilitychange",()=>{if(document.hidden&&activeVideo)video.pause();else if(!document.hidden&&activeVideo)video.play().catch(()=>finish());});
 const preloaded=new Image();preloaded.src="padres-padrinos.jpg";
+const storyScroll=document.getElementById("storyScroll");
+const calendar=document.getElementById("dateCalendar");
+for(const name of ["D","L","M","M","J","V","S"]) {
+ const cell=document.createElement("span");cell.textContent=name;cell.className="weekday";calendar.append(cell);
+}
+for(let i=0;i<2;i++){calendar.append(document.createElement("span"));}
+for(let day=1;day<=31;day++){
+ const cell=document.createElement("span");cell.textContent=day;
+ if(day===11){cell.className="day-11";cell.setAttribute("aria-label","Viernes 11 de diciembre: mis XV años");}
+ calendar.append(cell);
+}
+const celebration=new Date("2026-12-11T18:00:00-06:00").getTime();
+function renderCountdown(){
+ const left=Math.max(0,celebration-Date.now());
+ const vals={days:Math.floor(left/86400000),hours:Math.floor(left/3600000)%24,minutes:Math.floor(left/60000)%60,seconds:Math.floor(left/1000)%60};
+ for(const name in vals){
+  const cell=document.querySelector('[data-until="'+name+'"]');
+  if(cell)cell.textContent=String(vals[name]).padStart(2,"0");
+ }
+}
+renderCountdown();setInterval(renderCountdown,1000);
+
 })();
 </script>
 </body></html>
