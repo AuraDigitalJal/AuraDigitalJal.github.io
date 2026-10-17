@@ -44,7 +44,11 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
 .date-calendar {width:92%;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.47cqw .6cqw;margin:2.1cqw 0 0;font-size:2.85cqw;font-variant-numeric:tabular-nums;}
 .date-calendar span {display:grid;place-items:center;min-height:5.45cqw;aspect-ratio:1;line-height:1;color:#8d6264;}
 .date-calendar .weekday {font-size:2.5cqw;color:#ae838a;font-weight:600;}
-.date-calendar .day-11 {font-weight:bold;background:#b47b85;color:#fff;border-radius:50%;box-shadow:0 .3cqw .8cqw rgba(109,63,74,.13);}
+/* El 11 se integra en un corazón rosa que late suavemente. */
+.date-calendar .day-11 {position:relative;isolation:isolate;z-index:1;background:transparent;color:#fff;font-weight:700;text-shadow:0 1px 1px rgba(96,45,55,.25);border-radius:0;box-shadow:none;}
+.date-calendar .day-11::before {content:"";position:absolute;inset:-.95cqw;z-index:-1;pointer-events:none;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23b47b85' d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z'/%3E%3C/svg%3E");filter:drop-shadow(0 .4cqw .6cqw rgba(119,69,80,.2));transform-origin:center;animation:valeriaHeartBeat 1.65s ease-in-out infinite;}
+@keyframes valeriaHeartBeat {0%,45%,100%{transform:scale(1)}12%{transform:scale(1.16)}23%{transform:scale(1)}34%{transform:scale(1.09)}}
+@media (prefers-reduced-motion:reduce){.date-calendar .day-11::before{animation:none;}}
 .date-caption {font-size:2.65cqw;letter-spacing:.11em;margin-top:1.6cqw;}
 .date-rule {font-size:3.1cqw;line-height:1;margin:1.4cqw 0 .4cqw;color:#bd909a;}
 .date-count-label {font-size:3.15cqw;font-style:italic;margin-bottom:1.65cqw;}
