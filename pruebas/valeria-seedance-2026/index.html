@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#edd6d1">
+<meta name="description" content="Valeria Guadalupe te invita a celebrar sus XV años el viernes 11 de diciembre de 2026.">
+<meta property="og:locale" content="es_MX">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Aura Digital">
+<meta property="og:url" content="https://auradigitaljal.com/pruebas/valeria-seedance-2026/">
+<meta property="og:title" content="Valeria Guadalupe | Mis XV años">
+<meta property="og:description" content="Acompáñame a celebrar mis XV años · 11 de diciembre de 2026">
+<meta property="og:image" content="https://auradigitaljal.com/pruebas/valeria-seedance-2026/portada.jpg">
+<title>Valeria Guadalupe · Mis XV años | Aura Digital</title>
+<link rel="preload" as="image" href="portada.jpg">
+<link rel="preload" as="image" href="padres-padrinos.jpg">
+<style>
+:root { color-scheme:light; --ink:#7b5157; --rose:#af7d84; --paper:#fff8f3; }
+* { box-sizing:border-box; }
+html,body { padding:0;margin:0;width:100%;height:100%;background:#edd9d6;overflow:hidden; }
+body { font-family:Georgia,"Times New Roman",serif; -webkit-tap-highlight-color:transparent; }
+main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;overflow:hidden;background:#eddbd7; }
+.stage { position:relative;width:min(100vw,56.25dvh);aspect-ratio:9/16;max-height:100dvh;overflow:hidden;isolation:isolate;background:#f3e2dd;box-shadow:0 0 36px rgba(105,68,72,.08); }
+.scene { position:absolute;inset:0;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .14s ease,visibility .14s; }
+.scene.active { visibility:visible;opacity:1;pointer-events:auto; }
+.scene > img, .scene > video { width:100%;height:100%;position:absolute;inset:0;display:block;object-fit:contain;object-position:center;transform:none;filter:none;clip-path:none;border:0;background:transparent; }
+.seal { position:absolute;z-index:4;top:64%;left:49%;transform:translate(-50%,-50%);width:24%;height:15%;padding:0;border:0;border-radius:50%;background:transparent;cursor:pointer;touch-action:manipulation; }
+.seal:focus-visible,button:focus-visible,a:focus-visible { outline:2px solid #a96a77;outline-offset:3px; }
+.hidden-tool { position:absolute;right:12px;top:max(12px,env(safe-area-inset-top));z-index:4;display:flex;gap:7px; }
+.hidden-tool button { border:1px solid #cb969fa8;color:var(--ink);background:#fff8f2e8;box-shadow:0 3px 15px #663e461a;padding:8px 13px;border-radius:30px;font:12px Georgia,serif;cursor:pointer; }
+.next { position:absolute;z-index:4;left:50%;bottom:max(28px,env(safe-area-inset-bottom));transform:translateX(-50%);white-space:nowrap;border:1px solid #c89da4;color:var(--ink);background:#fff8f1ee;box-shadow:0 5px 21px #7e505244;padding:13px 19px;font:13px Georgia,serif;letter-spacing:.04em;border-radius:99px;cursor:pointer; }
+#info { background:#f6e9e4; }
+#info.active { overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch; }
+.paper { min-height:100%;padding:36px 23px max(30px,env(safe-area-inset-bottom));color:var(--ink);background:radial-gradient(ellipse at top left,#f1d4d2,transparent 56%),radial-gradient(ellipse at bottom right,#e9c8ca,transparent 45%),#f8eeea; }
+.paper::before { content:"";position:absolute;inset:13px;border:1px solid rgba(176,118,131,.46);border-radius:110px 110px 18px 18px;pointer-events:none; }
+.paper > * { position:relative; }
+.masthead { text-align:center;padding:20px 0 25px; }
+.tiny { font-size:11px;letter-spacing:.2em;text-transform:uppercase; }
+.masthead h1 { margin:13px 0 8px;font:italic clamp(30px,8vw,45px) Georgia,serif;color:#985f6e;line-height:1.1; }
+.masthead .rule { font-size:20px;margin:18px 0;color:#bf8791; }
+.card { text-align:center;background:rgba(255,250,245,.85);border:1px solid #d8b3b6;border-radius:15px;margin:13px 0;padding:22px 16px;box-shadow:0 5px 18px #825a6421; }
+.card h2 { margin:7px 0 16px;font:italic clamp(28px,7vw,37px) Georgia,serif;color:#a06c79; }
+.card p { font-size:14px;line-height:1.65;margin:8px 0; }
+.card .place { font-size:17px;color:#75444f; }
+.card .time { font-size:24px;color:#a36d79;margin:5px 0; }
+.calendar { display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin:15px auto 0; }
+.calendar span { display:grid;place-items:center;min-height:29px;font-size:12px; }
+.calendar .day-name { font-size:10px;color:#a7787f;font-weight:bold; }
+.calendar .special { color:#fff;background:#b27e8a;border-radius:50%;font-weight:bold; }
+.countdown { display:flex;justify-content:center;gap:10px;margin:15px auto 0; }
+.countdown div { display:grid;gap:4px;min-width:41px; }
+.countdown strong { font-size:22px;font-weight:normal; }
+.countdown small { font-size:9px;text-transform:uppercase;letter-spacing:.08em; }
+.rsvp { display:inline-flex;justify-content:center;align-items:center;min-height:43px;margin:12px 0 0;padding:12px 18px;background:#a87581;color:#fff;text-decoration:none;border-radius:99px;font:13px Georgia,serif; }
+.menu-nav { display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:13px 0 10px; }
+.menu-nav button {border:1px solid #c8a0a7;background:#fff8f4;color:var(--ink);border-radius:99px;padding:10px 15px;font:12px Georgia,serif;cursor:pointer;}
+.footer { font-size:10px;letter-spacing:.18em;text-align:center;color:#b28d92;margin:15px 0 4px; }
+#notice { position:absolute;z-index:8;left:6%;right:6%;bottom:7%;background:#fff9f2ed;color:#805460;border-radius:12px;padding:13px;text-align:center;font-size:13px;box-shadow:0 3px 12px #775e6240; }
+[hidden] { display:none!important; }
+@media (prefers-reduced-motion:reduce) { .scene {transition:none} }
+</style>
+</head>
+<body>
+<main>
+<div class="stage" aria-label="Invitación de XV años de Valeria Guadalupe">
+<section id="cover" class="scene active" aria-label="Portada">
+ <img src="portada.jpg" draggable="false" alt="Valeria Guadalupe: mis XV años, viernes 11 de diciembre de 2026. Sobre con sello de lacre.">
+ <button id="open" class="seal" type="button" aria-label="Tocar el sello para abrir la invitación"></button>
+</section>
+<section id="motion" class="scene" aria-label="Video de apertura" aria-hidden="true">
+ <video id="transition" preload="auto" playsinline webkit-playsinline poster="portada.jpg" disablepictureinpicture controlslist="nodownload noplaybackrate" aria-label="El sobre se abre mostrando la tarjeta de padres y padrinos">
+  <source src="transicion.mp4" type="video/mp4">
+ </video>
+</section>
+<section id="parents" class="scene" aria-label="Padres y padrinos" aria-hidden="true">
+ <img src="padres-padrinos.jpg" draggable="false" alt="Padres: Miguel Ángel Ayala González y Marisol Zamudio Miranda. Padrinos: Roberto Carlos Juárez Garibay y Yarely Zamudio Miranda.">
+ <div class="hidden-tool"><button id="back" type="button">Portada</button><button id="replay" type="button">Repetir</button></div>
+ <button id="continue" class="next" type="button">Continuar con la invitación ↓</button>
+</section>
+<section id="info" class="scene" aria-label="Detalles de los XV años" aria-hidden="true">
+<div class="paper">
+ <header class="masthead">
+ <div class="tiny">Mis XV años</div><h1>Valeria Guadalupe</h1>
+ <div class="tiny">Viernes · 11 de diciembre de 2026</div><div class="rule">— ❧ ♡ ❧ —</div>
+ </header>
+ <article class="card">
+  <div class="tiny">Nuestra fecha</div><h2>Un día especial</h2>
+  <p>Diciembre de 2026</p>
+  <div class="calendar" id="calendar" aria-label="Calendario de diciembre de 2026"></div>
+  <p style="margin-top:18px">Faltan para nuestra celebración</p>
+  <div class="countdown" id="countdown">
+   <div><strong data-count="days">00</strong><small>Días</small></div>
+   <div><strong data-count="hours">00</strong><small>Horas</small></div>
+   <div><strong data-count="minutes">00</strong><small>Minutos</small></div>
+   <div><strong data-count="seconds">00</strong><small>Segundos</small></div>
+  </div>
+ </article>
+ <article class="card">
+  <div class="tiny">Con la bendición de Dios</div><h2>Ceremonia religiosa</h2>
+  <p class="place">Iglesia de San Judas Tadeo</p>
+  <p class="time">6:00 p. m.</p>
+ </article>
+ <article class="card">
+  <div class="tiny">Un momento para celebrar</div><h2>Recepción</h2>
+  <p class="place">Real Campestre</p>
+  <p>Será un honor compartir este día contigo.</p>
+ </article>
+ <article class="card"><div class="tiny">Para esta ocasión</div><h2>Código de vestimenta</h2><p class="place">Formal</p></article>
+ <article class="card"><div class="tiny">Tu presencia es lo más importante</div><h2>Regalos</h2><p>Si deseas tener un detalle conmigo, tendremos lluvia de sobres.</p></article>
+ <article class="card"><div class="tiny">Nos encantaría verte</div><h2>Confirma tu asistencia</h2>
+ <p>Será un gusto que nos acompañes.</p>
+ <a class="rsvp" target="_blank" rel="noopener noreferrer" href="https://wa.me/524521034509?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20los%20XV%20a%C3%B1os%20de%20Valeria%20Guadalupe.">Confirmar por WhatsApp ↗</a>
+ </article>
+ <nav class="menu-nav" aria-label="Navegación"><button id="infoBack" type="button">Padres y padrinos</button><button id="infoHome" type="button">Volver a portada</button></nav>
+ <div class="footer">AURA DIGITAL · UNA HISTORIA ESPECIAL</div>
+</div>
+</section>
+<p id="notice" role="status" aria-live="polite" hidden></p>
+</div></main>
+<script>
+(()=>{
+const cover=document.getElementById("cover"),motion=document.getElementById("motion"),parents=document.getElementById("parents"),info=document.getElementById("info");
+const video=document.getElementById("transition"),notice=document.getElementById("notice"),scenes=[cover,motion,parents,info];
+let activeVideo=false;
+function show(next) {for(const scene of scenes){let current=scene===next;scene.classList.toggle("active",current);scene.setAttribute("aria-hidden",String(!current));}}
+function msg(value){notice.textContent=value;notice.hidden=!value;}
+function finish(){if(!activeVideo)return;activeVideo=false;video.pause();video.controls=false;msg("");show(parents);}
+function reset(){activeVideo=false;video.pause();try{video.currentTime=0;}catch(e){}video.controls=false;msg("");show(cover);}
+function play() {
+ if(activeVideo)return;
+ activeVideo=true;msg("");video.controls=false;video.pause();try{video.currentTime=0;}catch(e){}
+ video.muted=false;
+ let result;
+ try{result=video.play();}catch(e){result=Promise.reject(e);}
+ if(result&&typeof result.then==="function") {
+  result.then(()=>{if(activeVideo)show(motion);}).catch(()=>{
+   if(!activeVideo)return;
+   video.muted=true;
+   video.play().then(()=>{if(activeVideo)show(motion);}).catch(()=>{
+    activeVideo=false;msg("Toca el video para iniciar la animación.");video.controls=true;show(motion);
+   });
+  });
+ } else show(motion);
+}
+document.getElementById("open").addEventListener("click",play);
+document.getElementById("replay").addEventListener("click",()=>{activeVideo=false;play();});
+document.getElementById("back").addEventListener("click",reset);
+document.getElementById("continue").addEventListener("click",()=>{show(info);info.scrollTop=0;});
+document.getElementById("infoBack").addEventListener("click",()=>show(parents));
+document.getElementById("infoHome").addEventListener("click",reset);
+video.addEventListener("ended",finish);
+video.addEventListener("error",()=>{activeVideo=false;msg("No se pudo cargar el video.");show(cover);});
+video.addEventListener("timeupdate",()=>{if(activeVideo&&Number.isFinite(video.duration)&&video.duration-video.currentTime<0.065)finish();});
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&activeVideo)video.pause();else if(!document.hidden&&activeVideo)video.play().catch(()=>finish());});
+const preloaded=new Image();preloaded.src="padres-padrinos.jpg";
+const calendar=document.getElementById("calendar");
+for(const day of ["D","L","M","M","J","V","S"]){const e=document.createElement("span");e.className="day-name";e.textContent=day;calendar.append(e);}
+for(let n=0;n<2;n++){calendar.append(document.createElement("span"));}
+for(let day=1;day<=31;day++){const e=document.createElement("span");e.textContent=String(day);if(day===11)e.className="special";calendar.append(e);}
+const eventAt=new Date("2026-12-11T18:00:00-06:00").getTime();
+function updateClock(){const ms=Math.max(0,eventAt-Date.now());let vals={days:Math.floor(ms/86400000),hours:Math.floor(ms/3600000)%24,minutes:Math.floor(ms/60000)%60,seconds:Math.floor(ms/1000)%60};for(const k in vals){const e=document.querySelector('[data-count="'+k+'"]');if(e)e.textContent=String(vals[k]).padStart(2,"0");}}
+updateClock();setInterval(updateClock,1000);
+})();
+</script>
+</body></html>
