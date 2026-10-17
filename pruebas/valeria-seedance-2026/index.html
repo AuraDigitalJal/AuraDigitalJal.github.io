@@ -44,7 +44,7 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
 /* Padres y padrinos: PNG transparente auténtico, conservando bordes y texto. */
 .parents-panel > img.ornamental-label {z-index:1;filter:drop-shadow(0 .55cqw 1.1cqw rgba(112,67,78,.13));}
 /* Etiqueta del calendario: PNG real con canal alfa, sin polígonos CSS. */
-.date-panel > img.date-label-complete {z-index:1;filter:drop-shadow(0 .45cqw .95cqw rgba(112,67,78,.13));}
+.date-panel > img.date-label-complete {z-index:1;object-fit:cover;object-position:center;filter:drop-shadow(0 .45cqw .95cqw rgba(112,67,78,.13));}
 .scene.active .parents-panel .ornamental-label {animation:labelReveal 1.1s cubic-bezier(.21,.76,.26,1) both;}
 .date-panel.in-view .ornamental-label {animation:labelReveal 1s cubic-bezier(.21,.76,.26,1) both;}
 @keyframes labelReveal {from {opacity:0;transform:translateY(2.1cqw) scale(.99);} to {opacity:1;transform:translateY(0) scale(1);}}
@@ -145,7 +145,7 @@ main { width:100%;height:100vh;height:100dvh;display:grid;place-items:center;ove
   </div>
   <div class="story-panel date-panel" aria-label="Hay noches que se viven una vez y se recuerdan toda la vida. Espero que seas parte de la mía. Calendario de diciembre de 2026 y cuenta regresiva.">
    <!-- Etiqueta de una sola pieza, con transparencia real y contorno suavizado; fondo floral inmóvil debajo. -->
-   <img class="date-label-complete ornamental-label" src="frase-calendario-etiqueta.png" draggable="false" alt="Hay noches que se viven una vez y se recuerdan toda la vida. Espero que seas parte de la mía. Marco ornamental del calendario.">
+   <img class="date-label-complete ornamental-label" src="frase-calendario-nueva.png" draggable="false" alt="Hay noches que se viven una vez y se recuerdan toda la vida. Espero que seas parte de la mía. Marco ornamental del calendario.">
    <div class="date-widget" aria-label="Calendario y cuenta regresiva interactivos">
     <div class="date-heading"><span>✦</span> Diciembre <b>2026</b> <span>✦</span></div>
     <div class="date-calendar" id="dateCalendar" role="group" aria-label="Diciembre de 2026, viernes 11 señalado"></div>
