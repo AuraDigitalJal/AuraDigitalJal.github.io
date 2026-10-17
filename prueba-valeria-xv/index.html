@@ -1,86 +1,76 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#edd2ce">
-  <meta name="description" content="Prueba de transición interactiva para los XV años de Valeria Guadalupe · Aura Digital">
-  <meta property="og:title" content="Valeria Guadalupe · Mis XV años">
-  <meta property="og:description" content="Una invitación especial · 11 de diciembre de 2026">
-  <title>Valeria Guadalupe | Prueba de transición</title>
-  <style>
-    :root {color-scheme:light; --rose:#8c5360; --cream:#f9eeee}
-    * { box-sizing:border-box }
-    html,body {margin:0; width:100%; min-height:100%; background:#f4e1dc}
-    body {font-family:Georgia,'Times New Roman',serif; overflow:hidden; overscroll-behavior:none}
-    #app {position:relative; width:100vw; height:100svh; height:100dvh; overflow:hidden; background:linear-gradient(140deg,#f7eae6,#edcfcb)}
-    .scene {position:absolute;inset:0;display:flex;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:opacity .16s ease}
-    .scene.on {opacity:1;pointer-events:auto}
-    .scene img,.scene video {display:block; height:100%;width:100%;object-fit:contain;object-position:center; background:#f3dfdb}
-    .scene video {background:#f3dfdb}
-    .seal {position:absolute; z-index:5; top:65.5%;left:50%;transform:translate(-50%,-50%);width:min(24vw,14.2dvh);height:min(24vw,14.2dvh);min-width:72px;min-height:72px;border:0;border-radius:50%;background:transparent;cursor:pointer;touch-action:manipulation; -webkit-tap-highlight-color:transparent}
-    .seal:focus-visible {outline:3px solid #a55c6a; outline-offset:5px}
-    .seal::after {content:"";display:block;position:absolute;inset:3px;border-radius:50%;border:1.5px solid #fff9;animation:pulse 2.7s ease-in-out infinite;pointer-events:none}
-    @keyframes pulse {0%,100%{transform:scale(1);opacity:.45}50%{transform:scale(1.13);opacity:.1}}
-    .tools {position:absolute;bottom:max(16px,env(safe-area-inset-bottom));left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:8;pointer-events:none}
-    .tools button {pointer-events:auto;border:1px solid #c7969f;border-radius:99px;background:#fffdf6eb;color:var(--rose);padding:11px 17px;box-shadow:0 5px 24px #713c4830;letter-spacing:.025em;font-family:inherit;font-size:14px;cursor:pointer}
-    .tools button:focus-visible {outline:2px solid var(--rose);outline-offset:3px}
-    .status {position:absolute;z-index:9;left:50%;bottom:max(78px,calc(env(safe-area-inset-bottom) + 64px));transform:translateX(-50%);background:#fffdf7e8;color:#874b58;border-radius:12px;padding:12px 16px;font-size:13px;text-align:center;max-width:90vw;box-shadow:0 6px 26px #78505a33}
-    [hidden] {display:none!important}
-    @media (min-aspect-ratio: 9/16) { .seal {width:min(12svh,118px);height:min(12svh,118px);min-width:0;min-height:0;} }
-    @media (prefers-reduced-motion:reduce) {.scene {transition:none}.seal::after {animation:none}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3dcd7">
+<meta name="description" content="Valeria Guadalupe | Prueba de apertura interactiva de XV años con transición Seedance">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Valeria Guadalupe | Mis XV años">
+<meta property="og:description" content="Una invitación especial · Viernes 11 de diciembre de 2026">
+<meta property="og:image" content="https://auradigitaljal.com/prueba-valeria-xv/portada.jpg">
+<title>Valeria Guadalupe — Prueba de invitación</title>
+<style>
+*{box-sizing:border-box}
+:root{color-scheme:light;--rose:#88505d}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f5e1dc}
+body{display:grid;place-items:center;font-family:Georgia,"Times New Roman",serif;overscroll-behavior:none}
+#stage{position:relative;width:min(100vw,56.25dvh);height:auto;aspect-ratio:9/16;background:#f1ded9;overflow:hidden;isolation:isolate}
+.screen{position:absolute;inset:0;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .11s linear}
+.screen.active{opacity:1;visibility:visible;pointer-events:auto}
+.screen img,.screen video{width:100%;height:100%;display:block;object-fit:contain;object-position:center}
+#seal{position:absolute;left:50%;top:65.5%;transform:translate(-50%,-50%);width:21%;aspect-ratio:1;border:0;border-radius:50%;cursor:pointer;background:transparent;touch-action:manipulation}
+#seal::after{content:"";position:absolute;inset:12%;border:1px solid #fff6;border-radius:50%;animation:pulse 2.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.08;transform:scale(1.14)}}
+#seal:focus-visible,.actions button:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.actions{position:absolute;z-index:3;bottom:max(13px,env(safe-area-inset-bottom));left:0;right:0;display:flex;justify-content:center;gap:8px}
+.actions button{border:1px solid #bb8794;border-radius:30px;background:#fffbf2ed;color:var(--rose);padding:11px 16px;box-shadow:0 3px 10px #66363d33;font:500 13px Georgia,serif;cursor:pointer}
+#notice{position:absolute;z-index:5;bottom:80px;left:5%;width:90%;padding:11px;background:#fff9f2ed;text-align:center;color:var(--rose);border-radius:9px;font-size:13px}
+[hidden]{display:none!important}
+@media(prefers-reduced-motion:reduce){.screen{transition:none}#seal::after{animation:none}}
+</style>
 </head>
 <body>
-<main id="app" aria-label="Invitación de XV años de Valeria Guadalupe">
-  <section id="cover" class="scene on" aria-label="Portada">
-    <img src="portada.jpg" alt="Portada de Valeria Guadalupe con sobre y sello rosa" decoding="async" fetchpriority="high" draggable="false">
-    <button type="button" id="open" class="seal" aria-label="Tocar el sello para abrir la invitación" title="Toca el sello para abrir"></button>
-  </section>
-  <section id="motion" class="scene" aria-label="Apertura del sobre" aria-hidden="true">
-    <video id="video" playsinline webkit-playsinline preload="auto" poster="portada.jpg" disablepictureinpicture controlslist="nodownload noplaybackrate" aria-label="El sobre se abre y aparece la tarjeta de padres y padrinos">
-      <source src="transicion.mp4" type="video/mp4">
-    </video>
-  </section>
-  <section id="end" class="scene" aria-label="Mis padres y padrinos" aria-hidden="true">
-    <img src="padres-padrinos.jpg" alt="Información de los padres y padrinos de Valeria Guadalupe" decoding="async" draggable="false">
-    <div class="tools"><button type="button" id="again">↻ Volver a ver la animación</button><button type="button" id="reset">⌂ Portada</button></div>
-  </section>
-  <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+<main id="stage" aria-label="Prueba de invitación de Valeria Guadalupe">
+<section class="screen active" id="cover" aria-label="Portada con sobre">
+<img src="portada.jpg" alt="Valeria Guadalupe. Mis XV años. Toca el sello para abrir la invitación" fetchpriority="high" draggable="false">
+<button id="seal" aria-label="Abrir el sobre" title="Toca el sello para abrir" type="button"></button>
+</section>
+<section class="screen" id="transition" aria-label="Animación del sobre" aria-hidden="true">
+<video id="clip" poster="portada.jpg" preload="auto" playsinline webkit-playsinline disablepictureinpicture controlslist="nodownload noplaybackrate" aria-label="El sobre se abre para presentar a los padres y padrinos">
+<source src="transicion.mp4" type="video/mp4">
+</video>
+</section>
+<section class="screen" id="pageB" aria-label="Mis padres y padrinos" aria-hidden="true">
+<img src="padres-padrinos.jpg" alt="Miguel Ángel Ayala González, Marisol Zamudio Miranda, Roberto Carlos Juárez Garibay y Yarely Zamudio Miranda" draggable="false">
+<div class="actions"><button id="replay" type="button">↻ Repetir transición</button><button id="home" type="button">⌂ Portada</button></div>
+</section>
+<div id="notice" role="status" aria-live="polite" hidden></div>
 </main>
 <script>
-(() => {
-  const cover=document.getElementById('cover'),motion=document.getElementById('motion'),end=document.getElementById('end');
-  const video=document.getElementById('video'),status=document.getElementById('status');
-  let playing=false;
-  const layers=[cover,motion,end];
-  function show(layer){for(const item of layers){const active=item===layer;item.classList.toggle('on',active);if(item!==cover)item.setAttribute('aria-hidden',String(!active));}}
-  function message(text){status.textContent=text;status.hidden=!text;}
-  function complete(){playing=false;video.pause();message('');show(end);}
-  function restart(){playing=false;video.pause();video.currentTime=0;message('');show(cover);}
-  async function begin(){
-    if(playing)return;playing=true;message('');
-    try {
-      video.pause();video.currentTime=0;video.muted=false;
-      // play() is called synchronously from the touch/click gesture (iOS Safari).
-      const p=video.play();
-      if(p&&typeof p.then==='function')await p;
-      show(motion);
-    }catch(err){
-      playing=false;message('Toca para reproducir la animación.');
-      show(motion);video.controls=true;
-    }
-  }
-  document.getElementById('open').addEventListener('click',begin);
-  document.getElementById('again').addEventListener('click',begin);
-  document.getElementById('reset').addEventListener('click',restart);
-  video.addEventListener('ended',complete);
-  video.addEventListener('error',()=>{playing=false;message('No se pudo cargar el video. Revisa que transicion.mp4 esté publicado.');show(cover);});
-  video.addEventListener('playing',()=>{message('');show(motion);});
-  // Load the final card early, preventing a blank flash after the video.
-  const preload=new Image();preload.src='padres-padrinos.jpg';
-  // If media is not installed yet, show a useful diagnostic instead of a broken page.
-  document.querySelector('#cover img').addEventListener('error',()=>message('Falta subir portada.jpg a esta misma carpeta.'));
+(()=>{
+const cover=document.querySelector("#cover"),transition=document.querySelector("#transition"),pageB=document.querySelector("#pageB"),clip=document.querySelector("#clip"),notice=document.querySelector("#notice");
+const sections=[cover,transition,pageB];let busy=false;
+function show(section){for(const s of sections){let active=s===section;s.classList.toggle("active",active);if(s!==cover)s.setAttribute("aria-hidden",String(!active));}}
+function say(s){notice.textContent=s||"";notice.hidden=!s;}
+function done(){busy=false;clip.pause();say("");show(pageB);}
+async function play(){
+ if(busy)return;busy=true;say("");
+ try{clip.pause();clip.currentTime=0;clip.controls=false;
+ const pending=clip.play();
+ if(pending&&typeof pending.then==="function")await pending;
+ show(transition);
+ }catch(e){busy=false;show(transition);clip.controls=true;say("Toca reproducir en el video para continuar.");}
+}
+function reset(){busy=false;clip.pause();clip.currentTime=0;clip.controls=false;say("");show(cover);}
+document.querySelector("#seal").addEventListener("click",play);
+document.querySelector("#replay").addEventListener("click",play);
+document.querySelector("#home").addEventListener("click",reset);
+clip.addEventListener("playing",()=>{say("");show(transition);});
+clip.addEventListener("ended",done);
+clip.addEventListener("error",()=>{busy=false;show(cover);say("No se pudo cargar el video. Intenta actualizar la página.");});
+document.querySelector("#cover img").addEventListener("error",()=>say("No se pudo cargar la portada."));
+let preload=new Image();preload.src="padres-padrinos.jpg";
 })();
 </script>
 </body>
