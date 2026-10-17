@@ -17,7 +17,16 @@
     .scene {position:absolute;inset:0;display:flex;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:opacity .16s ease}
     .scene.on {opacity:1;pointer-events:auto}
     .scene img,.scene video {display:block; height:100%;width:100%;object-fit:contain;object-position:center; background:#f3dfdb}
-    .scene video {background:#f3dfdb}
+    #motion {overflow:hidden; background:#f3dfdb}
+    .scene video {
+      background:transparent;
+      object-fit:cover;
+      object-position:center;
+      transform:scale(1.035);
+      border:0;
+      outline:none;
+      box-shadow:none;
+    }
     .seal {position:absolute; z-index:5; top:65.5%;left:50%;transform:translate(-50%,-50%);width:min(24vw,14.2dvh);height:min(24vw,14.2dvh);min-width:72px;min-height:72px;border:0;border-radius:50%;background:transparent;cursor:pointer;touch-action:manipulation; -webkit-tap-highlight-color:transparent}
     .seal:focus-visible {outline:3px solid #a55c6a; outline-offset:5px}
     .seal::after {content:"";display:block;position:absolute;inset:3px;border-radius:50%;border:1.5px solid #fff9;animation:pulse 2.7s ease-in-out infinite;pointer-events:none}
