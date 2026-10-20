@@ -17,12 +17,14 @@ main{max-width:1570px;margin:auto;padding:30px 52px 28px;min-height:100vh;displa
 <div class="stats"><div class="status"><span class="dot" id="dot"></span><span id="connectionStatus">Conectando con los participantes…</span></div><span class="counter" id="count">0 reconocimientos</span></div>
 <section id="wall" class="wall" aria-label="Reconocimientos compartidos"><div class="empty" id="empty"><div class="empty-icon">❝</div><h2>Los recuerdos que nos acompañan</h2><p>Al compartir una frase desde «El maestro que me marcó», aparecerá aquí para reconocer a quienes dejaron huella.</p></div></section>
 <div id="pagination" class="pagination" aria-live="polite"></div>
-<footer class="bottom"><small>Los reconocimientos se reciben mientras esta pantalla permanece abierta. No se reciben las demás respuestas del cuadernillo.</small><div class="actions"><button class="action" id="fullscreen" type="button">Pantalla completa</button><button class="action" id="pause" type="button">Pausar rotación</button><button class="action danger" id="clear" type="button">Vaciar mural</button></div></footer>
+<footer class="bottom"><small>Los reconocimientos se reciben mientras esta pantalla permanece abierta. No se reciben las demás respuestas del cuadernillo.</small><div class="actions"><button class="action" id="fullscreen" type="button">Pantalla completa</button><button class="action" id="check" type="button">Probar conexión</button><button class="action" id="pause" type="button">Pausar rotación</button><button class="action danger" id="clear" type="button">Vaciar mural</button></div></footer>
 </main>
 <script>
 (()=>{'use strict';
-const MURAL_TOPIC='fcjalisco-c4d79822b1eb4c038fa177ac0d479af4',MURAL_URL='https://ntfy.sh/'+MURAL_TOPIC,KEY='fcjalisco-maestros-mural-2026',limit=9;
-let entries=[],page=0,paused=false,source=null;
+const MURAL_TOPIC='fcjalisco-c4d79822b1eb4c038fa177ac0d479af4';
+const MURAL_URL='https://ntfy.sh/'+MURAL_TOPIC,KEY='fcjalisco-maestros-mural-2026',limit=9;
+let entries=[],page=0,paused=false,source=null,pollTimer=null,lastId='',verified=false,probeUid='',probeTimer=null;
+const since=Math.floor(Date.now()/1000)-3;
 const wall=document.getElementById('wall'),status=document.getElementById('connectionStatus'),dot=document.getElementById('dot');
 try{const d=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(d))entries=d.filter(e=>typeof e?.teacher==='string'&&typeof e?.quote==='string').slice(-250)}catch(e){}
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(entries))}catch(e){}}
@@ -40,14 +42,32 @@ function render(){
    const remove=document.createElement('button');remove.className='remove';remove.type='button';remove.textContent='Eliminar';remove.setAttribute('aria-label','Eliminar este reconocimiento');remove.onclick=()=>{entries=entries.filter(x=>x.id!==e.id);persist();render()};card.append(remove);
    wall.append(card);
  }
- document.getElementById('pagination').textContent=pages>1?`Página ${page+1} de ${pages} · Cambio automático cada 13 segundos`:'';
+ document.getElementById('pagination').textContent=pages>1?'Página '+(page+1)+' de '+pages+' · Cambio automático cada 13 segundos':'';
 }
 function setStatus(message,ready){status.textContent=message;dot.classList.toggle('ready',Boolean(ready))}
+async function post(data){
+ const response=await fetch(MURAL_URL,{method:'POST',body:JSON.stringify(data),cache:'no-store'});
+ if(!response.ok)throw Error('HTTP '+response.status);
+}
+async function testChannel(){
+ verified=false;
+ clearTimeout(probeTimer);
+ probeUid='test-'+(crypto.randomUUID?.()||Date.now()+'-'+Math.random());
+ const myUid=probeUid;
+ setStatus('Verificando recepción de mensajes…',false);
+ probeTimer=setTimeout(()=>{if(!verified&&probeUid===myUid)setStatus('No se recibió la prueba. Revisa que ntfy.sh no esté bloqueado.',false)},11000);
+ try{await post({type:'mural-check',uid:myUid});}
+ catch(e){clearTimeout(probeTimer);setStatus('No se pudo enviar la prueba al servidor: '+e.message,false)}
+}
 async function acknowledge(uid,ok,message){
- try{await fetch(MURAL_URL,{method:'POST',body:JSON.stringify({type:'tribute-ack',uid,ok,message:message||''}),cache:'no-store'})}
- catch(err){setStatus('Reconocimiento recibido, pero falló la confirmación al participante.',false)}
+ try{await post({type:'tribute-ack',uid,ok,message:message||''})}
+ catch(e){setStatus('El reconocimiento llegó, pero falló la confirmación: '+e.message,false)}
 }
 function receive(data){
+ if(data?.type==='mural-check'){
+   if(data.uid===probeUid){verified=true;clearTimeout(probeTimer);setStatus('Conexión comprobada: el mural recibe mensajes',true)}
+   return;
+ }
  if(data?.type!=='teacher-tribute'||typeof data.uid!=='string')return;
  const teacher=safe(data.teacher,90),quote=safe(data.quote,360);
  if(!teacher||!quote){acknowledge(data.uid,false,'El reconocimiento está incompleto.');return}
@@ -55,21 +75,35 @@ function receive(data){
  if(!existing){const e={teacher,quote,uid:data.uid,id:data.uid,at:Date.now()};entries.push(e);if(entries.length>250)entries.shift();page=Math.floor((entries.length-1)/limit);persist();render()}
  acknowledge(data.uid,true,'');
 }
-function init(){
- if(typeof EventSource!=='function'){setStatus('Este navegador no admite conexión en tiempo real.',false);return}
- setStatus('Conectando con los participantes…',false);
- try{
-   source=new EventSource(MURAL_URL+'/sse?since=now');
-   source.onopen=()=>setStatus('Pantalla conectada y lista para recibir reconocimientos',true);
-   source.onmessage=event=>{
-      try{const packet=JSON.parse(event.data);if(packet.event!=='message')return;
-          const data=JSON.parse(packet.message);
-          if(data.type==='teacher-tribute')receive(data);
-      }catch(e){}
-   };
-   source.onerror=()=>setStatus('Conexión interrumpida. Intentando reconectar…',false);
- }catch(e){setStatus('No se pudo abrir el canal. Revisa tu conexión.',false)}
+function incoming(packet){
+ if(packet?.event!=='message')return;
+ if(packet.id)lastId=packet.id;
+ try{receive(JSON.parse(packet.message))}catch(e){console.warn('Mensaje de mural no válido',e)}
 }
+async function poll(){
+ try{
+   const r=await fetch(MURAL_URL+'/json?poll=1&since='+encodeURIComponent(lastId||String(since)),{cache:'no-store'});
+   if(!r.ok)throw Error('HTTP '+r.status);
+   for(const line of (await r.text()).split('\n')){if(line.trim()){try{incoming(JSON.parse(line))}catch(e){}}}
+ }catch(e){setStatus('No se pudo consultar el servicio: '+e.message,false)}
+}
+function startPolling(){
+ if(pollTimer)return;
+ setStatus('Conexión alternativa: comprobando recepción…',false);
+ poll();pollTimer=setInterval(poll,7000);
+ if(!probeUid)testChannel();
+}
+function init(){
+ setStatus('Conectando con el servicio de mensajes…',false);
+ if(typeof EventSource!=='function'){startPolling();return}
+ try{
+   source=new EventSource(MURAL_URL+'/sse?since='+since);
+   source.onopen=()=>{if(!probeUid)testChannel()};
+   source.onmessage=event=>{try{incoming(JSON.parse(event.data))}catch(e){}};
+   source.onerror=()=>{try{source?.close()}catch(e){};startPolling()};
+ }catch(e){startPolling()}
+}
+document.getElementById('check').onclick=()=>testChannel();
 document.getElementById('pause').onclick=()=>{paused=!paused;document.getElementById('pause').textContent=paused?'Reanudar rotación':'Pausar rotación'};
 document.getElementById('clear').onclick=()=>{if(confirm('¿Vaciar todos los reconocimientos de esta pantalla?')){entries=[];page=0;persist();render()}};
 document.getElementById('fullscreen').onclick=()=>{if(!document.fullscreenElement){document.documentElement.requestFullscreen?.().catch(()=>{})}else document.exitFullscreen?.()};
