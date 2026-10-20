@@ -11,7 +11,7 @@ main{max-width:1570px;margin:auto;padding:30px 52px 28px;min-height:100vh;displa
 @keyframes rise{from{opacity:0;transform:translateY(25px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(min-width:1600px){.tribute{min-height:245px}}@media(max-width:970px){.wall{grid-template-columns:repeat(2,1fr)}main{padding:24px 26px}}@media(max-width:580px){main{padding:18px}.wall{grid-template-columns:1fr}.tribute{min-height:185px}.head h1{font-size:38px}.empty h2{font-size:25px}}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.5/dist/peerjs.min.js" defer></script>
+
 </head><body><main>
 <header class="head"><div class="eyebrow">Formación del carácter al estilo Jalisco · Módulo I</div><h1>Maestros que dejaron huella</h1><p>Hay enseñanzas que permanecen toda la vida.</p><div class="rule"></div></header>
 <div class="stats"><div class="status"><span class="dot" id="dot"></span><span id="connectionStatus">Conectando con los participantes…</span></div><span class="counter" id="count">0 reconocimientos</span></div>
@@ -21,8 +21,8 @@ main{max-width:1570px;margin:auto;padding:30px 52px 28px;min-height:100vh;displa
 </main>
 <script>
 (()=>{'use strict';
-const PEER_ID='fcjalisco-mural-reconocimientos-2026-1ea8b09',KEY='fcjalisco-maestros-mural-2026',limit=9;
-let entries=[],page=0,paused=false,peer=null;
+const MURAL_TOPIC='fcjalisco-c4d79822b1eb4c038fa177ac0d479af4',MURAL_URL='https://ntfy.sh/'+MURAL_TOPIC,KEY='fcjalisco-maestros-mural-2026',limit=9;
+let entries=[],page=0,paused=false,source=null;
 const wall=document.getElementById('wall'),status=document.getElementById('connectionStatus'),dot=document.getElementById('dot');
 try{const d=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(d))entries=d.filter(e=>typeof e?.teacher==='string'&&typeof e?.quote==='string').slice(-250)}catch(e){}
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(entries))}catch(e){}}
@@ -43,21 +43,32 @@ function render(){
  document.getElementById('pagination').textContent=pages>1?`Página ${page+1} de ${pages} · Cambio automático cada 13 segundos`:'';
 }
 function setStatus(message,ready){status.textContent=message;dot.classList.toggle('ready',Boolean(ready))}
-function receive(conn,data){
- if(data?.type!=='teacher-tribute')return;
+async function acknowledge(uid,ok,message){
+ try{await fetch(MURAL_URL,{method:'POST',body:JSON.stringify({type:'tribute-ack',uid,ok,message:message||''}),cache:'no-store'})}
+ catch(err){setStatus('Reconocimiento recibido, pero falló la confirmación al participante.',false)}
+}
+function receive(data){
+ if(data?.type!=='teacher-tribute'||typeof data.uid!=='string')return;
  const teacher=safe(data.teacher,90),quote=safe(data.quote,360);
- if(!teacher||!quote){conn.send({type:'tribute-ack',ok:false,message:'El reconocimiento está incompleto.'});return}
- let existing=entries.find(e=>e.teacher.toLowerCase()===teacher.toLowerCase()&&e.quote.toLowerCase()===quote.toLowerCase());
- if(!existing){const e={teacher,quote,id:String(data.uid||Date.now())+'-'+Math.random().toString(36).slice(2),at:Date.now()};entries.push(e);if(entries.length>250)entries.shift();page=Math.floor((entries.length-1)/limit);persist();render()}
- conn.send({type:'tribute-ack',ok:true});
+ if(!teacher||!quote){acknowledge(data.uid,false,'El reconocimiento está incompleto.');return}
+ let existing=entries.find(e=>e.uid===data.uid||(e.teacher.toLowerCase()===teacher.toLowerCase()&&e.quote.toLowerCase()===quote.toLowerCase()));
+ if(!existing){const e={teacher,quote,uid:data.uid,id:data.uid,at:Date.now()};entries.push(e);if(entries.length>250)entries.shift();page=Math.floor((entries.length-1)/limit);persist();render()}
+ acknowledge(data.uid,true,'');
 }
 function init(){
- if(typeof Peer!=='function'){setStatus('No se pudo cargar el servicio de conexión. Comprueba Internet.',false);return}
- peer=new Peer(PEER_ID,{debug:0});
- peer.on('open',()=>setStatus('Pantalla lista para recibir reconocimientos',true));
- peer.on('connection',conn=>{conn.on('data',data=>receive(conn,data))});
- peer.on('disconnected',()=>{setStatus('Reconectando con los participantes…',false);try{peer.reconnect()}catch(e){}});
- peer.on('error',err=>{let type=err?.type||'';setStatus(type==='unavailable-id'?'Este mural ya está abierto en otra pantalla. Ciérrala y vuelve a cargar.':'Conexión interrumpida. Recarga esta página si no se recupera.',false)});
+ if(typeof EventSource!=='function'){setStatus('Este navegador no admite conexión en tiempo real.',false);return}
+ setStatus('Conectando con los participantes…',false);
+ try{
+   source=new EventSource(MURAL_URL+'/sse?since=now');
+   source.onopen=()=>setStatus('Pantalla conectada y lista para recibir reconocimientos',true);
+   source.onmessage=event=>{
+      try{const packet=JSON.parse(event.data);if(packet.event!=='message')return;
+          const data=JSON.parse(packet.message);
+          if(data.type==='teacher-tribute')receive(data);
+      }catch(e){}
+   };
+   source.onerror=()=>setStatus('Conexión interrumpida. Intentando reconectar…',false);
+ }catch(e){setStatus('No se pudo abrir el canal. Revisa tu conexión.',false)}
 }
 document.getElementById('pause').onclick=()=>{paused=!paused;document.getElementById('pause').textContent=paused?'Reanudar rotación':'Pausar rotación'};
 document.getElementById('clear').onclick=()=>{if(confirm('¿Vaciar todos los reconocimientos de esta pantalla?')){entries=[];page=0;persist();render()}};
