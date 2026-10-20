@@ -121,40 +121,64 @@ function shareMural(){
  const quote=String(document.querySelector('[data-answer="hr02_memory"]')?.value??answer('hr02_memory')).trim();
  if(!teacher||!quote){muralStatus('Primero escribe el nombre de tu maestro y una frase sobre él.',true);return}
  if(teacher.length>90||quote.length>360){muralStatus('Para compartir, usa un nombre de hasta 90 caracteres y una frase de hasta 360.',true);return}
- if(typeof EventSource!=='function'){muralStatus('Este navegador no admite la conexión en vivo.',true);return}
  sharingMural=true;
  const button=document.getElementById('share-mural-btn');
  if(button){button.disabled=true;button.textContent='Compartiendo…'}
- muralStatus('Conectando con el mural…');
  const uid=(crypto.randomUUID?.()||Math.random().toString(36).slice(2)+Date.now());
- let source=null,ended=false,sent=false;
- const timer=setTimeout(()=>finish(false,'No llegó confirmación del mural. Comprueba que esté abierto y conectado; luego vuelve a intentarlo.'),22000);
+ const since=Math.floor(Date.now()/1000)-3;
+ let source=null,timer=null,pollTimer=null,ended=false,sent=false,lastId='';
  function finish(ok,msg){
-   if(ended)return;
-   ended=true;clearTimeout(timer);sharingMural=false;
+   if(ended)return;ended=true;sharingMural=false;
+   clearTimeout(timer);clearInterval(pollTimer);
    try{source?.close()}catch(e){}
    if(button){button.disabled=false;button.textContent='▣ Compartir en pantalla'}
    muralStatus(msg,!ok);
  }
+ function incoming(packet){
+   if(packet.event!=='message')return;
+   if(packet.id)lastId=packet.id;
+   try{const data=JSON.parse(packet.message);
+     if(data.type==='tribute-ack'&&data.uid===uid){finish(!!data.ok,data.ok?'¡Compartido! El mural confirmó que recibió tu reconocimiento.':(data.message||'El mural rechazó el reconocimiento.'))}
+   }catch(e){}
+ }
+ async function poll(){
+   if(ended)return;
+   try{
+     const url=MURAL_URL+'/json?poll=1&since='+encodeURIComponent(lastId||String(since));
+     const response=await fetch(url,{cache:'no-store'});
+     if(!response.ok)throw Error('HTTP '+response.status);
+     for(const line of (await response.text()).split('\n')){
+       if(line.trim()){try{incoming(JSON.parse(line))}catch(e){}}
+     }
+   }catch(e){if(!ended)muralStatus('Esperando confirmación. El servicio de mensajes no responde: '+e.message,true)}
+ }
+ function startPolling(){
+   if(ended||pollTimer)return;
+   muralStatus('Buscando confirmación por conexión alternativa…');
+   poll();pollTimer=setInterval(poll,4500);
+ }
+ async function send(){
+   if(sent||ended)return;sent=true;
+   muralStatus('Enviando el reconocimiento…');
+   try{
+     const response=await fetch(MURAL_URL,{method:'POST',body:JSON.stringify({type:'teacher-tribute',teacher,quote,uid}),cache:'no-store'});
+     if(!response.ok)throw Error('HTTP '+response.status);
+     if(!ended)muralStatus('Mensaje enviado. Esperando confirmación del proyector…');
+   }catch(e){finish(false,'El servicio no aceptó el envío ('+e.message+'). Revisa la conexión e inténtalo de nuevo.')}
+ }
+ timer=setTimeout(()=>finish(false,'No llegó respuesta del mural en 25 segundos. Verifica la prueba de conexión en la pantalla del proyector.'),25000);
+ muralStatus('Conectando con el mural…');
  try{
-   source=new EventSource(MURAL_URL+'/sse?since=now');
-   source.onopen=async()=>{
-      if(ended||sent)return;
-      sent=true;muralStatus('Enviando tu reconocimiento…');
-      try{
-        const response=await fetch(MURAL_URL,{method:'POST',body:JSON.stringify({type:'teacher-tribute',teacher,quote,uid}),cache:'no-store'});
-        if(!response.ok)throw Error('HTTP '+response.status);
-        if(!ended)muralStatus('Enviado. Esperando confirmación de la pantalla…');
-      }catch(err){finish(false,'No se pudo enviar el reconocimiento. Revisa la conexión e inténtalo de nuevo.');}
+   if(typeof EventSource!=='function'){startPolling();send();return}
+   source=new EventSource(MURAL_URL+'/sse?since='+since);
+   source.onopen=()=>{if(!ended)send()};
+   source.onmessage=event=>{try{incoming(JSON.parse(event.data))}catch(e){}};
+   source.onerror=()=>{
+     if(ended)return;
+     try{source.close()}catch(e){}
+     startPolling();send();
    };
-   source.onmessage=event=>{
-     try{const packet=JSON.parse(event.data);if(packet.event!=='message')return;
-         const data=JSON.parse(packet.message);
-         if(data.type==='tribute-ack'&&data.uid===uid){finish(!!data.ok,data.ok?'¡Listo! Tu reconocimiento apareció en el mural.':(data.message||'El mural no confirmó tu envío.'))}
-     }catch(e){}
-   };
-   source.onerror=()=>{if(!sent&&!ended)finish(false,'No se pudo abrir la conexión con el mural. Revisa Internet e inténtalo de nuevo.');};
- }catch(e){finish(false,'Este navegador no pudo conectarse al mural.')}
+ }catch(e){startPolling();send()}
 }
 
 document.addEventListener('click',event=>{const navBtn=event.target.closest('[data-nav]');if(navBtn){go(navBtn.dataset.nav);return}const actBtn=event.target.closest('[data-action]');if(!actBtn)return;const act=actBtn.dataset.action;if(act==='share-mural')shareMural();if(act==='print')printPDF();if(act==='backup')backup();if(act==='restore')restore();if(act==='clear'){if(confirm('¿Borrar todas las respuestas guardadas en este dispositivo? Esto no se puede deshacer.')){state=empty();save();go('profile')}}});
