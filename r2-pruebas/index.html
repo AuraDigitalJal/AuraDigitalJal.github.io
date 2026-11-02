@@ -246,13 +246,13 @@
               <div class="inline-actions"><button type="button" class="btn secondary" id="githubConnect">Conectar GitHub</button><span id="githubAuthStatus">Sin conectar</span></div>
               <label>Repositorio de esta galería<input id="githubRepo" placeholder="boda-mariana-luis"></label>
               <div class="r2-settings">
-                <label class="switch-row"><input type="checkbox" id="r2Enabled" checked><span>Cloudflare R2 · fotos optimizadas (pruebas)</span></label>
+                <input type="checkbox" id="r2Enabled" checked hidden aria-hidden="true">
+                <input type="hidden" id="r2UploadUrl" value="https://aura-gallery-r2-upload.visual-arts-jal.workers.dev">
+                <input type="hidden" id="r2PublicUrl" value="https://pub-13ff1b1ba169434b9c10a7299b6ead9e.r2.dev">
                 <div id="r2Fields">
-                  <p class="hint">Mantiene la galería y GitHub Pages como siempre. Solamente las imágenes optimizadas se alojan en R2. No almacena originales ni agrega descargas.</p>
-                  <label>URL del Worker de subida<input id="r2UploadUrl" type="url" value="https://aura-gallery-r2-upload.visual-arts-jal.workers.dev" inputmode="url" placeholder="https://aura-gallery-r2-upload.tu-cuenta.workers.dev"></label>
-                  <label>Dominio público del bucket<input id="r2PublicUrl" type="url" value="https://pub-13ff1b1ba169434b9c10a7299b6ead9e.r2.dev" inputmode="url" placeholder="https://fotos.auradigitaljal.com"></label>
-                  <label>Clave de publicación R2<input id="r2PublishKey" type="password" autocomplete="off" placeholder="Clave privada configurada en Cloudflare"></label>
-                  <small>La clave solo vive en esta pestaña. Nunca se incorpora a la galería, GitHub o config.json.</small>
+                  <p class="hint"><b>Cloudflare R2 conectado para pruebas.</b> Las fotografías optimizadas se enviarán automáticamente. No necesitas poner direcciones URL.</p>
+                  <label>Clave privada de publicación <input id="r2PublishKey" type="password" autocomplete="off" placeholder="Contraseña que creaste en Cloudflare"></label>
+                  <small>Esta clave solo se utiliza para autorizar la subida y no se publica en GitHub ni dentro de la galería.</small>
                 </div>
               </div>
               <button type="button" class="btn primary full" id="githubPublish" disabled>Publicar galería</button>
