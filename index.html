@@ -869,6 +869,14 @@ img,svg,video,canvas{max-width:100%}
 .aura-hero-social a+a{padding-left:20px;border-left:1px solid var(--border)}
 .aura-hero-social svg{width:20px;height:20px;flex:none}
 @media(max-width:720px){.hero .hero-grid{grid-template-areas:"kicker" "title" "text" "visual" "actions" "social" "benefits"!important}.hero .aura-hero-social{grid-area:social!important;justify-content:center!important;margin:14px auto 0!important;gap:20px!important}.hero .aura-hero-social a{font-size:11px;min-height:36px}}
+
+/* Aura Digital: prioridades CTA portada v2 */
+.hero .hero-actions{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:10px!important;margin-top:18px!important}
+.hero .hero-actions .aura-hero-social{order:0;justify-content:flex-start!important;width:auto!important;max-width:100%;margin:0 0 4px!important}
+.hero .hero-actions>a{flex:0 0 auto!important;width:auto!important;max-width:100%;min-width:0!important}
+.hero .hero-actions>a[data-wa]{order:1;min-height:39px!important;padding:8px 15px!important;font-size:.81rem!important;font-weight:650!important;border-radius:10px!important}
+.hero .hero-actions>a[data-hero-secondary-link]{order:2;min-height:38px!important;padding:7px 14px!important;font-size:.82rem!important}
+@media(max-width:720px){.hero .hero-actions{align-items:center!important;margin-top:12px!important;gap:9px!important}.hero .hero-actions .aura-hero-social{justify-content:center!important;margin:0 auto 3px!important;gap:18px!important}.hero .hero-actions .btn{flex:0 0 auto!important;min-width:0!important}}
 </style>
 </head>
 <body>
@@ -889,10 +897,10 @@ img,svg,video,canvas{max-width:100%}
           <div class="kicker" data-hero-eyebrow></div>
           <h1 class="display hero-title" data-hero-title></h1>
           <p class="hero-text" data-hero-text></p>
-          <div class="hero-actions">
+          <div class="hero-actions"><nav class="aura-hero-social" aria-label="Redes sociales de Aura Digital"><a href="https://www.instagram.com/invitacionesauradigital?rpxt=MWpkMHZjOXF5Mnl4dw%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Aura Digital"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a><a href="https://www.facebook.com/share/19rHvPb4LE/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Aura Digital"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.2 21v-8h2.8l.45-3.5H15.2V7.3c0-1.05.3-1.75 1.75-1.75h1.7V2.4a23.5 23.5 0 0 0-2.5-.14c-2.5 0-4.2 1.53-4.2 4.35V9.5H9.2V13h2.75v8z"/></svg><span>Facebook</span></a></nav>
             <a class="btn btn-primary" data-wa target="_blank" rel="noopener"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.7a8.4 8.4 0 0 1-8.8 8.2 9.4 9.4 0 0 1-3.7-.8L3.3 21l1.6-4.5a8 8 0 0 1-1.5-4.8 8.4 8.4 0 0 1 8.8-8.2 8.4 8.4 0 0 1 8.3 8.2Z"/><path d="M8.2 8.1c.6 3.7 3 6.1 6.7 6.7"/></svg></span><span data-hero-primary></span><span class="button-arrow" aria-hidden="true">→</span></a>
             <a class="btn btn-ghost" data-hero-secondary-link><span data-hero-secondary></span><span class="button-arrow" aria-hidden="true">→</span></a>
-          </div> <nav class="aura-hero-social" aria-label="Redes sociales de Aura Digital"><a href="https://www.instagram.com/invitacionesauradigital?rpxt=MWpkMHZjOXF5Mnl4dw%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Aura Digital"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a><a href="https://www.facebook.com/share/19rHvPb4LE/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Aura Digital"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.2 21v-8h2.8l.45-3.5H15.2V7.3c0-1.05.3-1.75 1.75-1.75h1.7V2.4a23.5 23.5 0 0 0-2.5-.14c-2.5 0-4.2 1.53-4.2 4.35V9.5H9.2V13h2.75v8z"/></svg><span>Facebook</span></a></nav>
+          </div> 
           <div class="benefits" data-benefits></div>
         </div>
         <div class="hero-visual">
