@@ -1,0 +1,27 @@
+name: Integrar redes sociales en Aura Digital
+on:
+  push:
+    paths:
+      - .github/workflows/aura-social-sync.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener repositorio
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Aplicar accesos a Facebook e Instagram
+        run: python3 scripts/aura_social_sync.py
+      - name: Guardar sitio actualizado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Agregar Instagram y Facebook a portada de Aura Digital"
+            git push
+          fi
