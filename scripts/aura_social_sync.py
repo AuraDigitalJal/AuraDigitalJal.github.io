@@ -51,4 +51,48 @@ def patch_html(path):
     path.write_text(text, encoding="utf-8")
     print(f"Portada actualizada: {path}, {len(text)} caracteres")
 
+HERO_CTA_CSS = "\n/* Aura Digital: prioridades CTA portada v2 */\n.hero .hero-actions{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:10px!important;margin-top:18px!important}\n.hero .hero-actions .aura-hero-social{order:0;justify-content:flex-start!important;width:auto!important;max-width:100%;margin:0 0 4px!important}\n.hero .hero-actions>a{flex:0 0 auto!important;width:auto!important;max-width:100%;min-width:0!important}\n.hero .hero-actions>a[data-wa]{order:1;min-height:39px!important;padding:8px 15px!important;font-size:.81rem!important;font-weight:650!important;border-radius:10px!important}\n.hero .hero-actions>a[data-hero-secondary-link]{order:2;min-height:38px!important;padding:7px 14px!important;font-size:.82rem!important}\n@media(max-width:720px){.hero .hero-actions{align-items:center!important;margin-top:12px!important;gap:9px!important}.hero .hero-actions .aura-hero-social{justify-content:center!important;margin:0 auto 3px!important;gap:18px!important}.hero .hero-actions .btn{flex:0 0 auto!important;min-width:0!important}}\n"
+
+def arrange_hero_cta(path):
+    """Mantener Instagram/Facebook arriba, luego WhatsApp y por último Ver proyectos."""
+    import re
+    text = path.read_text(encoding="utf-8")
+    action_tag = '<div class="hero-actions">'
+    nav_matches = list(re.finditer(r'<nav class="aura-hero-social"[^>]*>.*?</nav>', text, re.S))
+    assert len(nav_matches) == 1, f"Esperaba exactamente una barra social, hallé {len(nav_matches)}"
+    nav_match = nav_matches[0]
+    nav_html = nav_match.group(0)
+    action_start = text.index(action_tag)
+    action_end = text.index('</div>', action_start) + len('</div>')
+    if not (action_start < nav_match.start() < action_end):
+        text = text[:nav_match.start()] + text[nav_match.end():]
+        action_start = text.index(action_tag)
+        insert_at = action_start + len(action_tag)
+        text = text[:insert_at] + nav_html + text[insert_at:]
+    else:
+        insert_at = action_start + len(action_tag)
+        nav_match = re.search(r'<nav class="aura-hero-social"[^>]*>.*?</nav>', text, re.S)
+        if nav_match.start() != insert_at:
+            text = text[:nav_match.start()] + text[nav_match.end():]
+            action_start = text.index(action_tag)
+            insert_at = action_start + len(action_tag)
+            text = text[:insert_at] + nav_html + text[insert_at:]
+    new_start = text.index(action_tag)
+    new_end = text.index('</div>', new_start) + len('</div>')
+    fragment = text[new_start:new_end]
+    assert fragment.find('class="aura-hero-social"') >= 0, "Falta barra social"
+    assert fragment.find('class="aura-hero-social"') < fragment.find('data-wa') < fragment.find('data-hero-secondary-link'), (
+        "El orden esperado es redes sociales > WhatsApp > Ver proyectos"
+    )
+    css_label = '/* Aura Digital: prioridades CTA portada v2 */'
+    if css_label not in text:
+        body = text.index('<body')
+        css_end = text.rfind('</style>', 0, body)
+        assert css_end >= 0, "No se encontró style en head"
+        text = text[:css_end] + HERO_CTA_CSS + text[css_end:]
+    assert text.count(css_label) == 1
+    path.write_text(text, encoding="utf-8")
+    print("Orden verificado: Instagram/Facebook → WhatsApp compacto → Ver proyectos")
+
 patch_html(Path("index.html"))
+arrange_hero_cta(Path("index.html"))

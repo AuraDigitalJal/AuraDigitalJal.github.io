@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/aura-social-sync.yml
+      - scripts/aura_social_sync.py
   workflow_dispatch:
 permissions:
   contents: write
