@@ -1,0 +1,36 @@
+name: Medir visitantes de la web comercial Aura Digital
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - scripts/aura_web_analytics.py
+      - .github/workflows/aura-web-analytics.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aura-web-analytics-main
+  cancel-in-progress: false
+
+jobs:
+  instalar-medicion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener la web publicada
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Instalar el beacon solo en la portada comercial
+        run: python3 scripts/aura_web_analytics.py
+      - name: Guardar cambios si hicieran falta
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Activar contador de visitas Cloudflare en portada Aura Digital"
+            git push origin HEAD:main
+          fi
