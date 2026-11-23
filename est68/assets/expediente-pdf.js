@@ -45,10 +45,7 @@ async function download({student,reports,followups}){
  const s=student;
  const records=[...(reports||[])].filter(r=>r.student_id===s.id).sort((a,b)=>String(a.report_date||'').localeCompare(String(b.report_date||''))||String(a.created_at||'').localeCompare(String(b.created_at||'')));
  const acts=[...(followups||[])];
- const logos=await Promise.all([
-  logoPng('/est68/assets/logo-educacion.svg'),
-  logoPng('/est68/assets/emblema-secundaria-tecnica.svg')
- ]);
+ const schoolLogo=await logoPng('/est68/assets/emblema-secundaria-tecnica.svg');
  const doc=new PDF({orientation:'portrait',unit:'mm',format:'letter',compress:true});
  const pageW=doc.internal.pageSize.getWidth();
  const pageH=doc.internal.pageSize.getHeight();
@@ -60,8 +57,7 @@ async function download({student,reports,followups}){
   page+=1;
   doc.setFillColor(...WINE);doc.rect(0,0,pageW,5,'F');
   if(first){
-   if(logos[0])try{doc.addImage(logos[0],'PNG',LEFT,12,40,18)}catch(_){}
-   if(logos[1])try{doc.addImage(logos[1],'PNG',pageW-RIGHT-18,10,18,22)}catch(_){}
+   if(schoolLogo)try{doc.addImage(schoolLogo,'PNG',LEFT,11,18,22)}catch(_){}
    color(DARK);doc.setFont('helvetica','bold');doc.setFontSize(10.2);
    doc.text('ESCUELA SECUNDARIA TÉCNICA N.º 68',pageW/2,17,{align:'center'});
    doc.setFont('helvetica','normal');doc.setFontSize(8.5);
