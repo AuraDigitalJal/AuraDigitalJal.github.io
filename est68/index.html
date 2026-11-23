@@ -10,7 +10,7 @@ const app=document.getElementById('app');
 const esc=s=>String(s===null||s===undefined?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 const severityBadge=s=>'<span class="badge '+esc((s||'SIN CLASIFICAR').replaceAll(' ','_'))+'">'+esc(s||'SIN CLASIFICAR')+'</span>';
-const key=(()=>{const k=decodeURIComponent((location.hash||'').replace(/^#acceso=/,''));if(k && k.length>30){sessionStorage.setItem('est68-test-key',k);history.replaceState(null,'',location.pathname+location.search);return k;}return sessionStorage.getItem('est68-test-key')||'';})();
+const key=(()=>{const k=decodeURIComponent((location.hash||'').replace(/^#acceso=/,''));if(k && k.length>30){sessionStorage.setItem('est68-test-key',k);return k;}return sessionStorage.getItem('est68-test-key')||'';})();
 let D={students:[],reports:[],followups:[],teachers:[],subjects:[],assignments:[],alertVerifications:[]},tab='resumen',term='',group='TODOS',severity='TODAS',dialog='',chosen='',msg='',status='',alertReturnStudent='';
 const student=id=>D.students.find(x=>x.id===id)||null;
 const reportsFor=id=>D.reports.filter(x=>x.student_id===id).sort((a,b)=>b.report_date.localeCompare(a.report_date));
