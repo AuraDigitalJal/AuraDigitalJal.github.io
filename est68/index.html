@@ -91,6 +91,30 @@ tr.data:hover{background:#faf4e9}
  .top-identity{gap:9px}
  .top h1{font-size:18px}
 }
+
+/* Indicadores operativos navegables del panel general */
+.stat-action{width:100%;display:block;text-align:left;cursor:pointer;font:inherit;color:inherit;transition:border-color .15s,box-shadow .15s,transform .15s}
+.stat-action:hover{border-color:#b18b79;box-shadow:0 6px 17px #6b3c3524;transform:translateY(-1px)}
+.stat-action:focus-visible,.group-report-button:focus-visible{outline:3px solid #9a6e40;outline-offset:3px}
+.stat-topline{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.stat-link{font-size:11px;color:#7b2c2a;font-weight:750;white-space:nowrap}
+.group-report-button{border:1px solid #e1dbd0;width:100%;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.group-report-button:hover{background:#f3e9d8;border-color:#bea28a}
+.kpi-list-scroll{overflow-y:auto;max-height:min(68vh,690px);padding-right:4px}
+.kpi-followups{display:grid;gap:10px}
+.kpi-followup{border:1px solid #e4ded4;border-radius:9px;padding:13px 15px;background:#fff}
+.kpi-followup.is-pending{border-left:5px solid #ab7334;background:#fffaf2}
+.kpi-followup-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.kpi-followup-top strong{color:#2d2b29}
+.kpi-followup-meta{color:#756d63;font-size:12px;margin:4px 0 8px}
+.kpi-followup-detail{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;color:#423e39;margin:7px 0 10px}
+.kpi-followup-status{font-size:11px;font-weight:750;padding:4px 8px;border-radius:20px;background:#f0e9db;color:#65523a;white-space:nowrap}
+.kpi-followup-status.done{background:#edf4ec;color:#366443}
+.kpi-followup-actions{display:flex;gap:8px;flex-wrap:wrap}
+.kpi-followup-actions .btn{font-size:12px;padding:7px 10px}
+.kpi-dialog-nav{display:flex;gap:8px;margin:12px 0 16px;flex-wrap:wrap}
+.kpi-dialog-nav .btn[aria-current="page"]{background:#7b2c2a;color:#fff;border-color:#7b2c2a}
+@media(max-width:680px){.kpi-followup-top{flex-direction:column;gap:5px}.stat-link{font-size:10px}}
 </style></head><body><div id="app"><div class="login"><div class="login-card"><b>EST 68</b><h1>Preparando plataforma…</h1><p>Verificando acceso de prueba.</p></div></div></div><script src="/est68/assets/jspdf.umd.min.js"></script>
 <script src="/est68/assets/expediente-pdf.js"></script>
 <script>
@@ -147,8 +171,8 @@ async function api(op,body){const res=await fetch('https://cwtgpbdaxdnruwuqgqax.
 async function refresh(){status='Cargando datos reales…';render();try{D=await api('bootstrap');status='';showSubAlarmAfterData();render()}catch(e){status='ERROR: '+e.message;render()}}
 function shell(title,content){return '<div class="shell"><aside class="side"><div class="brand"><div class="mark"><img src="/est68/assets/emblema-secundaria-tecnica.svg" alt="Emblema de Educación Secundaria Técnica"></div><div><b>EST 68</b><small>Juchitlán, Jalisco</small></div></div><div class="side-label">PLATAFORMA ESCOLAR</div><nav class="nav">'+navs.filter(n=>canManage()||n[0]!=='captura').map(n=>'<button data-tab="'+n[0]+'" class="'+(tab===n[0]?'active':'')+'"><span>'+n[1]+'</span>'+n[2]+'</button>').join('')+'</nav><div class="sidebar-foot"><b>CICLO ESCOLAR 2026–2027</b>Escuela Secundaria Técnica N.º 68<br>Seguimiento de reportes</div></aside><div class="main"><header class="top"><div class="top-identity"><img class="top-school-symbol" src="/est68/assets/emblema-secundaria-tecnica.svg" alt="Emblema de Secundaria Técnica"><div><small>ESCUELA SECUNDARIA TÉCNICA N.º 68</small><h1>'+esc(title)+'</h1></div></div><div class="header-actions">'+(!canManage()&&urgentAlerts().length?'<button class="btn sub-alarm-btn" data-open-sub-alarm>⚠ Atención urgente <b>'+urgentAlerts().length+'</b></button>':'')+'<button class="btn alert-header" data-open-alerts>⚠ Alertas <b>'+activeAlerts().length+'</b></button><span class="chip">● Base real conectada</span>'+(canManage()?'<button class="btn" data-manage-sub>Activar usuario Subdirección</button>':'<span class="chip">'+esc(staffName)+' · Subdirección</span><button class="btn" data-logout>Salir</button>')+'</div></header><div class="content">'+(msg?'<div class="success">'+esc(msg)+'</div>':'')+(status?'<div class="'+(status.startsWith('ERROR')?'alert':'note')+'">'+esc(status)+'</div>':'')+content+'<div class="footer">EST 68 · Sistema de reportes · Acceso provisional de prueba. No compartas el enlace de acceso con personas no autorizadas.</div></div></div></div>'+(dialog?renderDialog():'');}
 const grouped=()=>Object.fromEntries(['1°A','1°B','1°C','2°A','2°B','2°C','3°A','3°B','3°C'].map(g=>[g,D.reports.filter(r=>r.group_code===g).length]));
-function stat(label,n,sub){return '<div class="stat"><small>'+label+'</small><span class="num">'+esc(n)+'</span><small>'+sub+'</small></div>'}
-function summary(){const gr=grouped(),mx=Math.max(1,...Object.values(gr));const latest=[...D.reports].sort((a,b)=>b.report_date.localeCompare(a.report_date)).slice(0,8);return '<div class="heading"><div><h2>Panel general</h2><div class="lead">Información real del ciclo 2026–2027</div></div><div class="buttons"><button class="btn alert-header" data-open-alerts>⚠ Revisar alertas ('+activeAlerts().length+')</button><button class="btn" data-refresh>↻ Actualizar</button><button class="btn" data-export>⇩ Excel / CSV</button>'+(canManage()?'<button class="btn primary" data-tab="captura">＋ Nuevo reporte</button>':'')+'</div></div><div class="stats">'+stat('Alumnos registrados',D.students.length,'9 grupos escolares')+stat('Reportes',D.reports.length,'Historial cargado')+stat('Actuaciones',D.followups.length,'Seguimiento documentado')+stat('Pendientes',D.followups.filter(f=>f.status==='pendiente'||f.status==='asignado').length,'Pendientes o asignados')+'</div><div class="panel"><h3>Reportes por grupo</h3><div class="graph">'+Object.entries(gr).map(([g,v])=>'<div class="bar"><div class="flex" style="justify-content:space-between"><b>'+esc(g)+'</b><b>'+v+'</b></div><div class="line"><i style="width:'+(v/mx*100).toFixed(0)+'%"></i></div></div>').join('')+'</div></div><div class="panel"><h3>Reportes recientes</h3>'+reportTable(latest)+'</div>'}
+function stat(label,n,sub,target){return '<button type="button" class="stat stat-action" data-kpi="'+esc(target)+'" aria-label="Ver '+esc(label)+': '+esc(n)+'"><span class="stat-topline"><small>'+esc(label)+'</small><span class="stat-link">Ver detalle ↗</span></span><span class="num">'+esc(n)+'</span><small>'+esc(sub)+'</small></button>'}
+function summary(){const gr=grouped(),mx=Math.max(1,...Object.values(gr));const latest=[...D.reports].sort((a,b)=>b.report_date.localeCompare(a.report_date)).slice(0,8);return '<div class="heading"><div><h2>Panel general</h2><div class="lead">Información real del ciclo 2026–2027</div></div><div class="buttons"><button class="btn alert-header" data-open-alerts>⚠ Revisar alertas ('+activeAlerts().length+')</button><button class="btn" data-refresh>↻ Actualizar</button><button class="btn" data-export>⇩ Excel / CSV</button>'+(canManage()?'<button class="btn primary" data-tab="captura">＋ Nuevo reporte</button>':'')+'</div></div><div class="stats">'+stat('Alumnos registrados',D.students.length,'9 grupos escolares','alumnos')+stat('Reportes',D.reports.length,'Historial cargado','reportes')+stat('Actuaciones',D.followups.length,'Seguimiento documentado','actuaciones')+stat('Pendientes',D.followups.filter(f=>f.status==='pendiente'||f.status==='asignado').length,'Pendientes o asignados','pendientes')+'</div><div class="panel"><h3>Reportes por grupo</h3><div class="graph">'+Object.entries(gr).map(([g,v])=>'<button type="button" class="bar group-report-button" data-group-report="'+esc(g)+'" aria-label="Ver reportes del grupo '+esc(g)+': '+v+'"><span class="flex" style="justify-content:space-between"><b>'+esc(g)+'</b><b>'+v+'</b></span><span class="line"><i style="width:'+(v/mx*100).toFixed(0)+'%"></i></span></button>').join('')+'</div></div><div class="panel"><h3>Reportes recientes</h3>'+reportTable(latest)+'</div>'}
 function reportTable(rs){return rs.length?'<div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Alumno</th><th>Grupo</th><th>Materia</th><th>Tipo</th></tr></thead><tbody>'+rs.map(r=>'<tr class="data" data-report="'+esc(r.id)+'"><td class="nowrap">'+esc(date(r.report_date))+'</td><td class="strong">'+esc(student(r.student_id)?.full_name||'—')+'</td><td>'+esc(r.group_code)+'</td><td>'+esc(r.subject_snapshot||'—')+'</td><td>'+severityBadge(r.severity)+'</td></tr>').join('')+'</tbody></table></div>':'<div class="empty">No hay reportes con los filtros seleccionados.</div>'}
 function reportScreen(){let rs=D.reports.filter(r=>{const s=student(r.student_id);return (group==='TODOS'||r.group_code===group)&&(severity==='TODAS'||r.severity===severity)&&norm((s?.full_name||'')+' '+r.reason+' '+r.subject_snapshot).includes(norm(term))}).sort((a,b)=>b.report_date.localeCompare(a.report_date));return '<div class="heading"><div><h2>Historial de reportes</h2><div class="lead">'+rs.length+' registros encontrados</div></div><div class="buttons"><button class="btn" data-export>⇩ Excel / CSV</button><button class="btn" data-print>Imprimir / PDF</button>'+(canManage()?'<button class="btn primary" data-tab="captura">＋ Capturar</button>':'')+'</div></div><div class="panel"><div class="toolbar"><input class="input search" data-filter="term" placeholder="Buscar alumno, motivo o materia…" value="'+esc(term)+'"><select class="input" data-filter="group"><option value="TODOS">Todos los grupos</option>'+['1°A','1°B','1°C','2°A','2°B','2°C','3°A','3°B','3°C'].map(g=>'<option '+(group===g?'selected':'')+'>'+g+'</option>').join('')+'</select><select class="input" data-filter="severity">'+['TODAS','LEVE','GRAVE','MUY GRAVE','SIN CLASIFICAR'].map(s=>'<option '+(severity===s?'selected':'')+'>'+s+'</option>').join('')+'</select></div>'+reportTable(rs)+'</div>'}
 function studentScreen(){const ss=D.students.filter(s=>(group==='TODOS'||s.group_code===group)&&norm(s.full_name).includes(norm(term)));const count=new Map();D.reports.forEach(r=>count.set(r.student_id,(count.get(r.student_id)||0)+1));return '<div class="heading"><div><h2>Alumnos</h2><div class="lead">'+ss.length+' alumnos encontrados</div></div><div class="buttons">'+(canManage()?'<button class="btn primary" data-new-student>＋ Agregar alumno</button>':'')+'</div></div><div class="panel"><div class="toolbar"><input class="input search" data-filter="term" placeholder="Buscar nombre o apellido…" value="'+esc(term)+'"><select class="input" data-filter="group"><option value="TODOS">Todos los grupos</option>'+['1°A','1°B','1°C','2°A','2°B','2°C','3°A','3°B','3°C'].map(g=>'<option '+(group===g?'selected':'')+'>'+g+'</option>').join('')+'</select></div><div class="table-wrap"><table><thead><tr><th>Nombre completo</th><th>Grupo</th><th>N.º lista</th><th>Reportes</th></tr></thead><tbody>'+ss.map(s=>'<tr class="data" data-student="'+esc(s.id)+'"><td class="strong">'+esc(s.full_name)+'</td><td>'+esc(s.group_code)+'</td><td>'+esc(s.enrollment_no||'—')+'</td><td>'+esc(count.get(s.id)||0)+'</td></tr>').join('')+'</tbody></table></div></div>'}
@@ -173,7 +197,34 @@ function subEmergencyDialog(){
  '<div class="sub-emergency-footer"><button type="button" class="btn" data-open-alerts>Ver todas las alertas</button>'+
  '<button type="button" class="btn primary" data-dismiss-sub-alarm>Entendido · Ir al panel</button></div></div></div>';
 }
+
+function followupKpiDialog(pendingOnly){
+ const items=D.followups.filter(f=>!pendingOnly||f.status==='pendiente'||f.status==='asignado')
+  .map(f=>({followup:f,report:D.reports.find(r=>r.id===f.report_id)}))
+  .filter(x=>x.report)
+  .sort((a,b)=>String(b.followup.action_date||b.followup.created_at||'').localeCompare(String(a.followup.action_date||a.followup.created_at||'')));
+ const pendingCount=D.followups.filter(f=>f.status==='pendiente'||f.status==='asignado').length;
+ const kindName={llamada:'Llamada a familia',firma:'Recepción de firma',citatorio:'Citatorio',medida:'Medida',nota:'Nota'};
+ return '<div class="overlay"><div class="modal alerts-modal" role="dialog" aria-modal="true" aria-label="'+(pendingOnly?'Pendientes o asignados':'Actuaciones registradas')+'">'+
+ '<div class="modalheader"><div><small>SEGUIMIENTO DISCIPLINARIO · 2026–2027</small><h2>'+(pendingOnly?'Pendientes o asignados':'Actuaciones registradas')+'</h2><span class="muted">'+items.length+' actuaciones encontradas</span></div><button type="button" class="btn" data-close aria-label="Cerrar">✕</button></div>'+
+ '<div class="kpi-dialog-nav"><button type="button" class="btn" data-kpi="actuaciones" '+(!pendingOnly?'aria-current="page"':'')+'>Todas ('+D.followups.length+')</button>'+
+ '<button type="button" class="btn" data-kpi="pendientes" '+(pendingOnly?'aria-current="page"':'')+'>Pendientes o asignadas ('+pendingCount+')</button></div>'+
+ '<div class="kpi-list-scroll">'+(items.length?'<div class="kpi-followups">'+items.map(({followup:f,report:r})=>{
+ const s=student(r.student_id),open=f.status==='pendiente'||f.status==='asignado';
+ return '<article class="kpi-followup '+(open?'is-pending':'')+'"><div class="kpi-followup-top"><div><strong>'+esc(s?.full_name||'Alumno sin coincidencia')+'</strong>'+
+ '<div class="kpi-followup-meta">'+esc(r.group_code)+' · '+esc(r.subject_snapshot||'Área sin especificar')+' · Reporte del '+esc(date(r.report_date))+'</div></div>'+
+ '<span class="kpi-followup-status '+(f.status==='realizado'?'done':'')+'">'+esc(f.status||'Sin estado')+'</span></div>'+
+ '<b>'+esc(kindName[f.kind]||f.kind||'Actuación')+'</b>'+
+ '<div class="kpi-followup-meta">Fecha de actuación: '+esc(f.action_date?date(f.action_date):'No registrada')+'</div>'+
+ '<div class="kpi-followup-detail">'+esc(f.detail||'Sin detalle')+'</div>'+
+ '<div class="kpi-followup-actions"><button type="button" class="btn primary" data-report="'+esc(r.id)+'">Abrir reporte</button>'+
+ (s?'<button type="button" class="btn" data-student="'+esc(s.id)+'">Expediente del alumno</button>':'')+'</div></article>';
+ }).join('')+'</div>':'<div class="empty"><h3>No hay actuaciones '+(pendingOnly?'pendientes ni asignadas':'registradas')+'</h3><p>'+(pendingOnly?'Todos los seguimientos registrados se encuentran fuera de los estados pendiente y asignado.':'Todavía no hay actuaciones en los reportes.')+'</p></div>')+'</div>'+
+ '<div class="gap"></div><button type="button" class="btn" data-close>Cerrar ventana</button></div></div>';
+}
 function renderDialog(){
+if(dialog==='kpiActuaciones')return followupKpiDialog(false);
+if(dialog==='kpiPendientes')return followupKpiDialog(true);
 if(dialog==='subEmergency'&&!canManage())return subEmergencyDialog();
 if(dialog==='activateSub'&&canManage())return '<div class="overlay"><div class="modal"><div class="modalheader"><div><small>ACCESO INSTITUCIONAL</small><h2>Activar cuenta de Jorge Loza</h2></div><button type="button" class="btn" data-close>✕</button></div><p class="note"><b>Usuario:</b> Jorge Loza · <b>Rol:</b> Subdirección. Escribe aquí la contraseña inicial acordada para activar la cuenta. Se exigirá cambiarla al primer ingreso.</p><form id="activate-sub"><div class="field"><label>Contraseña inicial</label><input class="input" type="password" name="initialPassword" minlength="8" autocomplete="new-password" required></div><div class="buttons"><button class="btn primary" type="submit">Activar usuario</button><button class="btn" type="button" data-close>Cancelar</button></div></form></div></div>';
 if(dialog==='alerts')return '<div class="overlay"><div class="modal alerts-modal"><div class="modalheader"><div><small>SEGUIMIENTO DE REINCIDENCIAS</small><h2>⚠ Alertas de alumnos</h2><span class="muted">Información real, actualizada desde la base escolar</span></div><button type="button" class="btn" data-close aria-label="Cerrar alertas">✕</button></div>'+alertsMarkup()+'<div class="gap"></div><button type="button" class="btn" data-close>Cerrar ventana</button></div></div>';
@@ -210,6 +261,16 @@ if(t.dataset.downloadStudentPdf){
  if(!window.EST68ExpedientePDF)throw Error('No se ha cargado el generador de expedientes. Recarga la página.');
  await window.EST68ExpedientePDF.download({student:s,reports:D.reports,followups:D.followups});
  return;
+}
+if(t.dataset.kpi){
+ const type=t.dataset.kpi;
+ if(type==='alumnos'||type==='reportes'){tab=type;term='';group='TODOS';severity='TODAS';dialog='';}
+ else if(type==='actuaciones')dialog='kpiActuaciones';
+ else if(type==='pendientes')dialog='kpiPendientes';
+ render();return;
+}
+if(t.dataset.groupReport){
+ tab='reportes';group=t.dataset.groupReport;term='';severity='TODAS';dialog='';render();return;
 }
 if(t.hasAttribute('data-dismiss-sub-alarm')){dialog='';render();return;}
 if(t.hasAttribute('data-open-sub-alarm')){if(!canManage()&&urgentAlerts().length){dialog='subEmergency';render();}return;}
